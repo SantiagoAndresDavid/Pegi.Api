@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace Entities;
 
 [Table("users")]
-public class user
+public class User
 {
     [Key]
     [Column("user_name")]

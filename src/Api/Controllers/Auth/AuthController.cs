@@ -1,4 +1,5 @@
 using Entities;
+using Entities.Exceptions;
 using Mapster;
 using Microsoft.AspNetCore.Mvc;
 using Services;
@@ -8,10 +9,26 @@ namespace Api.Controllers.Auth;
 public class AuthController : ControllerBase
 {
     private readonly UsersService _usersService;
+    private readonly AuthService _authService;
 
-    public AuthController(UsersService usersService)
+    public AuthController(UsersService usersService, AuthService authService)
     {
         _usersService = usersService;
+        _authService = authService;
+    }
+
+    [HttpPost("login")]
+    public ActionResult Login([FromBody] LoginRequest loginRequest)
+    {
+        try
+        {
+            string message = _authService.LogIn(loginRequest.Name, loginRequest.Password);
+            return Ok(message);
+        }
+        catch (AuthException e)
+        {
+            return BadRequest(new  Response<Void>(e.Message));
+        }
     }
 
     [HttpPost("sign-up")]

@@ -4,29 +4,22 @@
 
 namespace Api.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class v100 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AlterDatabase()
-                .Annotation("MySql:CharSet", "utf8mb4");
-
             migrationBuilder.CreateTable(
                 name: "users",
                 columns: table => new
                 {
-                    user_name = table.Column<string>(type: "varchar(255)", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    user_password = table.Column<string>(type: "longtext", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    user_rol = table.Column<string>(type: "longtext", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4")
+                    user_name = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    user_password = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    user_rol = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("pk_users", x => x.user_name);
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
+                });
 
             migrationBuilder.CreateIndex(
                 name: "ix_users_user_name",

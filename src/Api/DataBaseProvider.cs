@@ -10,8 +10,7 @@ public static class DataBaseProvider
         this DbContextOptionsBuilder options, string connectionString
     )
     {
-        MySqlServerVersion mysqlVersion = new(new Version(8, 0));
-        options.UseMySql(connectionString, mysqlVersion,
+        options.UseSqlServer(connectionString,
                 builder => builder.MigrationsAssembly(MigrationsAssembly))
             .EnableDetailedErrors();
         return options;

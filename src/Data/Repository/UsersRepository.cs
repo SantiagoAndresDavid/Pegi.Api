@@ -3,9 +3,9 @@ using Entities;
 
 namespace Data.Repository;
 
-public class UserRepository : Repository<User>
+public class UsersRepository : Repository<User>
 {
-    public UserRepository(PegiDbContext context) : base(context)
+    public UsersRepository(PegiDbContext context) : base(context)
     {
     }
 }

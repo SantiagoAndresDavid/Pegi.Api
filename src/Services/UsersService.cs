@@ -4,11 +4,11 @@ using Microsoft.EntityFrameworkCore;
 using Encryptor = BCrypt.Net.BCrypt;
 namespace Services;
 
-public class UserService
+public class UsersService
 {
-    private readonly UserRepository _repository;
+    private readonly UsersRepository _repository;
 
-    public UserService(UserRepository repository)
+    public UsersService(UsersRepository repository)
     {
         _repository = repository;
     }
@@ -21,7 +21,7 @@ public class UserService
             _repository.Save(user);
             return true;
         }
-        catch (DbUpdateException e)
+        catch (DbUpdateException _)
         {
             return false;
         }

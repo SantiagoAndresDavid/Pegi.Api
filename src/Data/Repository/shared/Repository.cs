@@ -5,7 +5,7 @@ namespace Data.Repository.shared;
 
 public class Repository<TEntity> where TEntity : class
 {
-    protected readonly PegiDbContext Context;
+    private protected readonly PegiDbContext Context;
 
     public Repository(PegiDbContext context)
     {
@@ -44,5 +44,4 @@ public class Repository<TEntity> where TEntity : class
         Context.Set<TEntity>().Remove(entity);
         Context.SaveChangesAsync();
     }
-
 }

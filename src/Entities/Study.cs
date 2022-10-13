@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Entities;
 [Table("studies")]
-public class study
+public class Study
 {
     [Key]
     [Column("study_code")]

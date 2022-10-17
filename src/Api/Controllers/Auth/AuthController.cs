@@ -22,8 +22,8 @@ public class AuthController : ControllerBase
     {
         try
         {
-            string message = _authService.LogIn(loginRequest.Name, loginRequest.Password);
-            return Ok(message);
+            var(message, foundUser)  = _authService.LogIn(loginRequest.Name, loginRequest.Password);
+            return Ok(new Response<User>(message,foundUser));
         }
         catch (AuthException e)
         {

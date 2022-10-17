@@ -13,7 +13,7 @@ public class AuthService
         _repository = repository;
     }
 
-    public string LogIn(string username, string password)
+    public (string, User foundUser) LogIn(string username, string password)
     {
         User? foundUser = _repository.Find(user => user.Name == username);
 
@@ -22,6 +22,6 @@ public class AuthService
         if (!Encryptor.Verify(password, foundUser.Password))
             throw new AuthException("Contraseña incorrecta");
 
-        return "Haz ingresado con éxito";
+        return ("se ha ingresado con exito", foundUser);
     }
 }

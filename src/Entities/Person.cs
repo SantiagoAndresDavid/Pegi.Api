@@ -40,6 +40,9 @@ public class Person
     [Column("person_institutional_email")]
     public string InstitutionalMail { get; set; }
 
-    [ForeignKey("CityCode")]
+    [ForeignKey("study_code")]
+    public Study? Study { get; set; }
+
+    [ForeignKey("city_code")]
     public City? City { get; set; }
 }

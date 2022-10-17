@@ -19,6 +19,6 @@ public class Study
     [Column("study_end_date")]
     public DateTime EndDate { get; set; }
 
-    [ForeignKey("CityCode")]
+    [ForeignKey("city_id")]
     public City? City { get; set; }
 }

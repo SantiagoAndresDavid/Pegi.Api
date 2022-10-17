@@ -43,6 +43,6 @@ public class Person
     [ForeignKey("study_code")]
     public Study? Study { get; set; }
 
-    [ForeignKey("city_code")]
+    [ForeignKey("city_id")]
     public City? City { get; set; }
 }

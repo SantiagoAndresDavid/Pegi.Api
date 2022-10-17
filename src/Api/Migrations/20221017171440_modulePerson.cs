@@ -4,7 +4,7 @@
 
 namespace Api.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class modulePerson : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

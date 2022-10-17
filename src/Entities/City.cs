@@ -14,6 +14,6 @@ public class City
 
     public string DepartmenId { get; set; }
 
-    [ForeignKey("DeparmentId")]
+    [ForeignKey("d  eparment_id")]
     public Department Department { get; set; }
 }

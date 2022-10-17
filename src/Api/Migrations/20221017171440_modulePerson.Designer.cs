@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Api.Migrations
 {
     [DbContext(typeof(PegiDbContext))]
-    [Migration("20221008015756_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20221017171440_modulePerson")]
+    partial class modulePerson
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

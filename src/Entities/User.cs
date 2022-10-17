@@ -16,4 +16,6 @@ public class User
     [Column("user_rol")]
     public string Role { get; set; }
 
+    [ForeignKey("person_document")]
+    public Person? Person { get; set; }
 }

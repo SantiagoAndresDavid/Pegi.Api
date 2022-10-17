@@ -1,8 +1,8 @@
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Entities;
-
-public class Experience : Study
+[Table("Experiences")]
+public class Experience : Person
 {
     [Column("experience_position")]
     public string Position { get; set; }

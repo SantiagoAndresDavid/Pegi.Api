@@ -40,8 +40,7 @@ public class Person
     [Column("person_institutional_email")]
     public string InstitutionalMail { get; set; }
 
-    [ForeignKey("study_code")]
-    public Study? Study { get; set; }
+    public ICollection<Study> Studies { get; set; }
 
     [ForeignKey("city_id")]
     public City? City { get; set; }

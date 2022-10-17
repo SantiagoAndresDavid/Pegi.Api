@@ -42,6 +42,8 @@ public class Person
 
     public ICollection<Study> Studies { get; set; }
 
-    [ForeignKey("city_id")]
-    public City? City { get; set; }
+    public string DeparmentCode { get; set; }
+
+    [ForeignKey("DeparmentCode")]
+    public Department? Department { get; set; }
 }

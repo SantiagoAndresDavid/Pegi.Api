@@ -7,7 +7,13 @@ public class Department
 {
     [Key]
     [Column("department_id")]
-    public int Id { get; set; }
+    public string Id { get; set; }
+
     [Column("deparment_name")]
     public string Name { get; set; }
+
+    public string CityCode { get; set; }
+    [ForeignKey("Citycode")]
+    public City? City { get; set; }
+
 }

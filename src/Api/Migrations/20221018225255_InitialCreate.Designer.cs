@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Api.Migrations
 {
     [DbContext(typeof(PegiDbContext))]
-    [Migration("20221017195927_modulePerson")]
-    partial class modulePerson
+    [Migration("20221018225255_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -27,6 +27,11 @@ namespace Api.Migrations
                         .HasColumnType("varchar(255)")
                         .HasColumnName("city_id");
 
+                    b.Property<string>("DepartmentCode")
+                        .IsRequired()
+                        .HasColumnType("varchar(255)")
+                        .HasColumnName("department_code");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("longtext")
@@ -34,6 +39,9 @@ namespace Api.Migrations
 
                     b.HasKey("Id")
                         .HasName("pk_cities");
+
+                    b.HasIndex("DepartmentCode")
+                        .HasDatabaseName("ix_cities_department_code");
 
                     b.ToTable("cities", (string)null);
                 });
@@ -44,15 +52,6 @@ namespace Api.Migrations
                         .HasColumnType("varchar(255)")
                         .HasColumnName("department_id");
 
-                    b.Property<string>("CityCode")
-                        .IsRequired()
-                        .HasColumnType("longtext")
-                        .HasColumnName("city_code");
-
-                    b.Property<string>("Citycode")
-                        .HasColumnType("varchar(255)")
-                        .HasColumnName("citycode");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("longtext")
@@ -60,9 +59,6 @@ namespace Api.Migrations
 
                     b.HasKey("Id")
                         .HasName("pk_departments");
-
-                    b.HasIndex("Citycode")
-                        .HasDatabaseName("ix_departments_citycode");
 
                     b.ToTable("departments", (string)null);
                 });
@@ -77,15 +73,15 @@ namespace Api.Migrations
                         .HasColumnType("datetime(6)")
                         .HasColumnName("person_birth_date");
 
+                    b.Property<string>("CitiesCode")
+                        .IsRequired()
+                        .HasColumnType("varchar(255)")
+                        .HasColumnName("cities_code");
+
                     b.Property<string>("CivilState")
                         .IsRequired()
                         .HasColumnType("longtext")
                         .HasColumnName("person_civil_state");
-
-                    b.Property<string>("DeparmentCode")
-                        .IsRequired()
-                        .HasColumnType("varchar(255)")
-                        .HasColumnName("deparment_code");
 
                     b.Property<string>("FirstLastName")
                         .IsRequired()
@@ -128,8 +124,8 @@ namespace Api.Migrations
                     b.HasKey("Document")
                         .HasName("pk_people");
 
-                    b.HasIndex("DeparmentCode")
-                        .HasDatabaseName("ix_people_deparment_code");
+                    b.HasIndex("CitiesCode")
+                        .HasDatabaseName("ix_people_cities_code");
 
                     b.ToTable("people", (string)null);
                 });
@@ -141,10 +137,10 @@ namespace Api.Migrations
                         .HasColumnType("int")
                         .HasColumnName("study_code");
 
-                    b.Property<string>("DeparmentCode")
+                    b.Property<string>("CitiesCode")
                         .IsRequired()
                         .HasColumnType("varchar(255)")
-                        .HasColumnName("deparment_code");
+                        .HasColumnName("cities_code");
 
                     b.Property<DateTime>("EndDate")
                         .HasColumnType("datetime(6)")
@@ -166,8 +162,8 @@ namespace Api.Migrations
                     b.HasKey("Code")
                         .HasName("pk_studies");
 
-                    b.HasIndex("DeparmentCode")
-                        .HasDatabaseName("ix_studies_deparment_code");
+                    b.HasIndex("CitiesCode")
+                        .HasDatabaseName("ix_studies_cities_code");
 
                     b.HasIndex("PersonDocument")
                         .HasDatabaseName("ix_studies_person_document");
@@ -220,43 +216,45 @@ namespace Api.Migrations
                     b.ToTable("Experiences");
                 });
 
-            modelBuilder.Entity("Entities.Department", b =>
-                {
-                    b.HasOne("Entities.City", "City")
-                        .WithMany()
-                        .HasForeignKey("Citycode")
-                        .HasConstraintName("fk_departments_cities_citycode");
-
-                    b.Navigation("City");
-                });
-
-            modelBuilder.Entity("Entities.Person", b =>
+            modelBuilder.Entity("Entities.City", b =>
                 {
                     b.HasOne("Entities.Department", "Department")
                         .WithMany()
-                        .HasForeignKey("DeparmentCode")
+                        .HasForeignKey("DepartmentCode")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
-                        .HasConstraintName("fk_people_departments_deparment_code");
+                        .HasConstraintName("fk_cities_departments_department_code");
 
                     b.Navigation("Department");
                 });
 
-            modelBuilder.Entity("Entities.Study", b =>
+            modelBuilder.Entity("Entities.Person", b =>
                 {
-                    b.HasOne("Entities.Department", "Department")
+                    b.HasOne("Entities.City", "City")
                         .WithMany()
-                        .HasForeignKey("DeparmentCode")
+                        .HasForeignKey("CitiesCode")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
-                        .HasConstraintName("fk_studies_departments_deparment_code");
+                        .HasConstraintName("fk_people_cities_cities_code");
+
+                    b.Navigation("City");
+                });
+
+            modelBuilder.Entity("Entities.Study", b =>
+                {
+                    b.HasOne("Entities.City", "City")
+                        .WithMany()
+                        .HasForeignKey("CitiesCode")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_studies_cities_cities_code");
 
                     b.HasOne("Entities.Person", null)
                         .WithMany("Studies")
                         .HasForeignKey("PersonDocument")
                         .HasConstraintName("fk_studies_people_person_document");
 
-                    b.Navigation("Department");
+                    b.Navigation("City");
                 });
 
             modelBuilder.Entity("Entities.User", b =>

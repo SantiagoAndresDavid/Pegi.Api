@@ -6,26 +6,11 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Api.Migrations
 {
-    public partial class modulePerson : Migration
+    public partial class InitialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AlterDatabase()
-                .Annotation("MySql:CharSet", "utf8mb4");
-
-            migrationBuilder.CreateTable(
-                name: "cities",
-                columns: table => new
-                {
-                    city_id = table.Column<string>(type: "varchar(255)", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    city_name = table.Column<string>(type: "longtext", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4")
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("pk_cities", x => x.city_id);
-                })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
@@ -35,20 +20,34 @@ namespace Api.Migrations
                     department_id = table.Column<string>(type: "varchar(255)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     deparment_name = table.Column<string>(type: "longtext", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    city_code = table.Column<string>(type: "longtext", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    citycode = table.Column<string>(type: "varchar(255)", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("pk_departments", x => x.department_id);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
+                name: "cities",
+                columns: table => new
+                {
+                    city_id = table.Column<string>(type: "varchar(255)", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    city_name = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    department_code = table.Column<string>(type: "varchar(255)", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4")
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_cities", x => x.city_id);
                     table.ForeignKey(
-                        name: "fk_departments_cities_citycode",
-                        column: x => x.citycode,
-                        principalTable: "cities",
-                        principalColumn: "city_id");
+                        name: "fk_cities_departments_department_code",
+                        column: x => x.department_code,
+                        principalTable: "departments",
+                        principalColumn: "department_id",
+                        onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -77,17 +76,17 @@ namespace Api.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     person_institutional_email = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    deparment_code = table.Column<string>(type: "varchar(255)", nullable: false)
+                    cities_code = table.Column<string>(type: "varchar(255)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("pk_people", x => x.person_document);
                     table.ForeignKey(
-                        name: "fk_people_departments_deparment_code",
-                        column: x => x.deparment_code,
-                        principalTable: "departments",
-                        principalColumn: "department_id",
+                        name: "fk_people_cities_cities_code",
+                        column: x => x.cities_code,
+                        principalTable: "cities",
+                        principalColumn: "city_id",
                         onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
@@ -123,7 +122,7 @@ namespace Api.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     study_start_date = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     study_end_date = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    deparment_code = table.Column<string>(type: "varchar(255)", nullable: false)
+                    cities_code = table.Column<string>(type: "varchar(255)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     person_document = table.Column<string>(type: "varchar(255)", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4")
@@ -132,10 +131,10 @@ namespace Api.Migrations
                 {
                     table.PrimaryKey("pk_studies", x => x.study_code);
                     table.ForeignKey(
-                        name: "fk_studies_departments_deparment_code",
-                        column: x => x.deparment_code,
-                        principalTable: "departments",
-                        principalColumn: "department_id",
+                        name: "fk_studies_cities_cities_code",
+                        column: x => x.cities_code,
+                        principalTable: "cities",
+                        principalColumn: "city_id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "fk_studies_people_person_document",
@@ -170,19 +169,19 @@ namespace Api.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateIndex(
-                name: "ix_departments_citycode",
-                table: "departments",
-                column: "citycode");
+                name: "ix_cities_department_code",
+                table: "cities",
+                column: "department_code");
 
             migrationBuilder.CreateIndex(
-                name: "ix_people_deparment_code",
+                name: "ix_people_cities_code",
                 table: "people",
-                column: "deparment_code");
+                column: "cities_code");
 
             migrationBuilder.CreateIndex(
-                name: "ix_studies_deparment_code",
+                name: "ix_studies_cities_code",
                 table: "studies",
-                column: "deparment_code");
+                column: "cities_code");
 
             migrationBuilder.CreateIndex(
                 name: "ix_studies_person_document",
@@ -216,10 +215,10 @@ namespace Api.Migrations
                 name: "people");
 
             migrationBuilder.DropTable(
-                name: "departments");
+                name: "cities");
 
             migrationBuilder.DropTable(
-                name: "cities");
+                name: "departments");
         }
     }
 }

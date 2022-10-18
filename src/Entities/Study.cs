@@ -18,7 +18,7 @@ public class Study
     [Column("study_end_date")]
     public DateTime EndDate { get; set; }
 
-    public string DeparmentCode { get; set; }
-    [ForeignKey("DeparmentCode")]
-    public Department? Department { get; set; }
+    public string CitiesCode { get; set; }
+    [ForeignKey("CitiesCode")]
+    public City? City { get; set; }
 }

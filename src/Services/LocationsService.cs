@@ -18,4 +18,10 @@ public class LocationsService
     {
         return _departmentsRepository.GetAll();
     }
+
+    public List<City> GetCities(string department)
+    {
+        return _citiesRepository.Filter(city =>
+            city.Department != null && city.Department.Name == department);
+    }
 }

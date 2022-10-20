@@ -20,4 +20,10 @@ public class LocationsController : ControllerBase
         return Ok(new Response<List<Department>>(departments));
     }
 
+    [HttpGet("cities")]
+    public ActionResult GetCities([FromQuery] string departmentName)
+    {
+        List<City> cities = _locationsService.GetCities(departmentName);
+        return Ok(new Response<List<City>>(cities));
+    }
 }

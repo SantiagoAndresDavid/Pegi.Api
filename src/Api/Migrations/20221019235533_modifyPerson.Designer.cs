@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Api.Migrations
 {
     [DbContext(typeof(PegiDbContext))]
-    [Migration("20221017195927_modulePerson")]
-    partial class modulePerson
+    [Migration("20221019235533_modifyPerson")]
+    partial class modifyPerson
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -27,6 +27,11 @@ namespace Api.Migrations
                         .HasColumnType("varchar(255)")
                         .HasColumnName("city_id");
 
+                    b.Property<string>("DepartmentCode")
+                        .IsRequired()
+                        .HasColumnType("varchar(255)")
+                        .HasColumnName("department_code");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("longtext")
@@ -34,6 +39,9 @@ namespace Api.Migrations
 
                     b.HasKey("Id")
                         .HasName("pk_cities");
+
+                    b.HasIndex("DepartmentCode")
+                        .HasDatabaseName("ix_cities_department_code");
 
                     b.ToTable("cities", (string)null);
                 });
@@ -44,15 +52,6 @@ namespace Api.Migrations
                         .HasColumnType("varchar(255)")
                         .HasColumnName("department_id");
 
-                    b.Property<string>("CityCode")
-                        .IsRequired()
-                        .HasColumnType("longtext")
-                        .HasColumnName("city_code");
-
-                    b.Property<string>("Citycode")
-                        .HasColumnType("varchar(255)")
-                        .HasColumnName("citycode");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("longtext")
@@ -60,9 +59,6 @@ namespace Api.Migrations
 
                     b.HasKey("Id")
                         .HasName("pk_departments");
-
-                    b.HasIndex("Citycode")
-                        .HasDatabaseName("ix_departments_citycode");
 
                     b.ToTable("departments", (string)null);
                 });
@@ -220,14 +216,16 @@ namespace Api.Migrations
                     b.ToTable("Experiences");
                 });
 
-            modelBuilder.Entity("Entities.Department", b =>
+            modelBuilder.Entity("Entities.City", b =>
                 {
-                    b.HasOne("Entities.City", "City")
+                    b.HasOne("Entities.Department", "Department")
                         .WithMany()
-                        .HasForeignKey("Citycode")
-                        .HasConstraintName("fk_departments_cities_citycode");
+                        .HasForeignKey("DepartmentCode")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_cities_departments_department_code");
 
-                    b.Navigation("City");
+                    b.Navigation("Department");
                 });
 
             modelBuilder.Entity("Entities.Person", b =>

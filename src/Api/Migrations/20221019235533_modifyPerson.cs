@@ -6,26 +6,11 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Api.Migrations
 {
-    public partial class modulePerson : Migration
+    public partial class modifyPerson : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AlterDatabase()
-                .Annotation("MySql:CharSet", "utf8mb4");
-
-            migrationBuilder.CreateTable(
-                name: "cities",
-                columns: table => new
-                {
-                    city_id = table.Column<string>(type: "varchar(255)", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    city_name = table.Column<string>(type: "longtext", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4")
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("pk_cities", x => x.city_id);
-                })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
@@ -35,20 +20,34 @@ namespace Api.Migrations
                     department_id = table.Column<string>(type: "varchar(255)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     deparment_name = table.Column<string>(type: "longtext", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    city_code = table.Column<string>(type: "longtext", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    citycode = table.Column<string>(type: "varchar(255)", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("pk_departments", x => x.department_id);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
+                name: "cities",
+                columns: table => new
+                {
+                    city_id = table.Column<string>(type: "varchar(255)", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    city_name = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    department_code = table.Column<string>(type: "varchar(255)", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4")
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_cities", x => x.city_id);
                     table.ForeignKey(
-                        name: "fk_departments_cities_citycode",
-                        column: x => x.citycode,
-                        principalTable: "cities",
-                        principalColumn: "city_id");
+                        name: "fk_cities_departments_department_code",
+                        column: x => x.department_code,
+                        principalTable: "departments",
+                        principalColumn: "department_id",
+                        onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -170,9 +169,9 @@ namespace Api.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateIndex(
-                name: "ix_departments_citycode",
-                table: "departments",
-                column: "citycode");
+                name: "ix_cities_department_code",
+                table: "cities",
+                column: "department_code");
 
             migrationBuilder.CreateIndex(
                 name: "ix_people_deparment_code",
@@ -204,6 +203,9 @@ namespace Api.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "cities");
+
+            migrationBuilder.DropTable(
                 name: "Experiences");
 
             migrationBuilder.DropTable(
@@ -217,9 +219,6 @@ namespace Api.Migrations
 
             migrationBuilder.DropTable(
                 name: "departments");
-
-            migrationBuilder.DropTable(
-                name: "cities");
         }
     }
 }

@@ -11,11 +11,13 @@ public static class DependencyInjection
     {
         repositories.AddScoped<UsersRepository>();
         repositories.AddScoped<PeopleRepository>();
-        repositories.AddScoped<City>();
+        repositories.AddScoped<CitiesRepository>();
+        repositories.AddScoped<DepartmentsRepository>();
     }
 
     public static void AddServices(this IServiceCollection services)
     {
+        services.AddScoped<LocationsService>();
         services.AddScoped<AuthService>();
         services.AddScoped<UsersService>();
     }

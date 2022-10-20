@@ -12,8 +12,6 @@ public class Department
     [Column("deparment_name")]
     public string Name { get; set; }
 
-    public string CityCode { get; set; }
-    [ForeignKey("Citycode")]
-    public City? City { get; set; }
+
 
 }

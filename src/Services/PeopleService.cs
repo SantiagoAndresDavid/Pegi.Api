@@ -26,4 +26,8 @@ public class PeopleService
         }
     }
 
+    public Person? SearchPerson(string document)
+    {
+        return _peopleRepository.Find(person => person.Document == document);
+    }
 }

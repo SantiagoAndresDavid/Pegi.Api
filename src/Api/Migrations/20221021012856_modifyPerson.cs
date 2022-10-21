@@ -76,17 +76,17 @@ namespace Api.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     person_institutional_email = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    deparment_code = table.Column<string>(type: "varchar(255)", nullable: false)
+                    cities_code = table.Column<string>(type: "varchar(255)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("pk_people", x => x.person_document);
                     table.ForeignKey(
-                        name: "fk_people_departments_deparment_code",
-                        column: x => x.deparment_code,
-                        principalTable: "departments",
-                        principalColumn: "department_id",
+                        name: "fk_people_cities_cities_code",
+                        column: x => x.cities_code,
+                        principalTable: "cities",
+                        principalColumn: "city_id",
                         onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
@@ -122,7 +122,7 @@ namespace Api.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     study_start_date = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     study_end_date = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    deparment_code = table.Column<string>(type: "varchar(255)", nullable: false)
+                    cities_code = table.Column<string>(type: "varchar(255)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     person_document = table.Column<string>(type: "varchar(255)", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4")
@@ -131,10 +131,10 @@ namespace Api.Migrations
                 {
                     table.PrimaryKey("pk_studies", x => x.study_code);
                     table.ForeignKey(
-                        name: "fk_studies_departments_deparment_code",
-                        column: x => x.deparment_code,
-                        principalTable: "departments",
-                        principalColumn: "department_id",
+                        name: "fk_studies_cities_cities_code",
+                        column: x => x.cities_code,
+                        principalTable: "cities",
+                        principalColumn: "city_id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "fk_studies_people_person_document",
@@ -174,14 +174,14 @@ namespace Api.Migrations
                 column: "department_code");
 
             migrationBuilder.CreateIndex(
-                name: "ix_people_deparment_code",
+                name: "ix_people_cities_code",
                 table: "people",
-                column: "deparment_code");
+                column: "cities_code");
 
             migrationBuilder.CreateIndex(
-                name: "ix_studies_deparment_code",
+                name: "ix_studies_cities_code",
                 table: "studies",
-                column: "deparment_code");
+                column: "cities_code");
 
             migrationBuilder.CreateIndex(
                 name: "ix_studies_person_document",
@@ -203,9 +203,6 @@ namespace Api.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "cities");
-
-            migrationBuilder.DropTable(
                 name: "Experiences");
 
             migrationBuilder.DropTable(
@@ -216,6 +213,9 @@ namespace Api.Migrations
 
             migrationBuilder.DropTable(
                 name: "people");
+
+            migrationBuilder.DropTable(
+                name: "cities");
 
             migrationBuilder.DropTable(
                 name: "departments");

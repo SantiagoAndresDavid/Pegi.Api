@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Api.Migrations
 {
     [DbContext(typeof(PegiDbContext))]
-    [Migration("20221019235533_modifyPerson")]
+    [Migration("20221021012856_modifyPerson")]
     partial class modifyPerson
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -73,15 +73,15 @@ namespace Api.Migrations
                         .HasColumnType("datetime(6)")
                         .HasColumnName("person_birth_date");
 
+                    b.Property<string>("CitiesCode")
+                        .IsRequired()
+                        .HasColumnType("varchar(255)")
+                        .HasColumnName("cities_code");
+
                     b.Property<string>("CivilState")
                         .IsRequired()
                         .HasColumnType("longtext")
                         .HasColumnName("person_civil_state");
-
-                    b.Property<string>("DeparmentCode")
-                        .IsRequired()
-                        .HasColumnType("varchar(255)")
-                        .HasColumnName("deparment_code");
 
                     b.Property<string>("FirstLastName")
                         .IsRequired()
@@ -124,8 +124,8 @@ namespace Api.Migrations
                     b.HasKey("Document")
                         .HasName("pk_people");
 
-                    b.HasIndex("DeparmentCode")
-                        .HasDatabaseName("ix_people_deparment_code");
+                    b.HasIndex("CitiesCode")
+                        .HasDatabaseName("ix_people_cities_code");
 
                     b.ToTable("people", (string)null);
                 });
@@ -137,10 +137,10 @@ namespace Api.Migrations
                         .HasColumnType("int")
                         .HasColumnName("study_code");
 
-                    b.Property<string>("DeparmentCode")
+                    b.Property<string>("CitiesCode")
                         .IsRequired()
                         .HasColumnType("varchar(255)")
-                        .HasColumnName("deparment_code");
+                        .HasColumnName("cities_code");
 
                     b.Property<DateTime>("EndDate")
                         .HasColumnType("datetime(6)")
@@ -162,8 +162,8 @@ namespace Api.Migrations
                     b.HasKey("Code")
                         .HasName("pk_studies");
 
-                    b.HasIndex("DeparmentCode")
-                        .HasDatabaseName("ix_studies_deparment_code");
+                    b.HasIndex("CitiesCode")
+                        .HasDatabaseName("ix_studies_cities_code");
 
                     b.HasIndex("PersonDocument")
                         .HasDatabaseName("ix_studies_person_document");
@@ -230,31 +230,31 @@ namespace Api.Migrations
 
             modelBuilder.Entity("Entities.Person", b =>
                 {
-                    b.HasOne("Entities.Department", "Department")
+                    b.HasOne("Entities.City", "City")
                         .WithMany()
-                        .HasForeignKey("DeparmentCode")
+                        .HasForeignKey("CitiesCode")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
-                        .HasConstraintName("fk_people_departments_deparment_code");
+                        .HasConstraintName("fk_people_cities_cities_code");
 
-                    b.Navigation("Department");
+                    b.Navigation("City");
                 });
 
             modelBuilder.Entity("Entities.Study", b =>
                 {
-                    b.HasOne("Entities.Department", "Department")
+                    b.HasOne("Entities.City", "City")
                         .WithMany()
-                        .HasForeignKey("DeparmentCode")
+                        .HasForeignKey("CitiesCode")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
-                        .HasConstraintName("fk_studies_departments_deparment_code");
+                        .HasConstraintName("fk_studies_cities_cities_code");
 
                     b.HasOne("Entities.Person", null)
                         .WithMany("Studies")
                         .HasForeignKey("PersonDocument")
                         .HasConstraintName("fk_studies_people_person_document");
 
-                    b.Navigation("Department");
+                    b.Navigation("City");
                 });
 
             modelBuilder.Entity("Entities.User", b =>

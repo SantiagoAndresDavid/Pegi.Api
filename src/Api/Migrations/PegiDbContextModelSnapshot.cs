@@ -61,6 +61,52 @@ namespace Api.Migrations
                     b.ToTable("departments", (string)null);
                 });
 
+            modelBuilder.Entity("Entities.Experience", b =>
+                {
+                    b.Property<string>("Code")
+                        .HasColumnType("varchar(255)")
+                        .HasColumnName("experience_code");
+
+                    b.Property<string>("CitiesCode")
+                        .IsRequired()
+                        .HasColumnType("varchar(255)")
+                        .HasColumnName("cities_code");
+
+                    b.Property<DateTime>("EndDate")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("study_end_date");
+
+                    b.Property<string>("Institution")
+                        .IsRequired()
+                        .HasColumnType("longtext")
+                        .HasColumnName("experience_institution");
+
+                    b.Property<string>("PeopleCode")
+                        .IsRequired()
+                        .HasColumnType("varchar(255)")
+                        .HasColumnName("people_code");
+
+                    b.Property<string>("Position")
+                        .IsRequired()
+                        .HasColumnType("longtext")
+                        .HasColumnName("experience_position");
+
+                    b.Property<DateTime>("StartDate")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("study_start_date");
+
+                    b.HasKey("Code")
+                        .HasName("pk_experiences");
+
+                    b.HasIndex("CitiesCode")
+                        .HasDatabaseName("ix_experiences_cities_code");
+
+                    b.HasIndex("PeopleCode")
+                        .HasDatabaseName("ix_experiences_people_code");
+
+                    b.ToTable("Experiences");
+                });
+
             modelBuilder.Entity("Entities.Person", b =>
                 {
                     b.Property<string>("Document")
@@ -130,9 +176,8 @@ namespace Api.Migrations
 
             modelBuilder.Entity("Entities.Study", b =>
                 {
-                    b.Property<int>("Code")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
+                    b.Property<string>("Code")
+                        .HasColumnType("varchar(255)")
                         .HasColumnName("study_code");
 
                     b.Property<string>("CitiesCode")
@@ -149,9 +194,10 @@ namespace Api.Migrations
                         .HasColumnType("longtext")
                         .HasColumnName("study_institution");
 
-                    b.Property<string>("PersonDocument")
+                    b.Property<string>("PeopleCode")
+                        .IsRequired()
                         .HasColumnType("varchar(255)")
-                        .HasColumnName("person_document");
+                        .HasColumnName("people_code");
 
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("datetime(6)")
@@ -163,8 +209,8 @@ namespace Api.Migrations
                     b.HasIndex("CitiesCode")
                         .HasDatabaseName("ix_studies_cities_code");
 
-                    b.HasIndex("PersonDocument")
-                        .HasDatabaseName("ix_studies_person_document");
+                    b.HasIndex("PeopleCode")
+                        .HasDatabaseName("ix_studies_people_code");
 
                     b.ToTable("studies", (string)null);
                 });
@@ -202,18 +248,6 @@ namespace Api.Migrations
                     b.ToTable("users", (string)null);
                 });
 
-            modelBuilder.Entity("Entities.Experience", b =>
-                {
-                    b.HasBaseType("Entities.Person");
-
-                    b.Property<string>("Position")
-                        .IsRequired()
-                        .HasColumnType("longtext")
-                        .HasColumnName("experience_position");
-
-                    b.ToTable("Experiences");
-                });
-
             modelBuilder.Entity("Entities.City", b =>
                 {
                     b.HasOne("Entities.Department", "Department")
@@ -224,6 +258,27 @@ namespace Api.Migrations
                         .HasConstraintName("fk_cities_departments_department_code");
 
                     b.Navigation("Department");
+                });
+
+            modelBuilder.Entity("Entities.Experience", b =>
+                {
+                    b.HasOne("Entities.City", "City")
+                        .WithMany()
+                        .HasForeignKey("CitiesCode")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_experiences_cities_cities_code");
+
+                    b.HasOne("Entities.Person", "Person")
+                        .WithMany()
+                        .HasForeignKey("PeopleCode")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_experiences_people_people_code");
+
+                    b.Navigation("City");
+
+                    b.Navigation("Person");
                 });
 
             modelBuilder.Entity("Entities.Person", b =>
@@ -247,12 +302,16 @@ namespace Api.Migrations
                         .IsRequired()
                         .HasConstraintName("fk_studies_cities_cities_code");
 
-                    b.HasOne("Entities.Person", null)
+                    b.HasOne("Entities.Person", "Person")
                         .WithMany("Studies")
-                        .HasForeignKey("PersonDocument")
-                        .HasConstraintName("fk_studies_people_person_document");
+                        .HasForeignKey("PeopleCode")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_studies_people_people_code");
 
                     b.Navigation("City");
+
+                    b.Navigation("Person");
                 });
 
             modelBuilder.Entity("Entities.User", b =>
@@ -263,16 +322,6 @@ namespace Api.Migrations
                         .HasConstraintName("fk_users_people_person_document");
 
                     b.Navigation("Person");
-                });
-
-            modelBuilder.Entity("Entities.Experience", b =>
-                {
-                    b.HasOne("Entities.Person", null)
-                        .WithOne()
-                        .HasForeignKey("Entities.Experience", "Document")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("fk_experiences_people_person_document");
                 });
 
             modelBuilder.Entity("Entities.Person", b =>

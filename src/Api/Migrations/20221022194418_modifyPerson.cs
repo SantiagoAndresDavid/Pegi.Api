@@ -1,5 +1,4 @@
 ﻿using System;
-using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
@@ -95,17 +94,31 @@ namespace Api.Migrations
                 name: "Experiences",
                 columns: table => new
                 {
-                    person_document = table.Column<string>(type: "varchar(255)", nullable: false)
+                    experience_code = table.Column<string>(type: "varchar(255)", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    experience_institution = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    study_start_date = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    study_end_date = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    cities_code = table.Column<string>(type: "varchar(255)", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    people_code = table.Column<string>(type: "varchar(255)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     experience_position = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("pk_people", x => x.person_document);
+                    table.PrimaryKey("pk_experiences", x => x.experience_code);
                     table.ForeignKey(
-                        name: "fk_experiences_people_person_document",
-                        column: x => x.person_document,
+                        name: "fk_experiences_cities_cities_code",
+                        column: x => x.cities_code,
+                        principalTable: "cities",
+                        principalColumn: "city_id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "fk_experiences_people_people_code",
+                        column: x => x.people_code,
                         principalTable: "people",
                         principalColumn: "person_document",
                         onDelete: ReferentialAction.Cascade);
@@ -116,15 +129,15 @@ namespace Api.Migrations
                 name: "studies",
                 columns: table => new
                 {
-                    study_code = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    study_code = table.Column<string>(type: "varchar(255)", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
                     study_institution = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     study_start_date = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     study_end_date = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     cities_code = table.Column<string>(type: "varchar(255)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    person_document = table.Column<string>(type: "varchar(255)", nullable: true)
+                    people_code = table.Column<string>(type: "varchar(255)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
@@ -137,10 +150,11 @@ namespace Api.Migrations
                         principalColumn: "city_id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "fk_studies_people_person_document",
-                        column: x => x.person_document,
+                        name: "fk_studies_people_people_code",
+                        column: x => x.people_code,
                         principalTable: "people",
-                        principalColumn: "person_document");
+                        principalColumn: "person_document",
+                        onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -174,6 +188,16 @@ namespace Api.Migrations
                 column: "department_code");
 
             migrationBuilder.CreateIndex(
+                name: "ix_experiences_cities_code",
+                table: "Experiences",
+                column: "cities_code");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_experiences_people_code",
+                table: "Experiences",
+                column: "people_code");
+
+            migrationBuilder.CreateIndex(
                 name: "ix_people_cities_code",
                 table: "people",
                 column: "cities_code");
@@ -184,9 +208,9 @@ namespace Api.Migrations
                 column: "cities_code");
 
             migrationBuilder.CreateIndex(
-                name: "ix_studies_person_document",
+                name: "ix_studies_people_code",
                 table: "studies",
-                column: "person_document");
+                column: "people_code");
 
             migrationBuilder.CreateIndex(
                 name: "ix_users_person_document",

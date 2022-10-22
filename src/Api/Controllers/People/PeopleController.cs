@@ -15,7 +15,7 @@ public class PeopleController : ControllerBase
         _peopleService = peopleService;
     }
 
-    [HttpPost("RegistrerPerson")]
+    [HttpPost("registrer-person")]
     public ActionResult RegisterPeople(
         [FromBody] CreatePersonRequest createPersonRequest)
     {
@@ -41,7 +41,6 @@ public class PeopleController : ControllerBase
             {
                 return BadRequest(new Response<Void>("no se encontro a la persona"));
             }
-
             return Ok(new Response<PersonResponse>(person.Adapt<PersonResponse>()));
         }
         catch (PersonExeption e)

@@ -7,7 +7,7 @@ public class Study
 {
     [Key]
     [Column("study_code")]
-    public int Code { get; set; }
+    public string Code { get; set; }
 
     [Column("study_institution")]
     public string Institution { get; set; }
@@ -21,4 +21,8 @@ public class Study
     public string CitiesCode { get; set; }
     [ForeignKey("CitiesCode")]
     public City? City { get; set; }
+
+    public string PeopleCode { get; set; }
+    [ForeignKey("PeopleCode")]
+    public Person? Person { get; set; }
 }

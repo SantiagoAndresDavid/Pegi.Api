@@ -13,6 +13,4 @@ public record CreatePersonRequest(
     string Phone,
     string InstitutionalMail,
     string CitiesCode
-    // ICollection<CreateStudyRequest>Studies,
-    //ICollection<CreateExperienceRequest>Experiences
 );

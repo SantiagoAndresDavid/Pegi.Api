@@ -26,4 +26,9 @@ public class StudiesService
         }
     }
 
+    public List<Study> SearchStudies(string documentPerson)
+    {
+        return _studiesrespository.Filter(study => study.PeopleCode == documentPerson);
+    }
+
 }

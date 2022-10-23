@@ -6,6 +6,8 @@ using Services;
 
 namespace Api.Controllers.People;
 
+[ApiController]
+[Route("studies")]
 public class StudiesController : ControllerBase
 {
     private readonly StudiesService _studiesService;
@@ -15,7 +17,7 @@ public class StudiesController : ControllerBase
         _studiesService = studiesService;
     }
 
-    [HttpPost("registrer-study")]
+    [HttpPost]
     public ActionResult RegisterStudy(
         [FromBody] CreateStudyRequest createStudyRequest)
     {
@@ -28,6 +30,28 @@ public class StudiesController : ControllerBase
         catch (PersonExeption exeption)
         {
             return BadRequest(new Response<Void>(exeption.Message));
+        }
+    }
+
+    [HttpGet("{document}")]
+
+    public ActionResult GetStudies([FromRoute] string document)
+    {
+        try
+        {
+            var studies = _studiesService.SearchStudies(document);
+            if(studies.Count <=  0)
+            {
+                return BadRequest(new Response<Void>("no se encontro a la persona"));
+            }
+
+            return Ok(
+                new Response<List<StudiesResponse>>(
+                    studies.Adapt<List<StudiesResponse>>()));
+        }
+        catch (PersonExeption e)
+        {
+            return BadRequest(new Response<Void>(e.Message));
         }
     }
 }

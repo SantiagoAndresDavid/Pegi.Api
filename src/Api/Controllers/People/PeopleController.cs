@@ -5,7 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 using Services;
 
 namespace Api.Controllers.People;
-
+[ApiController]
+[Route("people")]
 public class PeopleController : ControllerBase
 {
     private readonly PeopleService _peopleService;
@@ -15,7 +16,7 @@ public class PeopleController : ControllerBase
         _peopleService = peopleService;
     }
 
-    [HttpPost("registrer-person")]
+    [HttpPost]
     public ActionResult RegisterPeople(
         [FromBody] CreatePersonRequest createPersonRequest)
     {
@@ -31,12 +32,12 @@ public class PeopleController : ControllerBase
         }
     }
 
-    [HttpGet("{documentPerson}")]
-    public ActionResult GetPerson([FromRoute] string documentPerson)
+    [HttpGet("{document}")]
+    public ActionResult GetPerson([FromRoute] string document)
     {
         try
         {
-            Person? person = _peopleService.SearchPerson(documentPerson);
+            Person? person = _peopleService.SearchPerson(document);
             if(person == null)
             {
                 return BadRequest(new Response<Void>("no se encontro a la persona"));

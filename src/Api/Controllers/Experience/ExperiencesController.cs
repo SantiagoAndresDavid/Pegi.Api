@@ -6,6 +6,8 @@ using Services;
 
 namespace Api.Controllers.People;
 
+[ApiController]
+[Route("experiences")]
 public class ExperiencesController : ControllerBase
 {
     private readonly ExperienceService _experienceService;
@@ -15,7 +17,7 @@ public class ExperiencesController : ControllerBase
         _experienceService = experienceService;
     }
 
-    [HttpPost("registrer-Experience")]
+    [HttpPost]
     public ActionResult RegisterExperience(
         [FromBody] CreateExperienceRequest createExperienceRequest)
     {

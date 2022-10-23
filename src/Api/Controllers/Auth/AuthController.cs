@@ -6,6 +6,8 @@ using Services;
 
 namespace Api.Controllers.Auth;
 
+[ApiController]
+[Route("auth")]
 public class AuthController : ControllerBase
 {
     private readonly UsersService _usersService;

@@ -26,4 +26,8 @@ public class ExperienceService
         }
     }
 
+    public List<Experience> SearchExperiences(string documentPerson)
+    {
+        return _experiencesRepository.Filter(experience => experience.PeopleCode == documentPerson);
+    }
 }

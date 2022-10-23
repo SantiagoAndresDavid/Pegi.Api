@@ -25,7 +25,8 @@ public class StudiesController : ControllerBase
         {
             var study = createStudyRequest.Adapt<Study>();
             _studiesService.saveStudy(study);
-            return Ok(new Response<Void>("el estudio se ha agregado con exito", false));
+            return Ok(new Response<Void>("el estudio se ha agregado con exito",
+                false));
         }
         catch (PersonExeption exeption)
         {
@@ -34,27 +35,24 @@ public class StudiesController : ControllerBase
     }
 
     [HttpGet("{document}")]
-
     public ActionResult GetStudies([FromRoute] string document)
     {
         try
         {
             var studies = _studiesService.SearchStudies(document);
-            if(studies.Count <=  0)
+            if (studies.Count <= 0)
             {
-                return BadRequest(new Response<Void>("no se encontro a la persona"));
+                return BadRequest(
+                    new Response<Void>("no se encontro a la persona"));
             }
 
             return Ok(
                 new Response<List<StudiesResponse>>(
                     studies.Adapt<List<StudiesResponse>>()));
         }
-        catch (PersonExeption e)
+        catch (StudyExeption e)
         {
             return BadRequest(new Response<Void>(e.Message));
         }
     }
 }
-
-
-

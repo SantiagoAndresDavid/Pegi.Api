@@ -49,4 +49,18 @@ public class PeopleController : ControllerBase
             return BadRequest(new Response<Void>(e.Message));
         }
     }
+
+    [HttpDelete("{document}")]
+    public ActionResult DeletePerson([FromRoute] string document)
+    {
+        try
+        {
+            string message = _peopleService.DeletePerson(document);
+            return Ok(new Response<Void>(message,false));
+        }
+        catch (Exception e)
+        {
+            return BadRequest(new Response<Void>(e.Message));
+        }
+    }
 }

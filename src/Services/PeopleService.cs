@@ -30,4 +30,21 @@ public class PeopleService
     {
         return _peopleRepository.Find(person => person.Document == document);
     }
+
+    public string DeletePerson(string document)
+    {
+        try
+        {
+            Person? foundPerson = SearchPerson(document);
+            if (foundPerson == null)
+                throw new PersonExeption("Persona no encontrada");
+            _peopleRepository.Delete(foundPerson);
+            return "Registro eliminado";
+        }
+        catch (Exception e)
+        {
+            throw new PersonExeption(
+                $"Ha ocurrido un error al eliminar {e.Message}");
+        }
+    }
 }

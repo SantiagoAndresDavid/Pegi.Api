@@ -21,9 +21,9 @@ public class UsersService
             _repository.Save(user);
             return true;
         }
-        catch (DbUpdateException _)
+        catch
         {
-            return false;
+            return false ;
         }
     }
 }

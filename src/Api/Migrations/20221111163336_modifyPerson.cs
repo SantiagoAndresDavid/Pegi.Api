@@ -13,6 +13,21 @@ namespace Api.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
+                name: "academics_program",
+                columns: table => new
+                {
+                    code_program = table.Column<string>(type: "varchar(255)", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    name = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4")
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_academics_program", x => x.code_program);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
                 name: "departments",
                 columns: table => new
                 {
@@ -126,6 +141,55 @@ namespace Api.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
+                name: "professor",
+                columns: table => new
+                {
+                    person_document = table.Column<string>(type: "varchar(255)", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    amount_credits = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_people", x => x.person_document);
+                    table.ForeignKey(
+                        name: "fk_professor_people_person_document",
+                        column: x => x.person_document,
+                        principalTable: "people",
+                        principalColumn: "person_document",
+                        onDelete: ReferentialAction.Cascade);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
+                name: "students",
+                columns: table => new
+                {
+                    person_document = table.Column<string>(type: "varchar(255)", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    program_code = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    academic_program_code = table.Column<string>(type: "varchar(255)", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    amount_credits = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_people", x => x.person_document);
+                    table.ForeignKey(
+                        name: "fk_students_academics_program_academic_program_code",
+                        column: x => x.academic_program_code,
+                        principalTable: "academics_program",
+                        principalColumn: "code_program");
+                    table.ForeignKey(
+                        name: "fk_students_people_person_document",
+                        column: x => x.person_document,
+                        principalTable: "people",
+                        principalColumn: "person_document",
+                        onDelete: ReferentialAction.Cascade);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
                 name: "studies",
                 columns: table => new
                 {
@@ -203,6 +267,11 @@ namespace Api.Migrations
                 column: "cities_code");
 
             migrationBuilder.CreateIndex(
+                name: "ix_students_academic_program_code",
+                table: "students",
+                column: "academic_program_code");
+
+            migrationBuilder.CreateIndex(
                 name: "ix_studies_cities_code",
                 table: "studies",
                 column: "cities_code");
@@ -230,10 +299,19 @@ namespace Api.Migrations
                 name: "Experiences");
 
             migrationBuilder.DropTable(
+                name: "professor");
+
+            migrationBuilder.DropTable(
+                name: "students");
+
+            migrationBuilder.DropTable(
                 name: "studies");
 
             migrationBuilder.DropTable(
                 name: "users");
+
+            migrationBuilder.DropTable(
+                name: "academics_program");
 
             migrationBuilder.DropTable(
                 name: "people");

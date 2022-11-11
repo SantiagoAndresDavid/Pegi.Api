@@ -19,6 +19,22 @@ namespace Api.Migrations
                 .HasAnnotation("ProductVersion", "6.0.7")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
+            modelBuilder.Entity("Entities.AcademicProgram", b =>
+                {
+                    b.Property<string>("Code")
+                        .HasColumnType("varchar(255)")
+                        .HasColumnName("code_program");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("longtext")
+                        .HasColumnName("name");
+
+                    b.HasKey("Code")
+                        .HasName("pk_academics_program");
+
+                    b.ToTable("academics_program", (string)null);
+                });
+
             modelBuilder.Entity("Entities.City", b =>
                 {
                     b.Property<string>("Id")
@@ -248,6 +264,39 @@ namespace Api.Migrations
                     b.ToTable("users", (string)null);
                 });
 
+            modelBuilder.Entity("Entities.Professor", b =>
+                {
+                    b.HasBaseType("Entities.Person");
+
+                    b.Property<int>("AmountCredits")
+                        .HasColumnType("int")
+                        .HasColumnName("amount_credits");
+
+                    b.ToTable("professor");
+                });
+
+            modelBuilder.Entity("Entities.Student", b =>
+                {
+                    b.HasBaseType("Entities.Person");
+
+                    b.Property<int>("AmountCredits")
+                        .HasColumnType("int")
+                        .HasColumnName("amount_credits");
+
+                    b.Property<string>("ProgramCode")
+                        .HasColumnType("longtext")
+                        .HasColumnName("program_code");
+
+                    b.Property<string>("academic_program_code")
+                        .HasColumnType("varchar(255)")
+                        .HasColumnName("academic_program_code");
+
+                    b.HasIndex("academic_program_code")
+                        .HasDatabaseName("ix_students_academic_program_code");
+
+                    b.ToTable("students");
+                });
+
             modelBuilder.Entity("Entities.City", b =>
                 {
                     b.HasOne("Entities.Department", "Department")
@@ -322,6 +371,33 @@ namespace Api.Migrations
                         .HasConstraintName("fk_users_people_person_document");
 
                     b.Navigation("Person");
+                });
+
+            modelBuilder.Entity("Entities.Professor", b =>
+                {
+                    b.HasOne("Entities.Person", null)
+                        .WithOne()
+                        .HasForeignKey("Entities.Professor", "Document")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_professor_people_person_document");
+                });
+
+            modelBuilder.Entity("Entities.Student", b =>
+                {
+                    b.HasOne("Entities.Person", null)
+                        .WithOne()
+                        .HasForeignKey("Entities.Student", "Document")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_students_people_person_document");
+
+                    b.HasOne("Entities.AcademicProgram", "AcademicProgram")
+                        .WithMany()
+                        .HasForeignKey("academic_program_code")
+                        .HasConstraintName("fk_students_academics_program_academic_program_code");
+
+                    b.Navigation("AcademicProgram");
                 });
 
             modelBuilder.Entity("Entities.Person", b =>

@@ -15,6 +15,9 @@ public class PegiDbContext : DbContext
     public DbSet<City> Cities { get; set; }
     public DbSet<Department> Departments { get; set; }
     public DbSet<Experience> Experiences { get; set; }
+    public DbSet<AcademicProgram> AcademicPrograms { get; set; }
+    public DbSet<Student> Students { get; set; }
+    public DbSet<Professor> Professors { get; set; }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<User>().HasIndex(user => user.Name).IsUnique();

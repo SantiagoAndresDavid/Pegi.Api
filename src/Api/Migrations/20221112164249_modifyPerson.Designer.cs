@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Api.Migrations
 {
     [DbContext(typeof(PegiDbContext))]
-    [Migration("20221111163336_modifyPerson")]
+    [Migration("20221112164249_modifyPerson")]
     partial class modifyPerson
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -270,9 +270,10 @@ namespace Api.Migrations
                 {
                     b.HasBaseType("Entities.Person");
 
-                    b.Property<int>("AmountCredits")
-                        .HasColumnType("int")
-                        .HasColumnName("amount_credits");
+                    b.Property<string>("Position")
+                        .IsRequired()
+                        .HasColumnType("longtext")
+                        .HasColumnName("position");
 
                     b.ToTable("professor");
                 });

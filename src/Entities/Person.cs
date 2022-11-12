@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace Entities;
 
 [Table("people")]
-public abstract class Person
+public  class Person
 {
     [Key] [Column("person_document")] public string Document { get; set; }
 

@@ -268,9 +268,10 @@ namespace Api.Migrations
                 {
                     b.HasBaseType("Entities.Person");
 
-                    b.Property<int>("AmountCredits")
-                        .HasColumnType("int")
-                        .HasColumnName("amount_credits");
+                    b.Property<string>("Position")
+                        .IsRequired()
+                        .HasColumnType("longtext")
+                        .HasColumnName("position");
 
                     b.ToTable("professor");
                 });

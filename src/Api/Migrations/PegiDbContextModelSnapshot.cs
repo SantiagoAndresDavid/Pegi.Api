@@ -190,6 +190,50 @@ namespace Api.Migrations
                     b.ToTable("people", (string)null);
                 });
 
+            modelBuilder.Entity("Entities.Professor", b =>
+                {
+                    b.Property<string>("person_document")
+                        .HasColumnType("varchar(255)")
+                        .HasColumnName("person_document");
+
+                    b.Property<string>("Position")
+                        .IsRequired()
+                        .HasColumnType("longtext")
+                        .HasColumnName("position");
+
+                    b.HasKey("person_document")
+                        .HasName("pk_professor");
+
+                    b.ToTable("professor", (string)null);
+                });
+
+            modelBuilder.Entity("Entities.Student", b =>
+                {
+                    b.Property<string>("person_document")
+                        .HasColumnType("varchar(255)")
+                        .HasColumnName("person_document");
+
+                    b.Property<int>("AmountCredits")
+                        .HasColumnType("int")
+                        .HasColumnName("amount_credits");
+
+                    b.Property<string>("ProgramCode")
+                        .HasColumnType("longtext")
+                        .HasColumnName("program_code");
+
+                    b.Property<string>("academic_program_code")
+                        .HasColumnType("varchar(255)")
+                        .HasColumnName("academic_program_code");
+
+                    b.HasKey("person_document")
+                        .HasName("pk_students");
+
+                    b.HasIndex("academic_program_code")
+                        .HasDatabaseName("ix_students_academic_program_code");
+
+                    b.ToTable("students", (string)null);
+                });
+
             modelBuilder.Entity("Entities.Study", b =>
                 {
                     b.Property<string>("Code")
@@ -264,40 +308,6 @@ namespace Api.Migrations
                     b.ToTable("users", (string)null);
                 });
 
-            modelBuilder.Entity("Entities.Professor", b =>
-                {
-                    b.HasBaseType("Entities.Person");
-
-                    b.Property<string>("Position")
-                        .IsRequired()
-                        .HasColumnType("longtext")
-                        .HasColumnName("position");
-
-                    b.ToTable("professor");
-                });
-
-            modelBuilder.Entity("Entities.Student", b =>
-                {
-                    b.HasBaseType("Entities.Person");
-
-                    b.Property<int>("AmountCredits")
-                        .HasColumnType("int")
-                        .HasColumnName("amount_credits");
-
-                    b.Property<string>("ProgramCode")
-                        .HasColumnType("longtext")
-                        .HasColumnName("program_code");
-
-                    b.Property<string>("academic_program_code")
-                        .HasColumnType("varchar(255)")
-                        .HasColumnName("academic_program_code");
-
-                    b.HasIndex("academic_program_code")
-                        .HasDatabaseName("ix_students_academic_program_code");
-
-                    b.ToTable("students");
-                });
-
             modelBuilder.Entity("Entities.City", b =>
                 {
                     b.HasOne("Entities.Department", "Department")
@@ -343,6 +353,37 @@ namespace Api.Migrations
                     b.Navigation("City");
                 });
 
+            modelBuilder.Entity("Entities.Professor", b =>
+                {
+                    b.HasOne("Entities.Person", "Person")
+                        .WithMany()
+                        .HasForeignKey("person_document")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_professor_people_person_document");
+
+                    b.Navigation("Person");
+                });
+
+            modelBuilder.Entity("Entities.Student", b =>
+                {
+                    b.HasOne("Entities.AcademicProgram", "AcademicProgram")
+                        .WithMany()
+                        .HasForeignKey("academic_program_code")
+                        .HasConstraintName("fk_students_academics_program_academic_program_code");
+
+                    b.HasOne("Entities.Person", "Person")
+                        .WithMany()
+                        .HasForeignKey("person_document")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_students_people_person_document");
+
+                    b.Navigation("AcademicProgram");
+
+                    b.Navigation("Person");
+                });
+
             modelBuilder.Entity("Entities.Study", b =>
                 {
                     b.HasOne("Entities.City", "City")
@@ -353,7 +394,7 @@ namespace Api.Migrations
                         .HasConstraintName("fk_studies_cities_cities_code");
 
                     b.HasOne("Entities.Person", "Person")
-                        .WithMany("Studies")
+                        .WithMany()
                         .HasForeignKey("PeopleCode")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
@@ -372,38 +413,6 @@ namespace Api.Migrations
                         .HasConstraintName("fk_users_people_person_document");
 
                     b.Navigation("Person");
-                });
-
-            modelBuilder.Entity("Entities.Professor", b =>
-                {
-                    b.HasOne("Entities.Person", null)
-                        .WithOne()
-                        .HasForeignKey("Entities.Professor", "Document")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("fk_professor_people_person_document");
-                });
-
-            modelBuilder.Entity("Entities.Student", b =>
-                {
-                    b.HasOne("Entities.Person", null)
-                        .WithOne()
-                        .HasForeignKey("Entities.Student", "Document")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("fk_students_people_person_document");
-
-                    b.HasOne("Entities.AcademicProgram", "AcademicProgram")
-                        .WithMany()
-                        .HasForeignKey("academic_program_code")
-                        .HasConstraintName("fk_students_academics_program_academic_program_code");
-
-                    b.Navigation("AcademicProgram");
-                });
-
-            modelBuilder.Entity("Entities.Person", b =>
-                {
-                    b.Navigation("Studies");
                 });
 #pragma warning restore 612, 618
         }

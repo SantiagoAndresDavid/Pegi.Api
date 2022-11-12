@@ -13,7 +13,7 @@ public class PeopleService
         _peopleRepository = peopleRepository;
     }
 
-    public (string, bool)  savePerson(Person person)
+    public (string, bool) savePerson(Person person)
     {
         try
         {

@@ -151,7 +151,7 @@ namespace Api.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("pk_people", x => x.person_document);
+                    table.PrimaryKey("pk_professor", x => x.person_document);
                     table.ForeignKey(
                         name: "fk_professor_people_person_document",
                         column: x => x.person_document,
@@ -175,7 +175,7 @@ namespace Api.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("pk_people", x => x.person_document);
+                    table.PrimaryKey("pk_students", x => x.person_document);
                     table.ForeignKey(
                         name: "fk_students_academics_program_academic_program_code",
                         column: x => x.academic_program_code,

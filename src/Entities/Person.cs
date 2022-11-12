@@ -6,6 +6,7 @@ namespace Entities;
 [Table("people")]
 public  class Person
 {
+
     [Key] [Column("person_document")] public string Document { get; set; }
 
     [Column("person_identification_type")]
@@ -31,8 +32,8 @@ public  class Person
     [Column("person_institutional_email")]
     public string InstitutionalMail { get; set; }
 
-    public ICollection<Study> Studies { get; set; }
-
     public string CitiesCode { get; set; }
     [ForeignKey("CitiesCode")] public City? City { get; set; }
+
+
 }

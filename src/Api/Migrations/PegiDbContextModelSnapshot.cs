@@ -127,7 +127,7 @@ namespace Api.Migrations
                 {
                     b.Property<string>("Document")
                         .HasColumnType("varchar(255)")
-                        .HasColumnName("person_document");
+                        .HasColumnName("document");
 
                     b.Property<DateTime>("BirthDate")
                         .HasColumnType("datetime(6)")
@@ -192,16 +192,15 @@ namespace Api.Migrations
 
             modelBuilder.Entity("Entities.Professor", b =>
                 {
-                    b.Property<string>("person_document")
+                    b.Property<string>("Document")
                         .HasColumnType("varchar(255)")
-                        .HasColumnName("person_document");
+                        .HasColumnName("document");
 
                     b.Property<string>("Position")
-                        .IsRequired()
                         .HasColumnType("longtext")
                         .HasColumnName("position");
 
-                    b.HasKey("person_document")
+                    b.HasKey("Document")
                         .HasName("pk_professor");
 
                     b.ToTable("professor", (string)null);
@@ -209,9 +208,9 @@ namespace Api.Migrations
 
             modelBuilder.Entity("Entities.Student", b =>
                 {
-                    b.Property<string>("person_document")
+                    b.Property<string>("Document")
                         .HasColumnType("varchar(255)")
-                        .HasColumnName("person_document");
+                        .HasColumnName("document");
 
                     b.Property<int>("AmountCredits")
                         .HasColumnType("int")
@@ -225,11 +224,18 @@ namespace Api.Migrations
                         .HasColumnType("varchar(255)")
                         .HasColumnName("academic_program_code");
 
-                    b.HasKey("person_document")
+                    b.Property<string>("document")
+                        .HasColumnType("varchar(255)")
+                        .HasColumnName("document1");
+
+                    b.HasKey("Document")
                         .HasName("pk_students");
 
                     b.HasIndex("academic_program_code")
                         .HasDatabaseName("ix_students_academic_program_code");
+
+                    b.HasIndex("document")
+                        .HasDatabaseName("ix_students_document");
 
                     b.ToTable("students", (string)null);
                 });
@@ -357,10 +363,10 @@ namespace Api.Migrations
                 {
                     b.HasOne("Entities.Person", "Person")
                         .WithMany()
-                        .HasForeignKey("person_document")
+                        .HasForeignKey("Document")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
-                        .HasConstraintName("fk_professor_people_person_document");
+                        .HasConstraintName("fk_professor_people_document");
 
                     b.Navigation("Person");
                 });
@@ -374,10 +380,8 @@ namespace Api.Migrations
 
                     b.HasOne("Entities.Person", "Person")
                         .WithMany()
-                        .HasForeignKey("person_document")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("fk_students_people_person_document");
+                        .HasForeignKey("document")
+                        .HasConstraintName("fk_students_people_document");
 
                     b.Navigation("AcademicProgram");
 

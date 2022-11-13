@@ -7,7 +7,7 @@ namespace Entities;
 public  class Person
 {
 
-    [Key] [Column("person_document")] public string Document { get; set; }
+    [Key] [Column("document")] public string Document { get; set; }
 
     [Column("person_identification_type")]
     public string IdentificationType { get; set; }

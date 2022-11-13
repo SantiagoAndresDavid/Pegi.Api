@@ -25,4 +25,12 @@ public class ProfessorService
             return (e.Message, false);
         }
     }
+
+    public Professor? SearchProfessor(string document)
+    {
+        return _professorRepository.Find(professor =>
+            professor.Document == document);
+    }
+
+
 }

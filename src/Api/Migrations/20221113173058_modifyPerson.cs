@@ -69,7 +69,7 @@ namespace Api.Migrations
                 name: "people",
                 columns: table => new
                 {
-                    person_document = table.Column<string>(type: "varchar(255)", nullable: false)
+                    document = table.Column<string>(type: "varchar(255)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     person_identification_type = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
@@ -95,7 +95,7 @@ namespace Api.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("pk_people", x => x.person_document);
+                    table.PrimaryKey("pk_people", x => x.document);
                     table.ForeignKey(
                         name: "fk_people_cities_cities_code",
                         column: x => x.cities_code,
@@ -135,7 +135,7 @@ namespace Api.Migrations
                         name: "fk_experiences_people_people_code",
                         column: x => x.people_code,
                         principalTable: "people",
-                        principalColumn: "person_document",
+                        principalColumn: "document",
                         onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
@@ -144,19 +144,19 @@ namespace Api.Migrations
                 name: "professor",
                 columns: table => new
                 {
-                    person_document = table.Column<string>(type: "varchar(255)", nullable: false)
+                    document = table.Column<string>(type: "varchar(255)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    position = table.Column<string>(type: "longtext", nullable: false)
+                    position = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("pk_professor", x => x.person_document);
+                    table.PrimaryKey("pk_professor", x => x.document);
                     table.ForeignKey(
-                        name: "fk_professor_people_person_document",
-                        column: x => x.person_document,
+                        name: "fk_professor_people_document",
+                        column: x => x.document,
                         principalTable: "people",
-                        principalColumn: "person_document",
+                        principalColumn: "document",
                         onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
@@ -165,7 +165,9 @@ namespace Api.Migrations
                 name: "students",
                 columns: table => new
                 {
-                    person_document = table.Column<string>(type: "varchar(255)", nullable: false)
+                    document = table.Column<string>(type: "varchar(255)", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    document1 = table.Column<string>(type: "varchar(255)", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     program_code = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
@@ -175,18 +177,17 @@ namespace Api.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("pk_students", x => x.person_document);
+                    table.PrimaryKey("pk_students", x => x.document);
                     table.ForeignKey(
                         name: "fk_students_academics_program_academic_program_code",
                         column: x => x.academic_program_code,
                         principalTable: "academics_program",
                         principalColumn: "code_program");
                     table.ForeignKey(
-                        name: "fk_students_people_person_document",
-                        column: x => x.person_document,
+                        name: "fk_students_people_document",
+                        column: x => x.document1,
                         principalTable: "people",
-                        principalColumn: "person_document",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "document");
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -218,7 +219,7 @@ namespace Api.Migrations
                         name: "fk_studies_people_people_code",
                         column: x => x.people_code,
                         principalTable: "people",
-                        principalColumn: "person_document",
+                        principalColumn: "document",
                         onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
@@ -243,7 +244,7 @@ namespace Api.Migrations
                         name: "fk_users_people_person_document",
                         column: x => x.person_document,
                         principalTable: "people",
-                        principalColumn: "person_document");
+                        principalColumn: "document");
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -271,6 +272,11 @@ namespace Api.Migrations
                 name: "ix_students_academic_program_code",
                 table: "students",
                 column: "academic_program_code");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_students_document",
+                table: "students",
+                column: "document1");
 
             migrationBuilder.CreateIndex(
                 name: "ix_studies_cities_code",

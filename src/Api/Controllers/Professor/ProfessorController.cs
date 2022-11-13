@@ -33,4 +33,23 @@ public class ProfessorController : ControllerBase
         }
     }
 
+    [HttpGet("{document}")]
+    public ActionResult GetProfessor([FromRoute] string document)
+    {
+        try
+        {
+            Entities.Professor? professor = _professorService.SearchProfessor(document);
+            if(professor?.Document == null)
+            {
+                return BadRequest(new Response<Void>("no se encontro a la persona"));
+            }
+            return Ok(new Response<ProfessorResponse>(professor.Adapt<ProfessorResponse>()));
+        }
+        catch (PersonExeption e)
+        {
+            return BadRequest(new Response<Void>(e.Message));
+        }
+    }
+
+
 }

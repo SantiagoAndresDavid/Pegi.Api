@@ -7,8 +7,8 @@ namespace Entities;
 [Table("students")]
 public class Student
 {
-    [Key] public string? person_document { get; set; }
-    [ForeignKey("person_document")] public Person? Person { get; set; }
+    [Key] public string? Document { get; set; }
+    [ForeignKey("document")] public Person? Person { get; set; }
 
     public string? ProgramCode { get; set; }
 

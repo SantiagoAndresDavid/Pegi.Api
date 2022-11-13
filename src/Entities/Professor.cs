@@ -6,8 +6,11 @@ namespace Entities;
 [Table("professor")]
 public class Professor
 {
-    [Key] public string person_document { get; set; }
-    [ForeignKey("person_document")] public Person Person { get; set; }
+    [Key]
+    public string? Document { get; set; }
+    [ForeignKey("Document")]
+    public Person? Person { get; set; }
 
-    [Column("position")] public string Position { get; set; }
+    [Column("position")]
+    public string? Position { get; set; }
 }

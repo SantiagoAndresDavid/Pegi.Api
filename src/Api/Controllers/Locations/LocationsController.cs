@@ -4,6 +4,8 @@ using Services;
 
 namespace Api.Controllers.Locations;
 
+[ApiController]
+[Route("Locations")]
 public class LocationsController : ControllerBase
 {
     private readonly LocationsService _locationsService;

@@ -28,5 +28,6 @@ public static class DependencyInjection
         services.AddScoped<StudiesService>();
         services.AddScoped<ExperienceService>();
         services.AddScoped<ProfessorService>();
+        services.AddScoped<AcademicProgramService>();
     }
 }

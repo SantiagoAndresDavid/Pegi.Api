@@ -23,7 +23,7 @@ public class ProfessorController : ControllerBase
         try
         {
             var professor = createProfessorRequest.Adapt<Entities.Professor>();
-            _professorService.saveProfessor(professor);
+            _professorService.SaveProfessor(professor);
             return Ok(new Response<Void>("el professor se ha creado con exito",
                 false));
         }

@@ -8,12 +8,12 @@ namespace Entities;
 public class Student
 {
     [Key] public string? Document { get; set; }
-    [ForeignKey("document")] public Person? Person { get; set; }
+    [ForeignKey("Document")] public Person? Person { get; set; }
 
-    public string? ProgramCode { get; set; }
+    [Column("amount_credits")]
+    public int AmountCredits { get; set; }
 
-    [ForeignKey("academic_program_code")]
+    public string? AcademicProgramCode { get; set; }
+    [ForeignKey("AcademicProgramCode")]
     public AcademicProgram? AcademicProgram { get; set; }
-
-    [Column("amount_credits")] public int AmountCredits { get; set; }
 }

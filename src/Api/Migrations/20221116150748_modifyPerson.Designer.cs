@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Api.Migrations
 {
     [DbContext(typeof(PegiDbContext))]
-    [Migration("20221113173058_modifyPerson")]
+    [Migration("20221116150748_modifyPerson")]
     partial class modifyPerson
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -214,30 +214,19 @@ namespace Api.Migrations
                         .HasColumnType("varchar(255)")
                         .HasColumnName("document");
 
+                    b.Property<string>("AcademicProgramCode")
+                        .HasColumnType("varchar(255)")
+                        .HasColumnName("academic_program_code");
+
                     b.Property<int>("AmountCredits")
                         .HasColumnType("int")
                         .HasColumnName("amount_credits");
 
-                    b.Property<string>("ProgramCode")
-                        .HasColumnType("longtext")
-                        .HasColumnName("program_code");
-
-                    b.Property<string>("academic_program_code")
-                        .HasColumnType("varchar(255)")
-                        .HasColumnName("academic_program_code");
-
-                    b.Property<string>("document")
-                        .HasColumnType("varchar(255)")
-                        .HasColumnName("document1");
-
                     b.HasKey("Document")
                         .HasName("pk_students");
 
-                    b.HasIndex("academic_program_code")
+                    b.HasIndex("AcademicProgramCode")
                         .HasDatabaseName("ix_students_academic_program_code");
-
-                    b.HasIndex("document")
-                        .HasDatabaseName("ix_students_document");
 
                     b.ToTable("students", (string)null);
                 });
@@ -377,12 +366,14 @@ namespace Api.Migrations
                 {
                     b.HasOne("Entities.AcademicProgram", "AcademicProgram")
                         .WithMany()
-                        .HasForeignKey("academic_program_code")
+                        .HasForeignKey("AcademicProgramCode")
                         .HasConstraintName("fk_students_academics_program_academic_program_code");
 
                     b.HasOne("Entities.Person", "Person")
                         .WithMany()
-                        .HasForeignKey("document")
+                        .HasForeignKey("Document")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
                         .HasConstraintName("fk_students_people_document");
 
                     b.Navigation("AcademicProgram");

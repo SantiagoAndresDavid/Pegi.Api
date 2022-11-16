@@ -167,13 +167,9 @@ namespace Api.Migrations
                 {
                     document = table.Column<string>(type: "varchar(255)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    document1 = table.Column<string>(type: "varchar(255)", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    program_code = table.Column<string>(type: "longtext", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    amount_credits = table.Column<int>(type: "int", nullable: false),
                     academic_program_code = table.Column<string>(type: "varchar(255)", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    amount_credits = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
                 {
@@ -185,9 +181,10 @@ namespace Api.Migrations
                         principalColumn: "code_program");
                     table.ForeignKey(
                         name: "fk_students_people_document",
-                        column: x => x.document1,
+                        column: x => x.document,
                         principalTable: "people",
-                        principalColumn: "document");
+                        principalColumn: "document",
+                        onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -272,11 +269,6 @@ namespace Api.Migrations
                 name: "ix_students_academic_program_code",
                 table: "students",
                 column: "academic_program_code");
-
-            migrationBuilder.CreateIndex(
-                name: "ix_students_document",
-                table: "students",
-                column: "document1");
 
             migrationBuilder.CreateIndex(
                 name: "ix_studies_cities_code",

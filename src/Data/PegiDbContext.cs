@@ -7,8 +7,8 @@ public class PegiDbContext : DbContext
 {
     public PegiDbContext(DbContextOptions options) : base(options)
     {
-
     }
+
     public DbSet<User>? Users { get; set; }
     public DbSet<Person> People { get; set; }
     public DbSet<Study> Studies { get; set; }
@@ -18,10 +18,11 @@ public class PegiDbContext : DbContext
     public DbSet<AcademicProgram> AcademicPrograms { get; set; }
     public DbSet<Student> Students { get; set; }
     public DbSet<Professor> Professors { get; set; }
+    public DbSet<Proposal> Proposals { get; set; }
+    public DbSet<StudentProposal> StudentProposals { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<User>().HasIndex(user => user.Name).IsUnique();
-
     }
 }

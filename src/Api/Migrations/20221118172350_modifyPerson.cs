@@ -1,4 +1,5 @@
 ﻿using System;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
@@ -39,6 +40,36 @@ namespace Api.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("pk_departments", x => x.department_id);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
+                name: "proposals",
+                columns: table => new
+                {
+                    code = table.Column<string>(type: "varchar(255)", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    title = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    date = table.Column<DateTime>(type: "datetime(6)", nullable: true),
+                    investigationGroup = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    approach = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    justification = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    generalObjective = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    specificObjective = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    biblioGraphical = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    status = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4")
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_proposals", x => x.code);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -227,9 +258,9 @@ namespace Api.Migrations
                 {
                     user_name = table.Column<string>(type: "varchar(255)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    user_password = table.Column<string>(type: "longtext", nullable: false)
+                    user_password = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    user_rol = table.Column<string>(type: "longtext", nullable: false)
+                    user_rol = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     person_document = table.Column<string>(type: "varchar(255)", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4")
@@ -241,6 +272,33 @@ namespace Api.Migrations
                         name: "fk_users_people_person_document",
                         column: x => x.person_document,
                         principalTable: "people",
+                        principalColumn: "document");
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
+                name: "Student_Proposal",
+                columns: table => new
+                {
+                    id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    proposal_code = table.Column<string>(type: "varchar(255)", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    student_code = table.Column<string>(type: "varchar(255)", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4")
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_student_proposal", x => x.id);
+                    table.ForeignKey(
+                        name: "fk_student_proposal_proposals_proposal_code",
+                        column: x => x.proposal_code,
+                        principalTable: "proposals",
+                        principalColumn: "code");
+                    table.ForeignKey(
+                        name: "fk_student_proposal_students_student_code",
+                        column: x => x.student_code,
+                        principalTable: "students",
                         principalColumn: "document");
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
@@ -264,6 +322,16 @@ namespace Api.Migrations
                 name: "ix_people_cities_code",
                 table: "people",
                 column: "cities_code");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_student_proposal_proposal_code",
+                table: "Student_Proposal",
+                column: "proposal_code");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_student_proposal_student_code",
+                table: "Student_Proposal",
+                column: "student_code");
 
             migrationBuilder.CreateIndex(
                 name: "ix_students_academic_program_code",
@@ -301,13 +369,19 @@ namespace Api.Migrations
                 name: "professor");
 
             migrationBuilder.DropTable(
-                name: "students");
+                name: "Student_Proposal");
 
             migrationBuilder.DropTable(
                 name: "studies");
 
             migrationBuilder.DropTable(
                 name: "users");
+
+            migrationBuilder.DropTable(
+                name: "proposals");
+
+            migrationBuilder.DropTable(
+                name: "students");
 
             migrationBuilder.DropTable(
                 name: "academics_program");

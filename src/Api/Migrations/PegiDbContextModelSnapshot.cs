@@ -206,6 +206,54 @@ namespace Api.Migrations
                     b.ToTable("professor", (string)null);
                 });
 
+            modelBuilder.Entity("Entities.Proposal", b =>
+                {
+                    b.Property<string>("Code")
+                        .HasColumnType("varchar(255)")
+                        .HasColumnName("code");
+
+                    b.Property<string>("Approach")
+                        .HasColumnType("longtext")
+                        .HasColumnName("approach");
+
+                    b.Property<string>("Bibliographical")
+                        .HasColumnType("longtext")
+                        .HasColumnName("biblioGraphical");
+
+                    b.Property<DateTime?>("Date")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("date");
+
+                    b.Property<string>("GeneralObjective")
+                        .HasColumnType("longtext")
+                        .HasColumnName("generalObjective");
+
+                    b.Property<string>("InvestigationGroup")
+                        .HasColumnType("longtext")
+                        .HasColumnName("investigationGroup");
+
+                    b.Property<string>("Justification")
+                        .HasColumnType("longtext")
+                        .HasColumnName("justification");
+
+                    b.Property<string>("SpecificObjective")
+                        .HasColumnType("longtext")
+                        .HasColumnName("specificObjective");
+
+                    b.Property<string>("Status")
+                        .HasColumnType("longtext")
+                        .HasColumnName("status");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("longtext")
+                        .HasColumnName("title");
+
+                    b.HasKey("Code")
+                        .HasName("pk_proposals");
+
+                    b.ToTable("proposals", (string)null);
+                });
+
             modelBuilder.Entity("Entities.Student", b =>
                 {
                     b.Property<string>("Document")
@@ -227,6 +275,33 @@ namespace Api.Migrations
                         .HasDatabaseName("ix_students_academic_program_code");
 
                     b.ToTable("students", (string)null);
+                });
+
+            modelBuilder.Entity("Entities.StudentProposal", b =>
+                {
+                    b.Property<int?>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("id");
+
+                    b.Property<string>("ProposalCode")
+                        .HasColumnType("varchar(255)")
+                        .HasColumnName("proposal_code");
+
+                    b.Property<string>("StudentCode")
+                        .HasColumnType("varchar(255)")
+                        .HasColumnName("student_code");
+
+                    b.HasKey("id")
+                        .HasName("pk_student_proposal");
+
+                    b.HasIndex("ProposalCode")
+                        .HasDatabaseName("ix_student_proposal_proposal_code");
+
+                    b.HasIndex("StudentCode")
+                        .HasDatabaseName("ix_student_proposal_student_code");
+
+                    b.ToTable("Student_Proposal");
                 });
 
             modelBuilder.Entity("Entities.Study", b =>
@@ -277,12 +352,10 @@ namespace Api.Migrations
                         .HasColumnName("user_name");
 
                     b.Property<string>("Password")
-                        .IsRequired()
                         .HasColumnType("longtext")
                         .HasColumnName("user_password");
 
                     b.Property<string>("Role")
-                        .IsRequired()
                         .HasColumnType("longtext")
                         .HasColumnName("user_rol");
 
@@ -377,6 +450,23 @@ namespace Api.Migrations
                     b.Navigation("AcademicProgram");
 
                     b.Navigation("Person");
+                });
+
+            modelBuilder.Entity("Entities.StudentProposal", b =>
+                {
+                    b.HasOne("Entities.Proposal", "Proposal")
+                        .WithMany()
+                        .HasForeignKey("ProposalCode")
+                        .HasConstraintName("fk_student_proposal_proposals_proposal_code");
+
+                    b.HasOne("Entities.Student", "Student")
+                        .WithMany()
+                        .HasForeignKey("StudentCode")
+                        .HasConstraintName("fk_student_proposal_students_student_code");
+
+                    b.Navigation("Proposal");
+
+                    b.Navigation("Student");
                 });
 
             modelBuilder.Entity("Entities.Study", b =>

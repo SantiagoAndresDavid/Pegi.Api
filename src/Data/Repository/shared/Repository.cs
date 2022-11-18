@@ -44,4 +44,10 @@ public class Repository<TEntity> where TEntity : class
         Context.Set<TEntity>().Remove(entity);
         Context.SaveChangesAsync();
     }
+
+    public void Update(TEntity entity)
+    {
+        Context.Set<TEntity>().Update(entity);
+        Context.SaveChanges();
+    }
 }

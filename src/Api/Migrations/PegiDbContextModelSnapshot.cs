@@ -129,32 +129,27 @@ namespace Api.Migrations
                         .HasColumnType("varchar(255)")
                         .HasColumnName("document");
 
-                    b.Property<DateTime>("BirthDate")
+                    b.Property<DateTime?>("BirthDate")
                         .HasColumnType("datetime(6)")
                         .HasColumnName("person_birth_date");
 
                     b.Property<string>("CitiesCode")
-                        .IsRequired()
                         .HasColumnType("varchar(255)")
                         .HasColumnName("cities_code");
 
                     b.Property<string>("CivilState")
-                        .IsRequired()
                         .HasColumnType("longtext")
                         .HasColumnName("person_civil_state");
 
                     b.Property<string>("FirstLastName")
-                        .IsRequired()
                         .HasColumnType("longtext")
                         .HasColumnName("person_first_last_name");
 
                     b.Property<string>("FirstName")
-                        .IsRequired()
                         .HasColumnType("longtext")
                         .HasColumnName("person_first_name");
 
                     b.Property<string>("Gender")
-                        .IsRequired()
                         .HasColumnType("longtext")
                         .HasColumnName("person_gender");
 
@@ -164,12 +159,10 @@ namespace Api.Migrations
                         .HasColumnName("person_identification_type");
 
                     b.Property<string>("InstitutionalMail")
-                        .IsRequired()
                         .HasColumnType("longtext")
                         .HasColumnName("person_institutional_email");
 
                     b.Property<string>("Phone")
-                        .IsRequired()
                         .HasColumnType("longtext")
                         .HasColumnName("person_phone");
 
@@ -355,13 +348,13 @@ namespace Api.Migrations
                         .HasColumnType("longtext")
                         .HasColumnName("user_password");
 
+                    b.Property<string>("PersonDocument")
+                        .HasColumnType("varchar(255)")
+                        .HasColumnName("person_document");
+
                     b.Property<string>("Role")
                         .HasColumnType("longtext")
                         .HasColumnName("user_rol");
-
-                    b.Property<string>("person_document")
-                        .HasColumnType("varchar(255)")
-                        .HasColumnName("person_document");
 
                     b.HasKey("Name")
                         .HasName("pk_users");
@@ -370,7 +363,7 @@ namespace Api.Migrations
                         .IsUnique()
                         .HasDatabaseName("ix_users_user_name");
 
-                    b.HasIndex("person_document")
+                    b.HasIndex("PersonDocument")
                         .HasDatabaseName("ix_users_person_document");
 
                     b.ToTable("users", (string)null);
@@ -414,8 +407,6 @@ namespace Api.Migrations
                     b.HasOne("Entities.City", "City")
                         .WithMany()
                         .HasForeignKey("CitiesCode")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
                         .HasConstraintName("fk_people_cities_cities_code");
 
                     b.Navigation("City");
@@ -494,7 +485,7 @@ namespace Api.Migrations
                 {
                     b.HasOne("Entities.Person", "Person")
                         .WithMany()
-                        .HasForeignKey("person_document")
+                        .HasForeignKey("PersonDocument")
                         .HasConstraintName("fk_users_people_person_document");
 
                     b.Navigation("Person");

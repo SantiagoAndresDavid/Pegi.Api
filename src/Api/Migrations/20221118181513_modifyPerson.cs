@@ -104,24 +104,24 @@ namespace Api.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     person_identification_type = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    person_first_name = table.Column<string>(type: "longtext", nullable: false)
+                    person_first_name = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     person_second_name = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    person_first_last_name = table.Column<string>(type: "longtext", nullable: false)
+                    person_first_last_name = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     person_second_last_name = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    person_civil_state = table.Column<string>(type: "longtext", nullable: false)
+                    person_civil_state = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    person_gender = table.Column<string>(type: "longtext", nullable: false)
+                    person_gender = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    person_birth_date = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    person_phone = table.Column<string>(type: "longtext", nullable: false)
+                    person_birth_date = table.Column<DateTime>(type: "datetime(6)", nullable: true),
+                    person_phone = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    person_institutional_email = table.Column<string>(type: "longtext", nullable: false)
+                    person_institutional_email = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    cities_code = table.Column<string>(type: "varchar(255)", nullable: false)
+                    cities_code = table.Column<string>(type: "varchar(255)", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
@@ -131,8 +131,7 @@ namespace Api.Migrations
                         name: "fk_people_cities_cities_code",
                         column: x => x.cities_code,
                         principalTable: "cities",
-                        principalColumn: "city_id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "city_id");
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 

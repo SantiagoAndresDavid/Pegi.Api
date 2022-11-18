@@ -1,16 +1,17 @@
 using Data.Repository;
 using Entities;
+using Entities.Exceptions;
 using Microsoft.EntityFrameworkCore;
 using Encryptor = BCrypt.Net.BCrypt;
 namespace Services;
 
 public class UsersService
 {
-    private readonly UsersRepository _repository;
+    private readonly UsersRepository _usersRepository;
 
     public UsersService(UsersRepository repository)
     {
-        _repository = repository;
+        _usersRepository = repository;
     }
 
     public bool SaveUser(User user)
@@ -18,7 +19,7 @@ public class UsersService
         try
         {
             user.Password = Encryptor.HashPassword(user.Password);
-            _repository.Save(user);
+            _usersRepository.Save(user);
             return true;
         }
         catch
@@ -26,4 +27,20 @@ public class UsersService
             return false ;
         }
     }
+
+    public (string,bool?) AddPersonDocument(string document,string username)
+    {
+        try
+        {
+            User? user = _usersRepository.Find(user => user.Name == username );
+            user!.PersonDocument = document;
+            _usersRepository.Update(user);
+            return ("se agrego con exito",true);
+        }
+        catch(AuthException e)
+        {
+            return ("error",false);
+        }
+    }
+
 }

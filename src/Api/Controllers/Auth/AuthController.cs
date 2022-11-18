@@ -45,10 +45,10 @@ public class AuthController : ControllerBase
             new Response<Void>("No se pudo registrar el usuario"));
     }
 
-    [HttpPost("{nameUser}")]
-    public ActionResult AddPerson(string nameUser,[FromBody] string document)
+    [HttpPost("addPerson")]
+    public ActionResult AddPerson([FromBody] AddPersonRequest addPersonRequest)
     {
-        var response = _usersService.AddPersonDocument(document, nameUser);
+        var response = _usersService.AddPersonDocument(addPersonRequest.Document, addPersonRequest.NameUser);
         if (response.Item2 == true)
             return Ok(new Response<Void>(response.Item1,
                 false));

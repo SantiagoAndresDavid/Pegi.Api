@@ -23,7 +23,7 @@ public class PeopleController : ControllerBase
         try
         {
             var person = createPersonRequest.Adapt<Person>();
-            _peopleService.savePerson(person);
+            _peopleService.SavePerson(person);
             return Ok(new Response<Void>("Usuario creado con exito", false));
         }
         catch (PersonExeption exeption)

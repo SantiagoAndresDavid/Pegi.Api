@@ -237,6 +237,10 @@ namespace Api.Migrations
                         .HasColumnType("longtext")
                         .HasColumnName("status");
 
+                    b.Property<string>("ThematicAreaCode")
+                        .HasColumnType("varchar(255)")
+                        .HasColumnName("thematic_area_code");
+
                     b.Property<string>("Title")
                         .HasColumnType("longtext")
                         .HasColumnName("title");
@@ -244,7 +248,49 @@ namespace Api.Migrations
                     b.HasKey("Code")
                         .HasName("pk_proposals");
 
+                    b.HasIndex("ThematicAreaCode")
+                        .HasDatabaseName("ix_proposals_thematic_area_code");
+
                     b.ToTable("proposals", (string)null);
+                });
+
+            modelBuilder.Entity("Entities.ResearchLine", b =>
+                {
+                    b.Property<string>("Code")
+                        .HasColumnType("varchar(255)")
+                        .HasColumnName("code");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("longtext")
+                        .HasColumnName("name");
+
+                    b.HasKey("Code")
+                        .HasName("pk_research_lines");
+
+                    b.ToTable("research_lines", (string)null);
+                });
+
+            modelBuilder.Entity("Entities.ResearchSubline", b =>
+                {
+                    b.Property<string>("Code")
+                        .HasColumnType("varchar(255)")
+                        .HasColumnName("code");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("longtext")
+                        .HasColumnName("name");
+
+                    b.Property<string>("ResearchLineCode")
+                        .HasColumnType("varchar(255)")
+                        .HasColumnName("research_line_code");
+
+                    b.HasKey("Code")
+                        .HasName("pk_research_sublines");
+
+                    b.HasIndex("ResearchLineCode")
+                        .HasDatabaseName("ix_research_sublines_research_line_code");
+
+                    b.ToTable("research_sublines", (string)null);
                 });
 
             modelBuilder.Entity("Entities.Student", b =>
@@ -338,6 +384,29 @@ namespace Api.Migrations
                     b.ToTable("studies", (string)null);
                 });
 
+            modelBuilder.Entity("Entities.ThematicArea", b =>
+                {
+                    b.Property<string>("Code")
+                        .HasColumnType("varchar(255)")
+                        .HasColumnName("code");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("longtext")
+                        .HasColumnName("name");
+
+                    b.Property<string>("ResearchSublineCode")
+                        .HasColumnType("varchar(255)")
+                        .HasColumnName("research_subline_code");
+
+                    b.HasKey("Code")
+                        .HasName("pk_thematic_areas");
+
+                    b.HasIndex("ResearchSublineCode")
+                        .HasDatabaseName("ix_thematic_areas_research_subline_code");
+
+                    b.ToTable("Thematic_areas");
+                });
+
             modelBuilder.Entity("Entities.User", b =>
                 {
                     b.Property<string>("Name")
@@ -424,6 +493,26 @@ namespace Api.Migrations
                     b.Navigation("Person");
                 });
 
+            modelBuilder.Entity("Entities.Proposal", b =>
+                {
+                    b.HasOne("Entities.ThematicArea", "ThematicArea")
+                        .WithMany()
+                        .HasForeignKey("ThematicAreaCode")
+                        .HasConstraintName("fk_proposals_thematic_areas_thematic_area_code");
+
+                    b.Navigation("ThematicArea");
+                });
+
+            modelBuilder.Entity("Entities.ResearchSubline", b =>
+                {
+                    b.HasOne("Entities.ResearchLine", "ResearchLine")
+                        .WithMany()
+                        .HasForeignKey("ResearchLineCode")
+                        .HasConstraintName("fk_research_sublines_research_lines_research_line_code");
+
+                    b.Navigation("ResearchLine");
+                });
+
             modelBuilder.Entity("Entities.Student", b =>
                 {
                     b.HasOne("Entities.AcademicProgram", "AcademicProgram")
@@ -479,6 +568,16 @@ namespace Api.Migrations
                     b.Navigation("City");
 
                     b.Navigation("Person");
+                });
+
+            modelBuilder.Entity("Entities.ThematicArea", b =>
+                {
+                    b.HasOne("Entities.ResearchSubline", "ResearchSubline")
+                        .WithMany()
+                        .HasForeignKey("ResearchSublineCode")
+                        .HasConstraintName("fk_thematic_areas_research_sublines_research_subline_code");
+
+                    b.Navigation("ResearchSubline");
                 });
 
             modelBuilder.Entity("Entities.User", b =>

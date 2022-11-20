@@ -21,4 +21,8 @@ public class Proposal
     [Column("specificObjective")] public string? SpecificObjective { get; set; }
     [Column("biblioGraphical")] public string? Bibliographical { get; set; }
     [Column("status")]public string? Status { get; set; }
+
+    public string? ThematicAreaCode { get; set; }
+    [ForeignKey("ThematicAreaCode")]
+    public ThematicArea? ThematicArea { get; set; }
 }

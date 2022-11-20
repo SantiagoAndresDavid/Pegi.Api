@@ -44,32 +44,17 @@ namespace Api.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "proposals",
+                name: "research_lines",
                 columns: table => new
                 {
                     code = table.Column<string>(type: "varchar(255)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    title = table.Column<string>(type: "longtext", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    date = table.Column<DateTime>(type: "datetime(6)", nullable: true),
-                    investigationGroup = table.Column<string>(type: "longtext", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    approach = table.Column<string>(type: "longtext", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    justification = table.Column<string>(type: "longtext", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    generalObjective = table.Column<string>(type: "longtext", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    specificObjective = table.Column<string>(type: "longtext", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    biblioGraphical = table.Column<string>(type: "longtext", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    status = table.Column<string>(type: "longtext", nullable: true)
+                    name = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("pk_proposals", x => x.code);
+                    table.PrimaryKey("pk_research_lines", x => x.code);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -93,6 +78,28 @@ namespace Api.Migrations
                         principalTable: "departments",
                         principalColumn: "department_id",
                         onDelete: ReferentialAction.Cascade);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
+                name: "research_sublines",
+                columns: table => new
+                {
+                    code = table.Column<string>(type: "varchar(255)", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    name = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    research_line_code = table.Column<string>(type: "varchar(255)", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4")
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_research_sublines", x => x.code);
+                    table.ForeignKey(
+                        name: "fk_research_sublines_research_lines_research_line_code",
+                        column: x => x.research_line_code,
+                        principalTable: "research_lines",
+                        principalColumn: "code");
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -132,6 +139,28 @@ namespace Api.Migrations
                         column: x => x.cities_code,
                         principalTable: "cities",
                         principalColumn: "city_id");
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
+                name: "Thematic_areas",
+                columns: table => new
+                {
+                    code = table.Column<string>(type: "varchar(255)", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    name = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    research_subline_code = table.Column<string>(type: "varchar(255)", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4")
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_thematic_areas", x => x.code);
+                    table.ForeignKey(
+                        name: "fk_thematic_areas_research_sublines_research_subline_code",
+                        column: x => x.research_subline_code,
+                        principalTable: "research_sublines",
+                        principalColumn: "code");
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -276,6 +305,43 @@ namespace Api.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
+                name: "proposals",
+                columns: table => new
+                {
+                    code = table.Column<string>(type: "varchar(255)", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    title = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    date = table.Column<DateTime>(type: "datetime(6)", nullable: true),
+                    investigationGroup = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    approach = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    justification = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    generalObjective = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    specificObjective = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    biblioGraphical = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    status = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    thematic_area_code = table.Column<string>(type: "varchar(255)", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4")
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_proposals", x => x.code);
+                    table.ForeignKey(
+                        name: "fk_proposals_thematic_areas_thematic_area_code",
+                        column: x => x.thematic_area_code,
+                        principalTable: "Thematic_areas",
+                        principalColumn: "code");
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
                 name: "Student_Proposal",
                 columns: table => new
                 {
@@ -323,6 +389,16 @@ namespace Api.Migrations
                 column: "cities_code");
 
             migrationBuilder.CreateIndex(
+                name: "ix_proposals_thematic_area_code",
+                table: "proposals",
+                column: "thematic_area_code");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_research_sublines_research_line_code",
+                table: "research_sublines",
+                column: "research_line_code");
+
+            migrationBuilder.CreateIndex(
                 name: "ix_student_proposal_proposal_code",
                 table: "Student_Proposal",
                 column: "proposal_code");
@@ -346,6 +422,11 @@ namespace Api.Migrations
                 name: "ix_studies_people_code",
                 table: "studies",
                 column: "people_code");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_thematic_areas_research_subline_code",
+                table: "Thematic_areas",
+                column: "research_subline_code");
 
             migrationBuilder.CreateIndex(
                 name: "ix_users_person_document",
@@ -383,13 +464,22 @@ namespace Api.Migrations
                 name: "students");
 
             migrationBuilder.DropTable(
+                name: "Thematic_areas");
+
+            migrationBuilder.DropTable(
                 name: "academics_program");
 
             migrationBuilder.DropTable(
                 name: "people");
 
             migrationBuilder.DropTable(
+                name: "research_sublines");
+
+            migrationBuilder.DropTable(
                 name: "cities");
+
+            migrationBuilder.DropTable(
+                name: "research_lines");
 
             migrationBuilder.DropTable(
                 name: "departments");

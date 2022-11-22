@@ -34,4 +34,11 @@ public class ThematicAreasController : ControllerBase
             return BadRequest(new Response<Void>(e.Message));
         }
     }
+
+    [HttpGet("thematic-areas")]
+    public ActionResult GetThematicAreas()
+    {
+        List<ThematicArea> thematicAreas = _thematicAreaService.GetLinesThematicAreas();
+        return Ok(new Response<List<ThematicAreaResponse>>(thematicAreas.Adapt<List<ThematicAreaResponse>>()));
+    }
 }

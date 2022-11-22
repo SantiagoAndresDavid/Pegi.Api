@@ -13,7 +13,7 @@ public class StudiesService
         _studiesrespository = studiesrespository;
     }
 
-    public (string, bool)  saveStudy(Study study)
+    public (string, bool)  SaveStudy(Study study)
     {
         try
         {

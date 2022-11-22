@@ -24,7 +24,7 @@ public class StudiesController : ControllerBase
         try
         {
             var study = createStudyRequest.Adapt<Study>();
-            _studiesService.saveStudy(study);
+            _studiesService.SaveStudy(study);
             return Ok(new Response<Void>("el estudio se ha agregado con exito",
                 false));
         }

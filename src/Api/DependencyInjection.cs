@@ -18,6 +18,7 @@ public static class DependencyInjection
         repositories.AddScoped<ProfessorRepository>();
         repositories.AddScoped<AcademicProgramsRepository>();
         repositories.AddScoped<StudentsRepository>();
+        repositories.AddScoped<ThematicAreasRepository>();
     }
 
     public static void AddServices(this IServiceCollection services)
@@ -31,5 +32,6 @@ public static class DependencyInjection
         services.AddScoped<ProfessorService>();
         services.AddScoped<AcademicProgramService>();
         services.AddScoped<StudentsService>();
+        services.AddScoped<ThematicAreaService>();
     }
 }

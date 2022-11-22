@@ -8,7 +8,7 @@ using Services;
 namespace Api.Controllers.ResearchSubLines;
 
 [ApiController]
-[Route("Research-sub-line")]
+[Route("research-sub-lines")]
 public class ResearchSubLinesController : ControllerBase
 {
     private readonly ResearchSubLineService _researchSubLineService;
@@ -36,8 +36,8 @@ public class ResearchSubLinesController : ControllerBase
         }
     }
 
-    [HttpGet("research-sub-lines")]
-    public ActionResult GetThematicAreas()
+    [HttpGet("get-research-sub-lines")]
+    public ActionResult GetResearchSubLines()
     {
         List<ResearchSubline> researchSublines =
             _researchSubLineService.GetLines();

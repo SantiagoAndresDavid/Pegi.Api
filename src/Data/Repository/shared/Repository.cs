@@ -42,7 +42,7 @@ public class Repository<TEntity> where TEntity : class
     public void Delete(TEntity entity)
     {
         Context.Set<TEntity>().Remove(entity);
-        Context.SaveChangesAsync();
+        Context.SaveChanges();
     }
 
     public void Update(TEntity entity)

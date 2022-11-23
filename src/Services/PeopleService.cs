@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using Data.Repository;
 using Entities;
 using Entities.Exceptions;
@@ -35,11 +36,11 @@ public class PeopleService
     {
         try
         {
-            Person? foundPerson = SearchPerson(document);
-            if (foundPerson == null)
-                throw new PersonExeption("Persona no encontrada");
-            _peopleRepository.Delete(foundPerson);
-            return "Registro eliminado";
+
+            Person? person = _peopleRepository.Find(person => person.Document  == document );
+            Debug.Assert(person != null, nameof(person) + " != null");
+            _peopleRepository.Delete(person);
+            return "se borro con exito";
         }
         catch (Exception e)
         {

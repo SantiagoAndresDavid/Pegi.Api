@@ -10,10 +10,13 @@ namespace Api.Controllers.People;
 public class PeopleController : ControllerBase
 {
     private readonly PeopleService _peopleService;
+    private readonly UsersService _usersService;
 
-    public PeopleController(PeopleService peopleService)
+
+    public PeopleController(PeopleService peopleService, UsersService usersService)
     {
         _peopleService = peopleService;
+        _usersService = usersService;
     }
 
     [HttpPost]
@@ -55,6 +58,7 @@ public class PeopleController : ControllerBase
     {
         try
         {
+            _usersService.DeletePersonDocument(document);
             string message = _peopleService.DeletePerson(document);
             return Ok(new Response<Void>(message,false));
         }

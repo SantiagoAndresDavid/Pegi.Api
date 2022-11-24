@@ -43,4 +43,20 @@ public class UsersService
         }
     }
 
+    public (string,bool?) DeletePersonDocument(string document)
+    {
+        try
+        {
+            User? user = _usersRepository.Find(user => user.PersonDocument == document );
+            user.PersonDocument = null;
+            _usersRepository.Update(user);
+            return ("se agrego con exito",true);
+        }
+        catch(AuthException e)
+        {
+            return ("error",false);
+        }
+    }
+
+
 }

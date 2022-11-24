@@ -9,6 +9,7 @@ public class PeopleService
 {
     private readonly PeopleRepository _peopleRepository;
 
+
     public PeopleService(PeopleRepository peopleRepository)
     {
         _peopleRepository = peopleRepository;
@@ -36,9 +37,7 @@ public class PeopleService
     {
         try
         {
-
             Person? person = _peopleRepository.Find(person => person.Document  == document );
-            Debug.Assert(person != null, nameof(person) + " != null");
             _peopleRepository.Delete(person);
             return "se borro con exito";
         }

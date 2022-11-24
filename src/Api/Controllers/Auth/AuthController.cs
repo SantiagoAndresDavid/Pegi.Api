@@ -42,17 +42,7 @@ public class AuthController : ControllerBase
             return Ok(new Response<Void>("Usuario creado con exito",
                 false));
         return BadRequest(
-            new Response<Void>("No se pudo registrar el usuario"));
+            new Response<Void>("Error al registrar el usuario"));
     }
 
-    [HttpPost("addPerson")]
-    public ActionResult AddPerson([FromBody] AddPersonRequest addPersonRequest)
-    {
-        var response = _usersService.AddPersonDocument(addPersonRequest.Document, addPersonRequest.NameUser);
-        if (response.Item2 == true)
-            return Ok(new Response<Void>(response.Item1,
-                false));
-        return BadRequest(
-            new Response<Void>("No se agregar persona al usuario"));
-    }
 }

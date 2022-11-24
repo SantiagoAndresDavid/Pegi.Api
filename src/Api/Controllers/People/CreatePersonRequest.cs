@@ -12,5 +12,6 @@ public record CreatePersonRequest(
     DateTime BirthDate,
     string Phone,
     string InstitutionalMail,
-    string CitiesCode
+    string CitiesCode,
+    string NameUser
 );

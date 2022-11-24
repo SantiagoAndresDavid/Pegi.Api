@@ -1,3 +1,4 @@
+using Api.Controllers.Auth;
 using Entities;
 using Entities.Exceptions;
 using Mapster;
@@ -27,7 +28,8 @@ public class PeopleController : ControllerBase
         {
             var person = createPersonRequest.Adapt<Person>();
             _peopleService.SavePerson(person);
-            return Ok(new Response<Void>("Usuario creado con exito", false));
+            var (response,hasErrors) = _usersService.AddPersonDocument(createPersonRequest.Document, createPersonRequest.NameUser);
+            return Ok(new Response<Void>("Usuario y persona creada con exito", false));
         }
         catch (PersonExeption exeption)
         {

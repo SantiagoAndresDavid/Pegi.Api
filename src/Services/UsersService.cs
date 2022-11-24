@@ -50,7 +50,7 @@ public class UsersService
             User? user = _usersRepository.Find(user => user.PersonDocument == document );
             user.PersonDocument = null;
             _usersRepository.Update(user);
-            return ("se agrego con exito",true);
+            return ("se elimino con exito",true);
         }
         catch(AuthException e)
         {

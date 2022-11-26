@@ -229,6 +229,10 @@ namespace Api.Migrations
                         .HasColumnType("longtext")
                         .HasColumnName("justification");
 
+                    b.Property<string>("PersonDocument")
+                        .HasColumnType("varchar(255)")
+                        .HasColumnName("person_document");
+
                     b.Property<string>("SpecificObjective")
                         .HasColumnType("longtext")
                         .HasColumnName("specificObjective");
@@ -247,6 +251,9 @@ namespace Api.Migrations
 
                     b.HasKey("Code")
                         .HasName("pk_proposals");
+
+                    b.HasIndex("PersonDocument")
+                        .HasDatabaseName("ix_proposals_person_document");
 
                     b.HasIndex("ThematicAreaCode")
                         .HasDatabaseName("ix_proposals_thematic_area_code");
@@ -495,10 +502,17 @@ namespace Api.Migrations
 
             modelBuilder.Entity("Entities.Proposal", b =>
                 {
+                    b.HasOne("Entities.Person", "Person")
+                        .WithMany()
+                        .HasForeignKey("PersonDocument")
+                        .HasConstraintName("fk_proposals_people_person_document");
+
                     b.HasOne("Entities.ThematicArea", "ThematicArea")
                         .WithMany()
                         .HasForeignKey("ThematicAreaCode")
                         .HasConstraintName("fk_proposals_thematic_areas_thematic_area_code");
+
+                    b.Navigation("Person");
 
                     b.Navigation("ThematicArea");
                 });

@@ -7,6 +7,9 @@ namespace Entities;
 public class Proposal
 {
     [Key] [Column("code")] public string? Code { get; set; }
+    public string? PersonDocument { get; set; }
+    [ForeignKey("PersonDocument")]
+    public Person? Person { get; set; }
 
 
     [Column("title")] public string? Title { get; set; }

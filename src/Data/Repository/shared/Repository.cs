@@ -25,7 +25,7 @@ public class Repository<TEntity> where TEntity : class
 
     public virtual TEntity? Find(Expression<Func<TEntity, bool>> predicate)
     {
-        return Context.Set<TEntity>().FirstOrDefault(predicate);
+        return Context.Set<TEntity>().AsNoTracking().FirstOrDefault(predicate);
     }
 
     public virtual List<TEntity> Filter(

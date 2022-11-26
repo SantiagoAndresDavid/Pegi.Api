@@ -310,6 +310,8 @@ namespace Api.Migrations
                 {
                     code = table.Column<string>(type: "varchar(255)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
+                    person_document = table.Column<string>(type: "varchar(255)", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
                     title = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     date = table.Column<DateTime>(type: "datetime(6)", nullable: true),
@@ -333,6 +335,11 @@ namespace Api.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("pk_proposals", x => x.code);
+                    table.ForeignKey(
+                        name: "fk_proposals_people_person_document",
+                        column: x => x.person_document,
+                        principalTable: "people",
+                        principalColumn: "document");
                     table.ForeignKey(
                         name: "fk_proposals_thematic_areas_thematic_area_code",
                         column: x => x.thematic_area_code,
@@ -387,6 +394,11 @@ namespace Api.Migrations
                 name: "ix_people_cities_code",
                 table: "people",
                 column: "cities_code");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_proposals_person_document",
+                table: "proposals",
+                column: "person_document");
 
             migrationBuilder.CreateIndex(
                 name: "ix_proposals_thematic_area_code",

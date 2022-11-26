@@ -23,6 +23,8 @@ public class PegiDbContext : DbContext
     public DbSet<ThematicArea> ThematicAreas { get; set; }
     public DbSet<ResearchSubline> ResearchSublines { get; set; }
     public DbSet<ResearchLine> ResearchLine { get; set; }
+    public DbSet<HistoryProposals> HistoryProposals { get; set; }
+    public DbSet<ProposalFeedBack> ProposalFeedBacks { get;  set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

@@ -44,6 +44,24 @@ namespace Api.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
+                name: "Porposal_feedback",
+                columns: table => new
+                {
+                    code = table.Column<string>(type: "varchar(255)", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    comment = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    status = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    date = table.Column<DateTime>(type: "datetime(6)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_porposal_feedback", x => x.code);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
                 name: "research_lines",
                 columns: table => new
                 {
@@ -349,6 +367,33 @@ namespace Api.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
+                name: "history_proposals",
+                columns: table => new
+                {
+                    code = table.Column<string>(type: "varchar(255)", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    porposal_feed_back_code = table.Column<string>(type: "varchar(255)", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    proposal_code = table.Column<string>(type: "varchar(255)", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4")
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_history_proposals", x => x.code);
+                    table.ForeignKey(
+                        name: "fk_history_proposals_porposal_feedback_porposal_feed_back_code",
+                        column: x => x.porposal_feed_back_code,
+                        principalTable: "Porposal_feedback",
+                        principalColumn: "code");
+                    table.ForeignKey(
+                        name: "fk_history_proposals_proposals_proposal_code",
+                        column: x => x.proposal_code,
+                        principalTable: "proposals",
+                        principalColumn: "code");
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
                 name: "Student_Proposal",
                 columns: table => new
                 {
@@ -389,6 +434,16 @@ namespace Api.Migrations
                 name: "ix_experiences_people_code",
                 table: "Experiences",
                 column: "people_code");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_history_proposals_porposal_feed_back_code",
+                table: "history_proposals",
+                column: "porposal_feed_back_code");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_history_proposals_proposal_code",
+                table: "history_proposals",
+                column: "proposal_code");
 
             migrationBuilder.CreateIndex(
                 name: "ix_people_cities_code",
@@ -458,6 +513,9 @@ namespace Api.Migrations
                 name: "Experiences");
 
             migrationBuilder.DropTable(
+                name: "history_proposals");
+
+            migrationBuilder.DropTable(
                 name: "professor");
 
             migrationBuilder.DropTable(
@@ -468,6 +526,9 @@ namespace Api.Migrations
 
             migrationBuilder.DropTable(
                 name: "users");
+
+            migrationBuilder.DropTable(
+                name: "Porposal_feedback");
 
             migrationBuilder.DropTable(
                 name: "proposals");

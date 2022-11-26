@@ -123,6 +123,32 @@ namespace Api.Migrations
                     b.ToTable("Experiences");
                 });
 
+            modelBuilder.Entity("Entities.HistoryProposals", b =>
+                {
+                    b.Property<string>("Code")
+                        .HasColumnType("varchar(255)")
+                        .HasColumnName("code");
+
+                    b.Property<string>("PorposalFeedBackCode")
+                        .HasColumnType("varchar(255)")
+                        .HasColumnName("porposal_feed_back_code");
+
+                    b.Property<string>("ProposalCode")
+                        .HasColumnType("varchar(255)")
+                        .HasColumnName("proposal_code");
+
+                    b.HasKey("Code")
+                        .HasName("pk_history_proposals");
+
+                    b.HasIndex("PorposalFeedBackCode")
+                        .HasDatabaseName("ix_history_proposals_porposal_feed_back_code");
+
+                    b.HasIndex("ProposalCode")
+                        .HasDatabaseName("ix_history_proposals_proposal_code");
+
+                    b.ToTable("history_proposals", (string)null);
+                });
+
             modelBuilder.Entity("Entities.Person", b =>
                 {
                     b.Property<string>("Document")
@@ -259,6 +285,30 @@ namespace Api.Migrations
                         .HasDatabaseName("ix_proposals_thematic_area_code");
 
                     b.ToTable("proposals", (string)null);
+                });
+
+            modelBuilder.Entity("Entities.ProposalFeedBack", b =>
+                {
+                    b.Property<string>("Code")
+                        .HasColumnType("varchar(255)")
+                        .HasColumnName("code");
+
+                    b.Property<string>("Comment")
+                        .HasColumnType("longtext")
+                        .HasColumnName("comment");
+
+                    b.Property<DateTime?>("Date")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("date");
+
+                    b.Property<string>("Status")
+                        .HasColumnType("longtext")
+                        .HasColumnName("status");
+
+                    b.HasKey("Code")
+                        .HasName("pk_porposal_feedback");
+
+                    b.ToTable("Porposal_feedback");
                 });
 
             modelBuilder.Entity("Entities.ResearchLine", b =>
@@ -476,6 +526,23 @@ namespace Api.Migrations
                     b.Navigation("City");
 
                     b.Navigation("Person");
+                });
+
+            modelBuilder.Entity("Entities.HistoryProposals", b =>
+                {
+                    b.HasOne("Entities.ProposalFeedBack", "RProposalFeedBack")
+                        .WithMany()
+                        .HasForeignKey("PorposalFeedBackCode")
+                        .HasConstraintName("fk_history_proposals_porposal_feedback_porposal_feed_back_code");
+
+                    b.HasOne("Entities.Proposal", "Proposal")
+                        .WithMany()
+                        .HasForeignKey("ProposalCode")
+                        .HasConstraintName("fk_history_proposals_proposals_proposal_code");
+
+                    b.Navigation("Proposal");
+
+                    b.Navigation("RProposalFeedBack");
                 });
 
             modelBuilder.Entity("Entities.Person", b =>

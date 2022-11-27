@@ -19,7 +19,7 @@ public class ProposalController : ControllerBase
     }
 
     [HttpPost]
-    public ActionResult RegisterPeople(
+    public ActionResult RegisterProposal(
         [FromBody] ProposalRequest proposalRequest)
     {
         try
@@ -47,21 +47,19 @@ public class ProposalController : ControllerBase
     }
 
     [HttpGet("{document}")]
-    public ActionResult GetPerson([FromRoute] string document)
+    public ActionResult GetProposal([FromRoute] string document)
     {
         try
         {
-            Entities.Proposal? proposal =
-                _proposalService.SearchProposal(document);
-            if (proposal == null)
+            List<Entities.Proposal> proposals =
+                _proposalService.GetProposals(document);
+            if (proposals.Count < 0)
             {
                 return BadRequest(
-                    new Response<Void>("no se encontro a la persona"));
+                    new Response<Void>("no se encontro ninguna propuesta"));
             }
-
-            return Ok(
-                new Response<ProposalResponse>(
-                    proposal.Adapt<ProposalResponse>()));
+            return Ok(new Response<List<ProposalResponse>>(
+                proposals?.Adapt<List<ProposalResponse>>()));
         }
         catch (PersonExeption e)
         {

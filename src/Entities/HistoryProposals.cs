@@ -5,11 +5,14 @@ namespace Entities;
 [Table("history_proposals")]
 public class HistoryProposals
 {
-    [Key] [Column("code")] public string? Code { get; set; }
+    [Key]
+    [Column("code")]
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+    public int? Code { get; set; }
 
-    public string? PorposalFeedBackCode { get; set; }
+    public int? PorposalFeedBackCode { get; set; }
     [ForeignKey("PorposalFeedBackCode")]
-    public ProposalFeedBack? RProposalFeedBack { get; set; }
+    public ProposalFeedBack? ProposalFeedBack { get; set; }
 
     public string? ProposalCode { get; set; }
     [ForeignKey("ProposalCode")]

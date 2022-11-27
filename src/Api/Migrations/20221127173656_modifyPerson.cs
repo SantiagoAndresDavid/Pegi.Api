@@ -47,8 +47,8 @@ namespace Api.Migrations
                 name: "Porposal_feedback",
                 columns: table => new
                 {
-                    code = table.Column<string>(type: "varchar(255)", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    code = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     comment = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     status = table.Column<string>(type: "longtext", nullable: true)
@@ -370,10 +370,9 @@ namespace Api.Migrations
                 name: "history_proposals",
                 columns: table => new
                 {
-                    code = table.Column<string>(type: "varchar(255)", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    porposal_feed_back_code = table.Column<string>(type: "varchar(255)", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    code = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    porposal_feed_back_code = table.Column<int>(type: "int", nullable: true),
                     proposal_code = table.Column<string>(type: "varchar(255)", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4")
                 },

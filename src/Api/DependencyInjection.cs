@@ -22,6 +22,8 @@ public static class DependencyInjection
         repositories.AddScoped<ResearchSubLinesRepository>();
         repositories.AddScoped<ResearchLinesRepository>();
         repositories.AddScoped<ProposalRepository>();
+        repositories.AddScoped<ProposalFeedBackRepository>();
+        repositories.AddScoped<HistoryProposalsRepository>();
     }
 
     public static void AddServices(this IServiceCollection services)
@@ -39,5 +41,7 @@ public static class DependencyInjection
         services.AddScoped<ResearchSubLineService>();
         services.AddScoped<ResearchLineService>();
         services.AddScoped<ProposalService>();
+        services.AddScoped<ProposalFeedBackService>();
+        services.AddScoped<HistoryProposalService>();
     }
 }

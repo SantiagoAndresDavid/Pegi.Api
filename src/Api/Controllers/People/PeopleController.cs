@@ -20,22 +20,22 @@ public class PeopleController : ControllerBase
         _usersService = usersService;
     }
 
-    [HttpPost]
-    public ActionResult RegisterPeople(
-        [FromBody] CreatePersonRequest createPersonRequest)
-    {
-        try
+        [HttpPost]
+        public ActionResult RegisterPeople(
+            [FromBody] CreatePersonRequest createPersonRequest)
         {
-            var person = createPersonRequest.Adapt<Person>();
-            _peopleService.SavePerson(person);
-            var (response,hasErrors) = _usersService.AddPersonDocument(createPersonRequest.Document, createPersonRequest.NameUser);
-            return Ok(new Response<Void>("Usuario y persona creada con exito", false));
+            try
+            {
+                var person = createPersonRequest.Adapt<Person>();
+                _peopleService.SavePerson(person);
+                var (response,hasErrors) = _usersService.AddPersonDocument(createPersonRequest.Document, createPersonRequest.NameUser);
+                return Ok(new Response<Void>("Usuario y persona creada con exito", false));
+            }
+            catch (PersonExeption exeption)
+            {
+                return BadRequest(new Response<Void>(exeption.Message));
+            }
         }
-        catch (PersonExeption exeption)
-        {
-            return BadRequest(new Response<Void>(exeption.Message));
-        }
-    }
 
     [HttpGet("{document}")]
     public ActionResult GetPerson([FromRoute] string document)

@@ -26,22 +26,24 @@ public class ProposalService
         }
     }
 
-    public (string,bool?) UpdateProposal(Proposal proposal)
+    public (string, bool?) UpdateProposal(Proposal proposal)
     {
         try
         {
             _proposalRepository.Update(proposal);
-            return ("se actualizo con exito",true);
+            return ("se actualizo con exito", true);
         }
-        catch(AuthException e)
+        catch (AuthException e)
         {
-            return ("error",false);
+            return ("error", false);
         }
     }
 
-    public List<Proposal> GetLines()
+    public List<Proposal> GetProposals(string personDocument)
     {
-        return _proposalRepository.GetAll();
+        return _proposalRepository.Filter(proposal =>
+            proposal.PersonDocument != null &&
+            proposal.PersonDocument == personDocument);
     }
 
     public Proposal? SearchProposal(string personDocument)

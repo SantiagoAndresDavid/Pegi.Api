@@ -5,7 +5,9 @@ namespace Entities;
 [Table("Porposal_feedback")]
 public class ProposalFeedBack
 {
-    [Key] [Column("code")] public string? Code { get; set; }
+    [Key]
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+    [Column("code")] public int? Code { get; set; }
 
     [Column("comment")] public string? Comment { get; set; }
 

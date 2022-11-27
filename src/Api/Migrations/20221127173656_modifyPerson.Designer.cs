@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Api.Migrations
 {
     [DbContext(typeof(PegiDbContext))]
-    [Migration("20221126211838_modifyPerson")]
+    [Migration("20221127173656_modifyPerson")]
     partial class modifyPerson
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -127,12 +127,13 @@ namespace Api.Migrations
 
             modelBuilder.Entity("Entities.HistoryProposals", b =>
                 {
-                    b.Property<string>("Code")
-                        .HasColumnType("varchar(255)")
+                    b.Property<int?>("Code")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
                         .HasColumnName("code");
 
-                    b.Property<string>("PorposalFeedBackCode")
-                        .HasColumnType("varchar(255)")
+                    b.Property<int?>("PorposalFeedBackCode")
+                        .HasColumnType("int")
                         .HasColumnName("porposal_feed_back_code");
 
                     b.Property<string>("ProposalCode")
@@ -291,8 +292,9 @@ namespace Api.Migrations
 
             modelBuilder.Entity("Entities.ProposalFeedBack", b =>
                 {
-                    b.Property<string>("Code")
-                        .HasColumnType("varchar(255)")
+                    b.Property<int?>("Code")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
                         .HasColumnName("code");
 
                     b.Property<string>("Comment")
@@ -532,7 +534,7 @@ namespace Api.Migrations
 
             modelBuilder.Entity("Entities.HistoryProposals", b =>
                 {
-                    b.HasOne("Entities.ProposalFeedBack", "RProposalFeedBack")
+                    b.HasOne("Entities.ProposalFeedBack", "ProposalFeedBack")
                         .WithMany()
                         .HasForeignKey("PorposalFeedBackCode")
                         .HasConstraintName("fk_history_proposals_porposal_feedback_porposal_feed_back_code");
@@ -544,7 +546,7 @@ namespace Api.Migrations
 
                     b.Navigation("Proposal");
 
-                    b.Navigation("RProposalFeedBack");
+                    b.Navigation("ProposalFeedBack");
                 });
 
             modelBuilder.Entity("Entities.Person", b =>

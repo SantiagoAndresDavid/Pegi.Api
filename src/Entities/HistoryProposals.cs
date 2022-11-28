@@ -5,6 +5,12 @@ namespace Entities;
 [Table("history_proposals")]
 public class HistoryProposals
 {
+    public HistoryProposals(int? porposalFeedBackCode, string? proposalCode)
+    {
+        PorposalFeedBackCode = porposalFeedBackCode;
+        ProposalCode = proposalCode;
+    }
+
     [Key]
     [Column("code")]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]

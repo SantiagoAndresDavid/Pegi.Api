@@ -20,11 +20,7 @@ public class HistorialProposalController : ControllerBase
         _historyProposalService = historyProposalService;
         _proposalFeedBackService = proposalFeedBackService;
     }
-
-    //variable = registerfeedback()
-    // guarda historial(propuestacCodigo, variable.codigo)
-
-
+    
     [HttpPost("register-feedback")]
     public ActionResult RegisterFeedback(
         [FromBody] ProposalFeedBackRequest proposalFeedBackRequest)
@@ -33,28 +29,11 @@ public class HistorialProposalController : ControllerBase
         {
             var proposal = proposalFeedBackRequest.Adapt<ProposalFeedBack>();
             _proposalFeedBackService.SaveFeedBackRepository(proposal);
-            return Ok(
-                new Response<ProposalFeedBackResponse>(
-                    proposal.Adapt<ProposalFeedBackResponse>()));
-        }
-        catch (PersonExeption exeption)
-        {
-            return BadRequest(new Response<Void>(exeption.Message));
-        }
-    }
-
-
-    [HttpPost("register-history-proposal")]
-    public ActionResult RegisterHistoryProposal(
-        [FromBody] HistorialProposalRequest historialProposalRequest)
-    {
-        try
-        {
-            var historialProposal = historialProposalRequest.Adapt<HistoryProposals>();
+            HistoryProposals historialProposal = new HistoryProposals(proposal.Code,proposalFeedBackRequest.ProposalCode);
             _historyProposalService.SaveProposalHistory(historialProposal);
             return Ok(
-                new Response<HistorialProposalRequest>(
-                    historialProposal.Adapt<HistorialProposalRequest>()));
+                new Response<HisotrialProposalResponse>(
+                    historialProposal.Adapt<HisotrialProposalResponse>()));
         }
         catch (PersonExeption exeption)
         {

@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Api.Migrations
 {
     [DbContext(typeof(PegiDbContext))]
-    [Migration("20221127173656_modifyPerson")]
+    [Migration("20221128195455_modifyPerson")]
     partial class modifyPerson
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -315,6 +315,44 @@ namespace Api.Migrations
                     b.ToTable("Porposal_feedback");
                 });
 
+            modelBuilder.Entity("Entities.Proyect", b =>
+                {
+                    b.Property<string>("Code")
+                        .HasColumnType("varchar(255)")
+                        .HasColumnName("code");
+
+                    b.Property<string>("Content")
+                        .HasColumnType("longtext")
+                        .HasColumnName("Content");
+
+                    b.Property<string>("PersonDocument")
+                        .HasColumnType("varchar(255)")
+                        .HasColumnName("person_document");
+
+                    b.Property<int?>("Score")
+                        .HasColumnType("int")
+                        .HasColumnName("Score");
+
+                    b.Property<string>("Status")
+                        .HasColumnType("longtext")
+                        .HasColumnName("Status");
+
+                    b.Property<string>("ThematicAreaCode")
+                        .HasColumnType("varchar(255)")
+                        .HasColumnName("thematic_area_code");
+
+                    b.HasKey("Code")
+                        .HasName("pk_proyects");
+
+                    b.HasIndex("PersonDocument")
+                        .HasDatabaseName("ix_proyects_person_document");
+
+                    b.HasIndex("ThematicAreaCode")
+                        .HasDatabaseName("ix_proyects_thematic_area_code");
+
+                    b.ToTable("proyects", (string)null);
+                });
+
             modelBuilder.Entity("Entities.ResearchLine", b =>
                 {
                     b.Property<string>("Code")
@@ -582,6 +620,23 @@ namespace Api.Migrations
                         .WithMany()
                         .HasForeignKey("ThematicAreaCode")
                         .HasConstraintName("fk_proposals_thematic_areas_thematic_area_code");
+
+                    b.Navigation("Person");
+
+                    b.Navigation("ThematicArea");
+                });
+
+            modelBuilder.Entity("Entities.Proyect", b =>
+                {
+                    b.HasOne("Entities.Person", "Person")
+                        .WithMany()
+                        .HasForeignKey("PersonDocument")
+                        .HasConstraintName("fk_proyects_people_person_document");
+
+                    b.HasOne("Entities.ThematicArea", "ThematicArea")
+                        .WithMany()
+                        .HasForeignKey("ThematicAreaCode")
+                        .HasConstraintName("fk_proyects_thematic_areas_thematic_area_code");
 
                     b.Navigation("Person");
 

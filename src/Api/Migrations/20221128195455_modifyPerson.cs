@@ -367,6 +367,38 @@ namespace Api.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
+                name: "proyects",
+                columns: table => new
+                {
+                    code = table.Column<string>(type: "varchar(255)", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    person_document = table.Column<string>(type: "varchar(255)", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Content = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Status = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Score = table.Column<int>(type: "int", nullable: true),
+                    thematic_area_code = table.Column<string>(type: "varchar(255)", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4")
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_proyects", x => x.code);
+                    table.ForeignKey(
+                        name: "fk_proyects_people_person_document",
+                        column: x => x.person_document,
+                        principalTable: "people",
+                        principalColumn: "document");
+                    table.ForeignKey(
+                        name: "fk_proyects_thematic_areas_thematic_area_code",
+                        column: x => x.thematic_area_code,
+                        principalTable: "Thematic_areas",
+                        principalColumn: "code");
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
                 name: "history_proposals",
                 columns: table => new
                 {
@@ -460,6 +492,16 @@ namespace Api.Migrations
                 column: "thematic_area_code");
 
             migrationBuilder.CreateIndex(
+                name: "ix_proyects_person_document",
+                table: "proyects",
+                column: "person_document");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_proyects_thematic_area_code",
+                table: "proyects",
+                column: "thematic_area_code");
+
+            migrationBuilder.CreateIndex(
                 name: "ix_research_sublines_research_line_code",
                 table: "research_sublines",
                 column: "research_line_code");
@@ -516,6 +558,9 @@ namespace Api.Migrations
 
             migrationBuilder.DropTable(
                 name: "professor");
+
+            migrationBuilder.DropTable(
+                name: "proyects");
 
             migrationBuilder.DropTable(
                 name: "Student_Proposal");

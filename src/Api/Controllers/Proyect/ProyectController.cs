@@ -43,4 +43,25 @@ public class ProyectController : ControllerBase
             return BadRequest(new Response<Void>(exeption.Message));
         }
     }
+
+    [HttpGet("{document}")]
+    public ActionResult GetProyects([FromRoute] string document)
+    {
+        try
+        {
+            List<Entities.Proyect> proyects =
+                _proyectService.GetProyects(document);
+            if (proyects.Count < 0)
+            {
+                return BadRequest(
+                    new Response<Void>("no se encontro ninguna propuesta"));
+            }
+            return Ok(new Response<List<ProyectResponse>>(
+                proyects?.Adapt<List<ProyectResponse>>()));
+        }
+        catch (PersonExeption e)
+        {
+            return BadRequest(new Response<Void>(e.Message));
+        }
+    }
 }

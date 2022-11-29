@@ -39,7 +39,7 @@ public class ProyectService
         }
     }
 
-    public List<Proyect> GetProyect(string personDocument)
+    public List<Proyect> GetProyects(string personDocument)
     {
         return _proyectRepository.Filter(proyect =>
             proyect.PersonDocument != null &&

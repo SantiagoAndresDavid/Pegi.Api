@@ -46,7 +46,7 @@ public class ProyectService
             proyect.PersonDocument == personDocument);
     }
 
-    public Proyect? SearchProposal(string personDocument)
+    public Proyect? SearchProyect(string personDocument)
     {
         return _proyectRepository.Find(proyect =>
             proyect.PersonDocument == personDocument);

@@ -44,4 +44,25 @@ public class HistorialProposalController : ControllerBase
             return BadRequest(new Response<Void>(exeption.Message));
         }
     }
+
+    [HttpGet("{proposalCode}")]
+    public ActionResult GetHistoryProposals([FromRoute] string proposalCode)
+    {
+        try
+        {
+            List<HistoryProposals> historyProposals = _historyProposalService.SearchHistoryProposal(proposalCode);
+            if (historyProposals.Count <= 0)
+            {
+                return BadRequest(
+                    new Response<Void>("no tiene experiencias registradas"));
+            }
+            return Ok(
+                new Response<List<HisotrialProposalResponse>>(
+                    historyProposals.Adapt<List<HisotrialProposalResponse>>()));
+        }
+        catch (ExperienceExeption e)
+        {
+            return BadRequest(new Response<Void>(e.Message));
+        }
+    }
 }

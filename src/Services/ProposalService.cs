@@ -66,7 +66,7 @@ public class ProposalService
             throw new PersonExeption(
                 $"Ha ocurrido un error al eliminar {e.Message}");
         }
-    }
+    }   
 
     public Proposal? GetProposalCode(string code)
     {

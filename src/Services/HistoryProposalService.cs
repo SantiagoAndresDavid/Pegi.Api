@@ -8,7 +8,8 @@ public class HistoryProposalService
     private readonly HistoryProposalsRepository _historyProposalsRepository;
 
 
-    public HistoryProposalService(HistoryProposalsRepository historyProposalsRepository)
+    public HistoryProposalService(
+        HistoryProposalsRepository historyProposalsRepository)
     {
         _historyProposalsRepository = historyProposalsRepository;
     }
@@ -26,5 +27,9 @@ public class HistoryProposalService
         }
     }
 
-
+    public List<HistoryProposals> SearchHistoryProposal(string codeProposal)
+    {
+        return _historyProposalsRepository.Filter(HistoryProposal =>
+            HistoryProposal.ProposalCode == codeProposal);
+    }
 }

@@ -39,16 +39,37 @@ public class ProposalService
         }
     }
 
-    public List<Proposal> GetProposals(string personDocument)
+    public List<Proposal> GetProposalsDocument(string personDocument)
     {
         return _proposalRepository.Filter(proposal =>
             proposal.PersonDocument != null &&
             proposal.PersonDocument == personDocument);
     }
 
-    public Proposal? SearchProposal(string personDocument)
+
+    public List<Proposal> GetAll()
     {
-        return _proposalRepository.Find(line =>
-            line.PersonDocument == personDocument);
+        return _proposalRepository.GetAll();
+    }
+
+    public string DeleteProposal(string code)
+    {
+        try
+        {
+            Proposal? proposal =
+                _proposalRepository.Find(proposal => proposal.Code == code);
+            _proposalRepository.Delete(proposal!);
+            return "se borro con exito";
+        }
+        catch (Exception e)
+        {
+            throw new PersonExeption(
+                $"Ha ocurrido un error al eliminar {e.Message}");
+        }
+    }
+
+    public Proposal? GetProposalCode(string code)
+    {
+        return _proposalRepository.Find(proposal => proposal.Code == code);
     }
 }

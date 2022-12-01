@@ -20,16 +20,20 @@ public class HistorialProposalController : ControllerBase
         _historyProposalService = historyProposalService;
         _proposalFeedBackService = proposalFeedBackService;
     }
-    
+
     [HttpPost("register-feedback")]
     public ActionResult RegisterFeedback(
         [FromBody] ProposalFeedBackRequest proposalFeedBackRequest)
     {
         try
         {
-            var proposal = proposalFeedBackRequest.Adapt<ProposalFeedBack>();
-            _proposalFeedBackService.SaveFeedBackRepository(proposal);
-            HistoryProposals historialProposal = new HistoryProposals(proposal.Code,proposalFeedBackRequest.ProposalCode);
+            var feedBack = proposalFeedBackRequest.Adapt<ProposalFeedBack>();
+            feedBack.Code = Random.Shared.Next();
+            _proposalFeedBackService.SaveFeedBackRepository(feedBack);
+            HistoryProposals historialProposal =
+                new HistoryProposals(feedBack.Code,
+                    proposalFeedBackRequest.ProposalCode);
+            historialProposal.Code = Random.Shared.Next();
             _historyProposalService.SaveProposalHistory(historialProposal);
             return Ok(
                 new Response<HisotrialProposalResponse>(

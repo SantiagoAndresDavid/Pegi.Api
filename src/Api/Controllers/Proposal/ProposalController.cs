@@ -48,7 +48,6 @@ public class ProposalController : ControllerBase
     }
 
     [HttpGet("get-proposals-document/{document}")]
-
     public ActionResult GetProposalsDocument([FromRoute] string document)
     {
         try
@@ -78,11 +77,15 @@ public class ProposalController : ControllerBase
         {
             Entities.Proposal?
                 proposal = _proposalService.GetProposalCode(code);
-            if(proposal == null)
+            if (proposal == null)
             {
-                return BadRequest(new Response<Void>("no se encontro a la propuesta"));
+                return BadRequest(
+                    new Response<Void>("no se encontro a la propuesta"));
             }
-            return Ok(new Response<ProposalResponse>(proposal.Adapt<ProposalResponse>()));
+
+            return Ok(
+                new Response<ProposalResponse>(
+                    proposal.Adapt<ProposalResponse>()));
         }
         catch (PersonExeption e)
         {

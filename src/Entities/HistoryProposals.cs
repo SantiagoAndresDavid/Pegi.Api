@@ -13,7 +13,6 @@ public class HistoryProposals
 
     [Key]
     [Column("code")]
-    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int? Code { get; set; }
 
     public int? PorposalFeedBackCode { get; set; }

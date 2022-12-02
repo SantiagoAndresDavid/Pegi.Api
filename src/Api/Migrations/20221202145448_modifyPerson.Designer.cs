@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Api.Migrations
 {
     [DbContext(typeof(PegiDbContext))]
-    [Migration("20221201031539_modifyPerson")]
+    [Migration("20221202145448_modifyPerson")]
     partial class modifyPerson
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -150,6 +150,33 @@ namespace Api.Migrations
                         .HasDatabaseName("ix_history_proposals_proposal_code");
 
                     b.ToTable("history_proposals", (string)null);
+                });
+
+            modelBuilder.Entity("Entities.HistoryProyect", b =>
+                {
+                    b.Property<int?>("Code")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("code");
+
+                    b.Property<string>("ProyectCode")
+                        .HasColumnType("varchar(255)")
+                        .HasColumnName("proyect_code");
+
+                    b.Property<int?>("ProyectFeedBackCode")
+                        .HasColumnType("int")
+                        .HasColumnName("proyect_feed_back_code");
+
+                    b.HasKey("Code")
+                        .HasName("pk_history_proyects");
+
+                    b.HasIndex("ProyectCode")
+                        .HasDatabaseName("ix_history_proyects_proyect_code");
+
+                    b.HasIndex("ProyectFeedBackCode")
+                        .HasDatabaseName("ix_history_proyects_proyect_feed_back_code");
+
+                    b.ToTable("history_proyects", (string)null);
                 });
 
             modelBuilder.Entity("Entities.Person", b =>
@@ -351,6 +378,31 @@ namespace Api.Migrations
                         .HasDatabaseName("ix_proyects_thematic_area_code");
 
                     b.ToTable("proyects", (string)null);
+                });
+
+            modelBuilder.Entity("Entities.ProyectFeedBack", b =>
+                {
+                    b.Property<int?>("Code")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("code");
+
+                    b.Property<string>("Comment")
+                        .HasColumnType("longtext")
+                        .HasColumnName("comment");
+
+                    b.Property<string>("Score")
+                        .HasColumnType("longtext")
+                        .HasColumnName("Score");
+
+                    b.Property<string>("Status")
+                        .HasColumnType("longtext")
+                        .HasColumnName("status");
+
+                    b.HasKey("Code")
+                        .HasName("pk_proyect_feed_backs");
+
+                    b.ToTable("ProyectFeedBacks");
                 });
 
             modelBuilder.Entity("Entities.ResearchLine", b =>
@@ -585,6 +637,23 @@ namespace Api.Migrations
                     b.Navigation("Proposal");
 
                     b.Navigation("ProposalFeedBack");
+                });
+
+            modelBuilder.Entity("Entities.HistoryProyect", b =>
+                {
+                    b.HasOne("Entities.Proyect", "Proyect")
+                        .WithMany()
+                        .HasForeignKey("ProyectCode")
+                        .HasConstraintName("fk_history_proyects_proyects_proyect_code");
+
+                    b.HasOne("Entities.ProyectFeedBack", "ProyectFeedBack")
+                        .WithMany()
+                        .HasForeignKey("ProyectFeedBackCode")
+                        .HasConstraintName("fk_history_proyects_proyect_feed_backs_proyect_feed_back_code");
+
+                    b.Navigation("Proyect");
+
+                    b.Navigation("ProyectFeedBack");
                 });
 
             modelBuilder.Entity("Entities.Person", b =>

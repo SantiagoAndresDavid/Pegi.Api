@@ -26,6 +26,8 @@ public class PegiDbContext : DbContext
     public DbSet<HistoryProposals> HistoryProposals { get; set; }
     public DbSet<ProposalFeedBack> ProposalFeedBacks { get; set; }
     public DbSet<Proyect> Proyects { get; set; }
+    public DbSet<ProyectFeedBack> ProyectFeedBacks { get; set; }
+    public DbSet<HistoryProyect> HistoryProyects { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

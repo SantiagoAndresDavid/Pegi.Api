@@ -62,6 +62,25 @@ namespace Api.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
+                name: "ProyectFeedBacks",
+                columns: table => new
+                {
+                    code = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    comment = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    status = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Score = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4")
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_proyect_feed_backs", x => x.code);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
                 name: "research_lines",
                 columns: table => new
                 {
@@ -451,6 +470,32 @@ namespace Api.Migrations
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
+            migrationBuilder.CreateTable(
+                name: "history_proyects",
+                columns: table => new
+                {
+                    code = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    proyect_feed_back_code = table.Column<int>(type: "int", nullable: true),
+                    proyect_code = table.Column<string>(type: "varchar(255)", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4")
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_history_proyects", x => x.code);
+                    table.ForeignKey(
+                        name: "fk_history_proyects_proyect_feed_backs_proyect_feed_back_code",
+                        column: x => x.proyect_feed_back_code,
+                        principalTable: "ProyectFeedBacks",
+                        principalColumn: "code");
+                    table.ForeignKey(
+                        name: "fk_history_proyects_proyects_proyect_code",
+                        column: x => x.proyect_code,
+                        principalTable: "proyects",
+                        principalColumn: "code");
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
             migrationBuilder.CreateIndex(
                 name: "ix_cities_department_code",
                 table: "cities",
@@ -475,6 +520,16 @@ namespace Api.Migrations
                 name: "ix_history_proposals_proposal_code",
                 table: "history_proposals",
                 column: "proposal_code");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_history_proyects_proyect_code",
+                table: "history_proyects",
+                column: "proyect_code");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_history_proyects_proyect_feed_back_code",
+                table: "history_proyects",
+                column: "proyect_feed_back_code");
 
             migrationBuilder.CreateIndex(
                 name: "ix_people_cities_code",
@@ -557,10 +612,10 @@ namespace Api.Migrations
                 name: "history_proposals");
 
             migrationBuilder.DropTable(
-                name: "professor");
+                name: "history_proyects");
 
             migrationBuilder.DropTable(
-                name: "proyects");
+                name: "professor");
 
             migrationBuilder.DropTable(
                 name: "Student_Proposal");
@@ -573,6 +628,12 @@ namespace Api.Migrations
 
             migrationBuilder.DropTable(
                 name: "Porposal_feedback");
+
+            migrationBuilder.DropTable(
+                name: "ProyectFeedBacks");
+
+            migrationBuilder.DropTable(
+                name: "proyects");
 
             migrationBuilder.DropTable(
                 name: "proposals");

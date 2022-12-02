@@ -13,7 +13,7 @@ public class ProposalFeedBackService
         _proposalFeedBackRepository = proposalFeedBackRepository;
     }
 
-    public (string, bool) SaveFeedBackRepository(ProposalFeedBack proposalFeedBack)
+    public (string, bool) SaveProposalFeedBack(ProposalFeedBack proposalFeedBack)
     {
         try
         {

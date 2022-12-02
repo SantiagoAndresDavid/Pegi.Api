@@ -29,7 +29,7 @@ public class HistorialProposalController : ControllerBase
         {
             var feedBack = proposalFeedBackRequest.Adapt<ProposalFeedBack>();
             feedBack.Code = Random.Shared.Next();
-            _proposalFeedBackService.SaveFeedBackRepository(feedBack);
+            _proposalFeedBackService.SaveProposalFeedBack(feedBack);
             HistoryProposals historialProposal =
                 new HistoryProposals(feedBack.Code,
                     proposalFeedBackRequest.ProposalCode);

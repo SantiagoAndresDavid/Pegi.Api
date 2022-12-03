@@ -24,6 +24,7 @@ public class ProyectController : ControllerBase
         {
             Entities.Proyect? newProyect =
                 proyectRequest.Adapt<Entities.Proyect>();
+            newProyect.Code = Random.Shared.Next().ToString();
             Entities.Proyect oldProyect =
                 _proyectService.SearchProyect(newProyect.Code!)!;
             if (newProyect.Code == oldProyect?.Code)

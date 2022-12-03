@@ -1,4 +1,4 @@
 namespace Api.Controllers.Proyect;
 
-public record ProyectRequest(string? Code, string? PersonDocument,
+public record ProyectRequest(string? PersonDocument,
     string? Content, string? Status, int? Score, string? ThematicAreaCode);

@@ -5,6 +5,12 @@ namespace Entities;
 
 public class HistoryProyect
 {
+    public HistoryProyect(int? proyectFeedBackCode, string? proyectCode)
+    {
+        ProyectFeedBackCode = proyectFeedBackCode;
+        ProyectCode = proyectCode;
+    }
+
     [Key]
     [Column("code")]
     public int? Code { get; set; }

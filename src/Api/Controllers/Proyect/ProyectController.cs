@@ -45,7 +45,7 @@ public class ProyectController : ControllerBase
         }
     }
 
-    [HttpGet("{document}")]
+    [HttpGet("get-proyect-document{document}")]
     public ActionResult GetProyects([FromRoute] string document)
     {
         try
@@ -57,10 +57,71 @@ public class ProyectController : ControllerBase
                 return BadRequest(
                     new Response<Void>("no se encontro ninguna propuesta"));
             }
+
             return Ok(new Response<List<ProyectResponse>>(
                 proyects?.Adapt<List<ProyectResponse>>()));
         }
         catch (PersonExeption e)
+        {
+            return BadRequest(new Response<Void>(e.Message));
+        }
+    }
+
+    [HttpGet("get-proyect-code/{code}")]
+    public ActionResult GetProyectCode([FromRoute] string code)
+    {
+        try
+        {
+            Entities.Proyect?
+                proyect = _proyectService.GetProyectCode(code);
+            if (proyect == null)
+            {
+                return BadRequest(
+                    new Response<Void>("no se encontro a la propuesta"));
+            }
+
+            return Ok(
+                new Response<ProyectResponse>(
+                    proyect.Adapt<ProyectResponse>()));
+        }
+        catch (PersonExeption e)
+        {
+            return BadRequest(new Response<Void>(e.Message));
+        }
+    }
+
+
+    [HttpGet]
+    public ActionResult GetAll()
+    {
+        try
+        {
+            List<Entities.Proyect> proyects =
+                _proyectService.GetAll();
+            if (proyects.Count < 0)
+            {
+                return BadRequest(
+                    new Response<Void>("no se encontro ninguna propuesta"));
+            }
+
+            return Ok(new Response<List<ProyectResponse>>(
+                proyects?.Adapt<List<ProyectResponse>>()));
+        }
+        catch (PersonExeption e)
+        {
+            return BadRequest(new Response<Void>(e.Message));
+        }
+    }
+
+    [HttpDelete("{code}")]
+    public ActionResult DeleteProyect([FromRoute] string code)
+    {
+        try
+        {
+            string message = _proyectService.DeleteProyect(code);
+            return Ok(new Response<Void>(message, false));
+        }
+        catch (Exception e)
         {
             return BadRequest(new Response<Void>(e.Message));
         }

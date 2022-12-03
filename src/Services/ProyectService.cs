@@ -52,4 +52,31 @@ public class ProyectService
             proyect.PersonDocument == personDocument);
     }
 
+    public string DeleteProyect(string code)
+    {
+        try
+        {
+            Proyect? proyect =
+                _proyectRepository.Find(proyect => proyect.Code == code);
+            _proyectRepository.Delete(proyect!);
+            return "se borro con exito";
+        }
+        catch (Exception e)
+        {
+            throw new PersonExeption(
+                $"Ha ocurrido un error al eliminar {e.Message}");
+        }
+    }
+
+    public List<Proyect> GetAll()
+    {
+        return _proyectRepository.GetAll();
+    }
+
+
+    public Proyect? GetProyectCode(string code)
+    {
+        return _proyectRepository.Find(proyect => proyect.Code == code);
+    }
+
 }

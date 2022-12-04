@@ -24,7 +24,7 @@ public class ResearchSubLinesController : ControllerBase
     {
         ResearchSubline? researchSubline =
             _researchSubLineService.SearchSubLine(code);
-        if (researchSubline!.Code != null)
+        if (researchSubline!.Code == null)
         {
             return BadRequest(
                 new Response<Void>("no se encontraron areas tematicas"));

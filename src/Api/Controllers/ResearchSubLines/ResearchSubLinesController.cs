@@ -22,17 +22,17 @@ public class ResearchSubLinesController : ControllerBase
     [HttpGet("{code}")]
     public ActionResult GetResearchSubLine([FromRoute] string code)
     {
-        ResearchSubline? researchSubline =
+        List<ResearchSubline>researchSublines =
             _researchSubLineService.SearchSubLine(code);
-        if (researchSubline!.Code == null)
+        if (researchSublines.Count < 0)
         {
             return BadRequest(
                 new Response<Void>("no se encontraron areas tematicas"));
         }else
         {
             return Ok(
-                new Response<ResearchSubLinesResponse>(researchSubline?
-                    .Adapt<ResearchSubLinesResponse>()));
+                new Response<List<ResearchSubLinesResponse>>(researchSublines?
+                    .Adapt<List<ResearchSubLinesResponse>>()));
         }
     }
 

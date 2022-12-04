@@ -18,10 +18,10 @@ public class ResearchSubLineService
         return _researchSubLinesRepository.GetAll();
     }
 
-    public ResearchSubline? SearchSubLine(string code)
+    public List<ResearchSubline> SearchSubLine(string code)
     {
-        return _researchSubLinesRepository.Find(line =>
-            line.Code == code);
+        return _researchSubLinesRepository.Filter(line =>
+            line.ResearchLineCode == code);
     }
 
 

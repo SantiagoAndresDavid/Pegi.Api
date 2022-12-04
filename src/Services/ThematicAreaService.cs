@@ -17,9 +17,9 @@ public class ThematicAreaService
         return _thematicAreasRepository.GetAll();
     }
 
-    public ThematicArea? SearchThematicArea(string code)
+    public List<ThematicArea> SearchThematicArea(string code)
     {
-        return _thematicAreasRepository.Find(area  =>
-            area.Code == code);
+        return _thematicAreasRepository.Filter(area  =>
+            area.ResearchSublineCode == code);
     }
 }

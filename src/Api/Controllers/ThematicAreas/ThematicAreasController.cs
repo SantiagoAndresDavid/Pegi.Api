@@ -23,11 +23,11 @@ public class ThematicAreasController : ControllerBase
     {
         try
         {
-            ThematicArea? thematicArea =
+            List<ThematicArea> thematicArea =
                 _thematicAreaService.SearchThematicArea(code);
             return Ok(
-                new Response<ThematicAreaResponse>(thematicArea?
-                    .Adapt<ThematicAreaResponse>()));
+                new Response<List<ThematicAreaResponse>>(thematicArea?
+                    .Adapt<List<ThematicAreaResponse>>()));
         }
         catch (ThematicAreaExeption e)
         {

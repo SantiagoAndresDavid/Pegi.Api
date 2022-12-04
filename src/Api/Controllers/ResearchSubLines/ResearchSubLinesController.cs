@@ -22,32 +22,37 @@ public class ResearchSubLinesController : ControllerBase
     [HttpGet("{code}")]
     public ActionResult GetResearchSubLine([FromRoute] string code)
     {
-        ResearchSubline? researchSubline =
-            _researchSubLineService.SearchSubLine(code);
-        if (researchSubline!.Code == null)
+        try
+        {
+            List<ResearchSubline> researchSubline =
+                _researchSubLineService.SearchSubLine(code);
+            return Ok(
+                new Response<List<ResearchSubLinesResponse>>(researchSubline?
+                    .Adapt<List<ResearchSubLinesResponse>>()));
+        }
+        catch (Exception e)
         {
             return BadRequest(
-                new Response<Void>("no se encontraron areas tematicas"));
-        }else
-        {
-            return Ok(
-                new Response<ResearchSubLinesResponse>(researchSubline?
-                    .Adapt<ResearchSubLinesResponse>()));
+                new Response<Void>("no se encontraron sublineas asociadas a esta linea"));
         }
+
     }
 
     [HttpGet("get-research-sub-lines")]
     public ActionResult GetResearchSubLines()
     {
-        List<ResearchSubline> researchSublines =
-            _researchSubLineService.GetLines();
-        if (researchSublines.Count < 0)
+        try
         {
-            return BadRequest(
-                new Response<Void>("no se encontraron areas tematicas"));
+            List<ResearchSubline> researchSublines =
+                _researchSubLineService.GetLines();
+            return Ok(new Response<List<ResearchSubLinesResponse>>(
+                researchSublines?.Adapt<List<ResearchSubLinesResponse>>()));
+        }
+        catch (Exception e)
+        {
+             return BadRequest(
+                            new Response<Void>("no se encontraron sublineas"));
         }
 
-        return Ok(new Response<List<ResearchSubLinesResponse>>(
-            researchSublines?.Adapt<List<ResearchSubLinesResponse>>()));
     }
 }

@@ -8,7 +8,7 @@ public class Proyect
 {
     [Key] [Column("code")] public string? Code { get; set; }
     public string? PersonDocument { get; set; }
-    [ForeignKey("PersonDocument")] public Person? Person { get; set; }
+    [ForeignKey("PersonDocument")] public Student? Student { get; set; }
 
     [Column("Content")] public string? Content { get; set; }
     [Column("Status")] public string? Status { get; set; }

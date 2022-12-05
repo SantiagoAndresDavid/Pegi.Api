@@ -25,7 +25,6 @@ public class StudentController : ControllerBase
         try
         {
             var student = createStudentRequest.Adapt<Student>();
-
             if(_studentsService.SearchStudent(createStudentRequest.Document) != null)
             {
                 return BadRequest(new Response<Void>("el estudiante ya se encuentra registrado"));

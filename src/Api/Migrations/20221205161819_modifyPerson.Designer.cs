@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Api.Migrations
 {
     [DbContext(typeof(PegiDbContext))]
-    [Migration("20221202145448_modifyPerson")]
+    [Migration("20221205161819_modifyPerson")]
     partial class modifyPerson
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -680,34 +680,34 @@ namespace Api.Migrations
 
             modelBuilder.Entity("Entities.Proposal", b =>
                 {
-                    b.HasOne("Entities.Person", "Person")
+                    b.HasOne("Entities.Student", "Student")
                         .WithMany()
                         .HasForeignKey("PersonDocument")
-                        .HasConstraintName("fk_proposals_people_person_document");
+                        .HasConstraintName("fk_proposals_students_person_document");
 
                     b.HasOne("Entities.ThematicArea", "ThematicArea")
                         .WithMany()
                         .HasForeignKey("ThematicAreaCode")
                         .HasConstraintName("fk_proposals_thematic_areas_thematic_area_code");
 
-                    b.Navigation("Person");
+                    b.Navigation("Student");
 
                     b.Navigation("ThematicArea");
                 });
 
             modelBuilder.Entity("Entities.Proyect", b =>
                 {
-                    b.HasOne("Entities.Person", "Person")
+                    b.HasOne("Entities.Student", "Student")
                         .WithMany()
                         .HasForeignKey("PersonDocument")
-                        .HasConstraintName("fk_proyects_people_person_document");
+                        .HasConstraintName("fk_proyects_students_person_document");
 
                     b.HasOne("Entities.ThematicArea", "ThematicArea")
                         .WithMany()
                         .HasForeignKey("ThematicAreaCode")
                         .HasConstraintName("fk_proyects_thematic_areas_thematic_area_code");
 
-                    b.Navigation("Person");
+                    b.Navigation("Student");
 
                     b.Navigation("ThematicArea");
                 });

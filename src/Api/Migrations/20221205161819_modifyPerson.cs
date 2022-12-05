@@ -373,9 +373,9 @@ namespace Api.Migrations
                 {
                     table.PrimaryKey("pk_proposals", x => x.code);
                     table.ForeignKey(
-                        name: "fk_proposals_people_person_document",
+                        name: "fk_proposals_students_person_document",
                         column: x => x.person_document,
-                        principalTable: "people",
+                        principalTable: "students",
                         principalColumn: "document");
                     table.ForeignKey(
                         name: "fk_proposals_thematic_areas_thematic_area_code",
@@ -405,9 +405,9 @@ namespace Api.Migrations
                 {
                     table.PrimaryKey("pk_proyects", x => x.code);
                     table.ForeignKey(
-                        name: "fk_proyects_people_person_document",
+                        name: "fk_proyects_students_person_document",
                         column: x => x.person_document,
-                        principalTable: "people",
+                        principalTable: "students",
                         principalColumn: "document");
                     table.ForeignKey(
                         name: "fk_proyects_thematic_areas_thematic_area_code",

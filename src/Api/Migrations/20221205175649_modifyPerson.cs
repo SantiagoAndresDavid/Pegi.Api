@@ -444,33 +444,6 @@ namespace Api.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "Student_Proposal",
-                columns: table => new
-                {
-                    id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    proposal_code = table.Column<string>(type: "varchar(255)", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    student_code = table.Column<string>(type: "varchar(255)", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4")
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("pk_student_proposal", x => x.id);
-                    table.ForeignKey(
-                        name: "fk_student_proposal_proposals_proposal_code",
-                        column: x => x.proposal_code,
-                        principalTable: "proposals",
-                        principalColumn: "code");
-                    table.ForeignKey(
-                        name: "fk_student_proposal_students_student_code",
-                        column: x => x.student_code,
-                        principalTable: "students",
-                        principalColumn: "document");
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
-
-            migrationBuilder.CreateTable(
                 name: "history_proyects",
                 columns: table => new
                 {
@@ -562,16 +535,6 @@ namespace Api.Migrations
                 column: "research_line_code");
 
             migrationBuilder.CreateIndex(
-                name: "ix_student_proposal_proposal_code",
-                table: "Student_Proposal",
-                column: "proposal_code");
-
-            migrationBuilder.CreateIndex(
-                name: "ix_student_proposal_student_code",
-                table: "Student_Proposal",
-                column: "student_code");
-
-            migrationBuilder.CreateIndex(
                 name: "ix_students_academic_program_code",
                 table: "students",
                 column: "academic_program_code");
@@ -618,9 +581,6 @@ namespace Api.Migrations
                 name: "professor");
 
             migrationBuilder.DropTable(
-                name: "Student_Proposal");
-
-            migrationBuilder.DropTable(
                 name: "studies");
 
             migrationBuilder.DropTable(
@@ -630,13 +590,13 @@ namespace Api.Migrations
                 name: "Porposal_feedback");
 
             migrationBuilder.DropTable(
+                name: "proposals");
+
+            migrationBuilder.DropTable(
                 name: "ProyectFeedBacks");
 
             migrationBuilder.DropTable(
                 name: "proyects");
-
-            migrationBuilder.DropTable(
-                name: "proposals");
 
             migrationBuilder.DropTable(
                 name: "students");

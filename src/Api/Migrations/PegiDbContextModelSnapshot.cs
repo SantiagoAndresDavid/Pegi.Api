@@ -465,33 +465,6 @@ namespace Api.Migrations
                     b.ToTable("students", (string)null);
                 });
 
-            modelBuilder.Entity("Entities.StudentProposal", b =>
-                {
-                    b.Property<int?>("id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasColumnName("id");
-
-                    b.Property<string>("ProposalCode")
-                        .HasColumnType("varchar(255)")
-                        .HasColumnName("proposal_code");
-
-                    b.Property<string>("StudentCode")
-                        .HasColumnType("varchar(255)")
-                        .HasColumnName("student_code");
-
-                    b.HasKey("id")
-                        .HasName("pk_student_proposal");
-
-                    b.HasIndex("ProposalCode")
-                        .HasDatabaseName("ix_student_proposal_proposal_code");
-
-                    b.HasIndex("StudentCode")
-                        .HasDatabaseName("ix_student_proposal_student_code");
-
-                    b.ToTable("Student_Proposal");
-                });
-
             modelBuilder.Entity("Entities.Study", b =>
                 {
                     b.Property<string>("Code")
@@ -737,23 +710,6 @@ namespace Api.Migrations
                     b.Navigation("AcademicProgram");
 
                     b.Navigation("Person");
-                });
-
-            modelBuilder.Entity("Entities.StudentProposal", b =>
-                {
-                    b.HasOne("Entities.Proposal", "Proposal")
-                        .WithMany()
-                        .HasForeignKey("ProposalCode")
-                        .HasConstraintName("fk_student_proposal_proposals_proposal_code");
-
-                    b.HasOne("Entities.Student", "Student")
-                        .WithMany()
-                        .HasForeignKey("StudentCode")
-                        .HasConstraintName("fk_student_proposal_students_student_code");
-
-                    b.Navigation("Proposal");
-
-                    b.Navigation("Student");
                 });
 
             modelBuilder.Entity("Entities.Study", b =>

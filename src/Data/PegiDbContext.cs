@@ -19,7 +19,6 @@ public class PegiDbContext : DbContext
     public DbSet<Student> Students { get; set; }
     public DbSet<Professor> Professors { get; set; }
     public DbSet<Proposal> Proposals { get; set; }
-    public DbSet<StudentProposal> StudentProposals { get; set; }
     public DbSet<ThematicArea> ThematicAreas { get; set; }
     public DbSet<ResearchSubline> ResearchSublines { get; set; }
     public DbSet<ResearchLine> ResearchLine { get; set; }

@@ -12,10 +12,12 @@ namespace Api.Controllers.Students;
 public class StudentController : ControllerBase
 {
     private readonly StudentsService _studentsService;
+    private readonly PeopleService _peopleService;
 
-    public StudentController(StudentsService studentsService)
+    public StudentController(StudentsService studentsService,PeopleService peopleService)
     {
         _studentsService = studentsService;
+        _peopleService = peopleService;
     }
 
     [HttpPost]
@@ -24,13 +26,13 @@ public class StudentController : ControllerBase
     {
         try
         {
-            var student = createStudentRequest.Adapt<Student>();
-            if(_studentsService.SearchStudent(createStudentRequest.Document) != null)
+            if (_peopleService.SearchPerson(createStudentRequest.Document) != null &&
+                _studentsService.SearchStudent(createStudentRequest.Document) == null)
             {
-                return BadRequest(new Response<Void>("el estudiante ya se encuentra registrado"));
+                _studentsService.SaveStudent(createStudentRequest.Adapt<Student>());
+                return Ok(new Response<Void>("Estudiante creado con exito", false));
             }
-            _studentsService.SaveStudent(student);
-            return Ok(new Response<Void>("Estudiante creado con exito", false));
+            return BadRequest(new Response<Void>("Error al registrar estudiante"));
         }
         catch (PersonExeption exeption)
         {

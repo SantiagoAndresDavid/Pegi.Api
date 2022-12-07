@@ -11,7 +11,7 @@ public class Student
     [ForeignKey("Document")] public Person? Person { get; set; }
 
     [Column("amount_credits")]
-    public int AmountCredits { get; set; }
+    public string? AmountCredits { get; set; }
 
     public string? AcademicProgramCode { get; set; }
     [ForeignKey("AcademicProgramCode")]

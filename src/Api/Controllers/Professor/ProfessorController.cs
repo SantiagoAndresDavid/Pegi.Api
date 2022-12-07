@@ -10,10 +10,12 @@ namespace Api.Controllers.Professor;
 public class ProfessorController : ControllerBase
 {
     private readonly ProfessorService _professorService;
+    private readonly PeopleService _peopleService;
 
-    public ProfessorController(ProfessorService professorService)
+    public ProfessorController(ProfessorService professorService,PeopleService peopleService)
     {
         _professorService = professorService;
+        _peopleService = peopleService;
     }
 
     [HttpPost]
@@ -22,10 +24,14 @@ public class ProfessorController : ControllerBase
     {
         try
         {
-            var professor = createProfessorRequest.Adapt<Entities.Professor>();
-            _professorService.SaveProfessor(professor);
-            return Ok(new Response<Void>("el professor se ha creado con exito",
-                false));
+            if (_peopleService.SearchPerson(createProfessorRequest.Document) != null &&
+                _professorService.SearchProfessor(createProfessorRequest.Document) == null)
+            {
+                _professorService.SaveProfessor(createProfessorRequest.Adapt<Entities.Professor>());
+                return Ok(new Response<Void>("Profesor creado con exito",
+                    false));
+            }
+            return BadRequest(new Response<Void>("Error al registrar profesor"));
         }
         catch (ProfessorExeption e)
         {

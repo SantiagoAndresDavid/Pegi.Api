@@ -17,6 +17,17 @@ Basic C# project structure.
 dotnet new -i Pegi.Api.Template
 ```
 
+## Migrations
+
+```bash
+dotnet ef migrations add InitialCreate --output-dir Your/Directory
+```
+
+```bash
+dotnet ef migrations update
+```
+
+
 ## Usage
 
 ```bash

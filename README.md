@@ -13,9 +13,7 @@ Basic C# project structure.
 
 ## Installation
 
-
-
-##mirations 
+## Mirations 
 
 ```bash
 dotnet ef migrations add InitialCreate --output-dir Your/Directory

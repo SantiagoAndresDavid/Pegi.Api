@@ -22,6 +22,7 @@ public class AuthController : ControllerBase
     [HttpPost("login")]
     public ActionResult Login([FromBody] LoginRequest loginRequest)
     {
+        //validar usuario, retornar mensaje, rol, persona
         try
         {
             var (message, foundUser) = _authService.LogIn(loginRequest.Name,

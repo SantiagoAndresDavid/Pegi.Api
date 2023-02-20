@@ -4,6 +4,7 @@ using Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
@@ -16,109 +17,101 @@ namespace Api.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.7")
-                .HasAnnotation("Relational:MaxIdentifierLength", 64);
+                .HasAnnotation("ProductVersion", "7.0.3")
+                .HasAnnotation("Relational:MaxIdentifierLength", 63);
+
+            NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
             modelBuilder.Entity("Entities.AcademicProgram", b =>
                 {
                     b.Property<string>("Code")
-                        .HasColumnType("varchar(255)")
+                        .HasColumnType("text")
                         .HasColumnName("code_program");
 
                     b.Property<string>("Name")
-                        .HasColumnType("longtext")
+                        .HasColumnType("text")
                         .HasColumnName("name");
 
-                    b.HasKey("Code")
-                        .HasName("pk_academics_program");
+                    b.HasKey("Code");
 
-                    b.ToTable("academics_program", (string)null);
+                    b.ToTable("academics_program");
                 });
 
             modelBuilder.Entity("Entities.City", b =>
                 {
                     b.Property<string>("Id")
-                        .HasColumnType("varchar(255)")
+                        .HasColumnType("text")
                         .HasColumnName("city_id");
 
                     b.Property<string>("DepartmentCode")
                         .IsRequired()
-                        .HasColumnType("varchar(255)")
-                        .HasColumnName("department_code");
+                        .HasColumnType("text");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("longtext")
+                        .HasColumnType("text")
                         .HasColumnName("city_name");
 
-                    b.HasKey("Id")
-                        .HasName("pk_cities");
+                    b.HasKey("Id");
 
-                    b.HasIndex("DepartmentCode")
-                        .HasDatabaseName("ix_cities_department_code");
+                    b.HasIndex("DepartmentCode");
 
-                    b.ToTable("cities", (string)null);
+                    b.ToTable("cities");
                 });
 
             modelBuilder.Entity("Entities.Department", b =>
                 {
                     b.Property<string>("Id")
-                        .HasColumnType("varchar(255)")
+                        .HasColumnType("text")
                         .HasColumnName("department_id");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("longtext")
+                        .HasColumnType("text")
                         .HasColumnName("deparment_name");
 
-                    b.HasKey("Id")
-                        .HasName("pk_departments");
+                    b.HasKey("Id");
 
-                    b.ToTable("departments", (string)null);
+                    b.ToTable("departments");
                 });
 
             modelBuilder.Entity("Entities.Experience", b =>
                 {
                     b.Property<string>("Code")
-                        .HasColumnType("varchar(255)")
+                        .HasColumnType("text")
                         .HasColumnName("experience_code");
 
                     b.Property<string>("CitiesCode")
                         .IsRequired()
-                        .HasColumnType("varchar(255)")
-                        .HasColumnName("cities_code");
+                        .HasColumnType("text");
 
                     b.Property<DateTime>("EndDate")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("timestamp with time zone")
                         .HasColumnName("study_end_date");
 
                     b.Property<string>("Institution")
                         .IsRequired()
-                        .HasColumnType("longtext")
+                        .HasColumnType("text")
                         .HasColumnName("experience_institution");
 
                     b.Property<string>("PeopleCode")
                         .IsRequired()
-                        .HasColumnType("varchar(255)")
-                        .HasColumnName("people_code");
+                        .HasColumnType("text");
 
                     b.Property<string>("Position")
                         .IsRequired()
-                        .HasColumnType("longtext")
+                        .HasColumnType("text")
                         .HasColumnName("experience_position");
 
                     b.Property<DateTime>("StartDate")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("timestamp with time zone")
                         .HasColumnName("study_start_date");
 
-                    b.HasKey("Code")
-                        .HasName("pk_experiences");
+                    b.HasKey("Code");
 
-                    b.HasIndex("CitiesCode")
-                        .HasDatabaseName("ix_experiences_cities_code");
+                    b.HasIndex("CitiesCode");
 
-                    b.HasIndex("PeopleCode")
-                        .HasDatabaseName("ix_experiences_people_code");
+                    b.HasIndex("PeopleCode");
 
                     b.ToTable("Experiences");
                 });
@@ -127,215 +120,200 @@ namespace Api.Migrations
                 {
                     b.Property<int?>("Code")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasColumnName("code");
 
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int?>("Code"));
+
                     b.Property<int?>("PorposalFeedBackCode")
-                        .HasColumnType("int")
-                        .HasColumnName("porposal_feed_back_code");
+                        .HasColumnType("integer");
 
                     b.Property<string>("ProposalCode")
-                        .HasColumnType("varchar(255)")
-                        .HasColumnName("proposal_code");
+                        .HasColumnType("text");
 
-                    b.HasKey("Code")
-                        .HasName("pk_history_proposals");
+                    b.HasKey("Code");
 
-                    b.HasIndex("PorposalFeedBackCode")
-                        .HasDatabaseName("ix_history_proposals_porposal_feed_back_code");
+                    b.HasIndex("PorposalFeedBackCode");
 
-                    b.HasIndex("ProposalCode")
-                        .HasDatabaseName("ix_history_proposals_proposal_code");
+                    b.HasIndex("ProposalCode");
 
-                    b.ToTable("history_proposals", (string)null);
+                    b.ToTable("history_proposals");
                 });
 
             modelBuilder.Entity("Entities.HistoryProyect", b =>
                 {
                     b.Property<int?>("Code")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasColumnName("code");
 
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int?>("Code"));
+
                     b.Property<string>("ProyectCode")
-                        .HasColumnType("varchar(255)")
-                        .HasColumnName("proyect_code");
+                        .HasColumnType("text");
 
                     b.Property<int?>("ProyectFeedBackCode")
-                        .HasColumnType("int")
-                        .HasColumnName("proyect_feed_back_code");
+                        .HasColumnType("integer");
 
-                    b.HasKey("Code")
-                        .HasName("pk_history_proyects");
+                    b.HasKey("Code");
 
-                    b.HasIndex("ProyectCode")
-                        .HasDatabaseName("ix_history_proyects_proyect_code");
+                    b.HasIndex("ProyectCode");
 
-                    b.HasIndex("ProyectFeedBackCode")
-                        .HasDatabaseName("ix_history_proyects_proyect_feed_back_code");
+                    b.HasIndex("ProyectFeedBackCode");
 
-                    b.ToTable("history_proyects", (string)null);
+                    b.ToTable("HistoryProyects");
                 });
 
             modelBuilder.Entity("Entities.Person", b =>
                 {
                     b.Property<string>("Document")
-                        .HasColumnType("varchar(255)")
+                        .HasColumnType("text")
                         .HasColumnName("document");
 
                     b.Property<DateTime?>("BirthDate")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("timestamp with time zone")
                         .HasColumnName("person_birth_date");
 
                     b.Property<string>("CitiesCode")
-                        .HasColumnType("varchar(255)")
-                        .HasColumnName("cities_code");
+                        .HasColumnType("text");
 
                     b.Property<string>("CivilState")
-                        .HasColumnType("longtext")
+                        .HasColumnType("text")
                         .HasColumnName("person_civil_state");
 
                     b.Property<string>("FirstLastName")
-                        .HasColumnType("longtext")
+                        .HasColumnType("text")
                         .HasColumnName("person_first_last_name");
 
                     b.Property<string>("FirstName")
-                        .HasColumnType("longtext")
+                        .HasColumnType("text")
                         .HasColumnName("person_first_name");
 
                     b.Property<string>("Gender")
-                        .HasColumnType("longtext")
+                        .HasColumnType("text")
                         .HasColumnName("person_gender");
 
                     b.Property<string>("IdentificationType")
                         .IsRequired()
-                        .HasColumnType("longtext")
+                        .HasColumnType("text")
                         .HasColumnName("person_identification_type");
 
                     b.Property<string>("InstitutionalMail")
-                        .HasColumnType("longtext")
+                        .HasColumnType("text")
                         .HasColumnName("person_institutional_email");
 
                     b.Property<string>("Phone")
-                        .HasColumnType("longtext")
+                        .HasColumnType("text")
                         .HasColumnName("person_phone");
 
                     b.Property<string>("SecondLastName")
-                        .HasColumnType("longtext")
+                        .HasColumnType("text")
                         .HasColumnName("person_second_last_name");
 
                     b.Property<string>("SecondName")
-                        .HasColumnType("longtext")
+                        .HasColumnType("text")
                         .HasColumnName("person_second_name");
 
-                    b.HasKey("Document")
-                        .HasName("pk_people");
+                    b.HasKey("Document");
 
-                    b.HasIndex("CitiesCode")
-                        .HasDatabaseName("ix_people_cities_code");
+                    b.HasIndex("CitiesCode");
 
-                    b.ToTable("people", (string)null);
+                    b.ToTable("people");
                 });
 
             modelBuilder.Entity("Entities.Professor", b =>
                 {
                     b.Property<string>("Document")
-                        .HasColumnType("varchar(255)")
-                        .HasColumnName("document");
+                        .HasColumnType("text");
 
                     b.Property<string>("Position")
-                        .HasColumnType("longtext")
+                        .HasColumnType("text")
                         .HasColumnName("position");
 
-                    b.HasKey("Document")
-                        .HasName("pk_professor");
+                    b.HasKey("Document");
 
-                    b.ToTable("professor", (string)null);
+                    b.ToTable("professor");
                 });
 
             modelBuilder.Entity("Entities.Proposal", b =>
                 {
                     b.Property<string>("Code")
-                        .HasColumnType("varchar(255)")
+                        .HasColumnType("text")
                         .HasColumnName("code");
 
                     b.Property<string>("Approach")
-                        .HasColumnType("longtext")
+                        .HasColumnType("text")
                         .HasColumnName("approach");
 
                     b.Property<string>("Bibliographical")
-                        .HasColumnType("longtext")
+                        .HasColumnType("text")
                         .HasColumnName("biblioGraphical");
 
                     b.Property<DateTime?>("Date")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("timestamp with time zone")
                         .HasColumnName("date");
 
                     b.Property<string>("GeneralObjective")
-                        .HasColumnType("longtext")
+                        .HasColumnType("text")
                         .HasColumnName("generalObjective");
 
                     b.Property<string>("InvestigationGroup")
-                        .HasColumnType("longtext")
+                        .HasColumnType("text")
                         .HasColumnName("investigationGroup");
 
                     b.Property<string>("Justification")
-                        .HasColumnType("longtext")
+                        .HasColumnType("text")
                         .HasColumnName("justification");
 
                     b.Property<string>("PersonDocument")
-                        .HasColumnType("varchar(255)")
-                        .HasColumnName("person_document");
+                        .HasColumnType("text");
 
                     b.Property<string>("SpecificObjective")
-                        .HasColumnType("longtext")
+                        .HasColumnType("text")
                         .HasColumnName("specificObjective");
 
                     b.Property<string>("Status")
-                        .HasColumnType("longtext")
+                        .HasColumnType("text")
                         .HasColumnName("status");
 
                     b.Property<string>("ThematicAreaCode")
-                        .HasColumnType("varchar(255)")
-                        .HasColumnName("thematic_area_code");
+                        .HasColumnType("text");
 
                     b.Property<string>("Title")
-                        .HasColumnType("longtext")
+                        .HasColumnType("text")
                         .HasColumnName("title");
 
-                    b.HasKey("Code")
-                        .HasName("pk_proposals");
+                    b.HasKey("Code");
 
-                    b.HasIndex("PersonDocument")
-                        .HasDatabaseName("ix_proposals_person_document");
+                    b.HasIndex("PersonDocument");
 
-                    b.HasIndex("ThematicAreaCode")
-                        .HasDatabaseName("ix_proposals_thematic_area_code");
+                    b.HasIndex("ThematicAreaCode");
 
-                    b.ToTable("proposals", (string)null);
+                    b.ToTable("proposals");
                 });
 
             modelBuilder.Entity("Entities.ProposalFeedBack", b =>
                 {
                     b.Property<int?>("Code")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasColumnName("code");
 
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int?>("Code"));
+
                     b.Property<string>("Comment")
-                        .HasColumnType("longtext")
+                        .HasColumnType("text")
                         .HasColumnName("comment");
 
                     b.Property<DateTime?>("Date")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("timestamp with time zone")
                         .HasColumnName("date");
 
                     b.Property<string>("Status")
-                        .HasColumnType("longtext")
+                        .HasColumnType("text")
                         .HasColumnName("status");
 
-                    b.HasKey("Code")
-                        .HasName("pk_porposal_feedback");
+                    b.HasKey("Code");
 
                     b.ToTable("Porposal_feedback");
                 });
@@ -343,62 +321,58 @@ namespace Api.Migrations
             modelBuilder.Entity("Entities.Proyect", b =>
                 {
                     b.Property<string>("Code")
-                        .HasColumnType("varchar(255)")
+                        .HasColumnType("text")
                         .HasColumnName("code");
 
                     b.Property<string>("Content")
-                        .HasColumnType("longtext")
+                        .HasColumnType("text")
                         .HasColumnName("Content");
 
                     b.Property<string>("PersonDocument")
-                        .HasColumnType("varchar(255)")
-                        .HasColumnName("person_document");
+                        .HasColumnType("text");
 
                     b.Property<int?>("Score")
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasColumnName("Score");
 
                     b.Property<string>("Status")
-                        .HasColumnType("longtext")
+                        .HasColumnType("text")
                         .HasColumnName("Status");
 
                     b.Property<string>("ThematicAreaCode")
-                        .HasColumnType("varchar(255)")
-                        .HasColumnName("thematic_area_code");
+                        .HasColumnType("text");
 
-                    b.HasKey("Code")
-                        .HasName("pk_proyects");
+                    b.HasKey("Code");
 
-                    b.HasIndex("PersonDocument")
-                        .HasDatabaseName("ix_proyects_person_document");
+                    b.HasIndex("PersonDocument");
 
-                    b.HasIndex("ThematicAreaCode")
-                        .HasDatabaseName("ix_proyects_thematic_area_code");
+                    b.HasIndex("ThematicAreaCode");
 
-                    b.ToTable("proyects", (string)null);
+                    b.ToTable("proyects");
                 });
 
             modelBuilder.Entity("Entities.ProyectFeedBack", b =>
                 {
                     b.Property<int?>("Code")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasColumnName("code");
 
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int?>("Code"));
+
                     b.Property<string>("Comment")
-                        .HasColumnType("longtext")
+                        .HasColumnType("text")
                         .HasColumnName("comment");
 
                     b.Property<string>("Score")
-                        .HasColumnType("longtext")
+                        .HasColumnType("text")
                         .HasColumnName("Score");
 
                     b.Property<string>("Status")
-                        .HasColumnType("longtext")
+                        .HasColumnType("text")
                         .HasColumnName("status");
 
-                    b.HasKey("Code")
-                        .HasName("pk_proyect_feed_backs");
+                    b.HasKey("Code");
 
                     b.ToTable("ProyectFeedBacks");
                 });
@@ -406,125 +380,109 @@ namespace Api.Migrations
             modelBuilder.Entity("Entities.ResearchLine", b =>
                 {
                     b.Property<string>("Code")
-                        .HasColumnType("varchar(255)")
+                        .HasColumnType("text")
                         .HasColumnName("code");
 
                     b.Property<string>("Name")
-                        .HasColumnType("longtext")
+                        .HasColumnType("text")
                         .HasColumnName("name");
 
-                    b.HasKey("Code")
-                        .HasName("pk_research_lines");
+                    b.HasKey("Code");
 
-                    b.ToTable("research_lines", (string)null);
+                    b.ToTable("research_lines");
                 });
 
             modelBuilder.Entity("Entities.ResearchSubline", b =>
                 {
                     b.Property<string>("Code")
-                        .HasColumnType("varchar(255)")
+                        .HasColumnType("text")
                         .HasColumnName("code");
 
                     b.Property<string>("Name")
-                        .HasColumnType("longtext")
+                        .HasColumnType("text")
                         .HasColumnName("name");
 
                     b.Property<string>("ResearchLineCode")
-                        .HasColumnType("varchar(255)")
-                        .HasColumnName("research_line_code");
+                        .HasColumnType("text");
 
-                    b.HasKey("Code")
-                        .HasName("pk_research_sublines");
+                    b.HasKey("Code");
 
-                    b.HasIndex("ResearchLineCode")
-                        .HasDatabaseName("ix_research_sublines_research_line_code");
+                    b.HasIndex("ResearchLineCode");
 
-                    b.ToTable("research_sublines", (string)null);
+                    b.ToTable("research_sublines");
                 });
 
             modelBuilder.Entity("Entities.Student", b =>
                 {
                     b.Property<string>("Document")
-                        .HasColumnType("varchar(255)")
-                        .HasColumnName("document");
+                        .HasColumnType("text");
 
                     b.Property<string>("AcademicProgramCode")
-                        .HasColumnType("varchar(255)")
-                        .HasColumnName("academic_program_code");
+                        .HasColumnType("text");
 
-                    b.Property<int>("AmountCredits")
-                        .HasColumnType("int")
+                    b.Property<string>("AmountCredits")
+                        .HasColumnType("text")
                         .HasColumnName("amount_credits");
 
-                    b.HasKey("Document")
-                        .HasName("pk_students");
+                    b.HasKey("Document");
 
-                    b.HasIndex("AcademicProgramCode")
-                        .HasDatabaseName("ix_students_academic_program_code");
+                    b.HasIndex("AcademicProgramCode");
 
-                    b.ToTable("students", (string)null);
+                    b.ToTable("students");
                 });
 
             modelBuilder.Entity("Entities.Study", b =>
                 {
                     b.Property<string>("Code")
-                        .HasColumnType("varchar(255)")
+                        .HasColumnType("text")
                         .HasColumnName("study_code");
 
                     b.Property<string>("CitiesCode")
                         .IsRequired()
-                        .HasColumnType("varchar(255)")
-                        .HasColumnName("cities_code");
+                        .HasColumnType("text");
 
                     b.Property<DateTime>("EndDate")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("timestamp with time zone")
                         .HasColumnName("study_end_date");
 
                     b.Property<string>("Institution")
                         .IsRequired()
-                        .HasColumnType("longtext")
+                        .HasColumnType("text")
                         .HasColumnName("study_institution");
 
                     b.Property<string>("PeopleCode")
                         .IsRequired()
-                        .HasColumnType("varchar(255)")
-                        .HasColumnName("people_code");
+                        .HasColumnType("text");
 
                     b.Property<DateTime>("StartDate")
-                        .HasColumnType("datetime(6)")
+                        .HasColumnType("timestamp with time zone")
                         .HasColumnName("study_start_date");
 
-                    b.HasKey("Code")
-                        .HasName("pk_studies");
+                    b.HasKey("Code");
 
-                    b.HasIndex("CitiesCode")
-                        .HasDatabaseName("ix_studies_cities_code");
+                    b.HasIndex("CitiesCode");
 
-                    b.HasIndex("PeopleCode")
-                        .HasDatabaseName("ix_studies_people_code");
+                    b.HasIndex("PeopleCode");
 
-                    b.ToTable("studies", (string)null);
+                    b.ToTable("studies");
                 });
 
             modelBuilder.Entity("Entities.ThematicArea", b =>
                 {
                     b.Property<string>("Code")
-                        .HasColumnType("varchar(255)")
+                        .HasColumnType("text")
                         .HasColumnName("code");
 
                     b.Property<string>("Name")
-                        .HasColumnType("longtext")
+                        .HasColumnType("text")
                         .HasColumnName("name");
 
                     b.Property<string>("ResearchSublineCode")
-                        .HasColumnType("varchar(255)")
-                        .HasColumnName("research_subline_code");
+                        .HasColumnType("text");
 
-                    b.HasKey("Code")
-                        .HasName("pk_thematic_areas");
+                    b.HasKey("Code");
 
-                    b.HasIndex("ResearchSublineCode")
-                        .HasDatabaseName("ix_thematic_areas_research_subline_code");
+                    b.HasIndex("ResearchSublineCode");
 
                     b.ToTable("Thematic_areas");
                 });
@@ -532,32 +490,28 @@ namespace Api.Migrations
             modelBuilder.Entity("Entities.User", b =>
                 {
                     b.Property<string>("Name")
-                        .HasColumnType("varchar(255)")
+                        .HasColumnType("text")
                         .HasColumnName("user_name");
 
                     b.Property<string>("Password")
-                        .HasColumnType("longtext")
+                        .HasColumnType("text")
                         .HasColumnName("user_password");
 
                     b.Property<string>("PersonDocument")
-                        .HasColumnType("varchar(255)")
-                        .HasColumnName("person_document");
+                        .HasColumnType("text");
 
                     b.Property<string>("Role")
-                        .HasColumnType("longtext")
+                        .HasColumnType("text")
                         .HasColumnName("user_rol");
 
-                    b.HasKey("Name")
-                        .HasName("pk_users");
+                    b.HasKey("Name");
 
                     b.HasIndex("Name")
-                        .IsUnique()
-                        .HasDatabaseName("ix_users_user_name");
+                        .IsUnique();
 
-                    b.HasIndex("PersonDocument")
-                        .HasDatabaseName("ix_users_person_document");
+                    b.HasIndex("PersonDocument");
 
-                    b.ToTable("users", (string)null);
+                    b.ToTable("users");
                 });
 
             modelBuilder.Entity("Entities.City", b =>
@@ -566,8 +520,7 @@ namespace Api.Migrations
                         .WithMany()
                         .HasForeignKey("DepartmentCode")
                         .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("fk_cities_departments_department_code");
+                        .IsRequired();
 
                     b.Navigation("Department");
                 });
@@ -578,15 +531,13 @@ namespace Api.Migrations
                         .WithMany()
                         .HasForeignKey("CitiesCode")
                         .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("fk_experiences_cities_cities_code");
+                        .IsRequired();
 
                     b.HasOne("Entities.Person", "Person")
                         .WithMany()
                         .HasForeignKey("PeopleCode")
                         .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("fk_experiences_people_people_code");
+                        .IsRequired();
 
                     b.Navigation("City");
 
@@ -597,13 +548,11 @@ namespace Api.Migrations
                 {
                     b.HasOne("Entities.ProposalFeedBack", "ProposalFeedBack")
                         .WithMany()
-                        .HasForeignKey("PorposalFeedBackCode")
-                        .HasConstraintName("fk_history_proposals_porposal_feedback_porposal_feed_back_code");
+                        .HasForeignKey("PorposalFeedBackCode");
 
                     b.HasOne("Entities.Proposal", "Proposal")
                         .WithMany()
-                        .HasForeignKey("ProposalCode")
-                        .HasConstraintName("fk_history_proposals_proposals_proposal_code");
+                        .HasForeignKey("ProposalCode");
 
                     b.Navigation("Proposal");
 
@@ -614,13 +563,11 @@ namespace Api.Migrations
                 {
                     b.HasOne("Entities.Proyect", "Proyect")
                         .WithMany()
-                        .HasForeignKey("ProyectCode")
-                        .HasConstraintName("fk_history_proyects_proyects_proyect_code");
+                        .HasForeignKey("ProyectCode");
 
                     b.HasOne("Entities.ProyectFeedBack", "ProyectFeedBack")
                         .WithMany()
-                        .HasForeignKey("ProyectFeedBackCode")
-                        .HasConstraintName("fk_history_proyects_proyect_feed_backs_proyect_feed_back_code");
+                        .HasForeignKey("ProyectFeedBackCode");
 
                     b.Navigation("Proyect");
 
@@ -631,8 +578,7 @@ namespace Api.Migrations
                 {
                     b.HasOne("Entities.City", "City")
                         .WithMany()
-                        .HasForeignKey("CitiesCode")
-                        .HasConstraintName("fk_people_cities_cities_code");
+                        .HasForeignKey("CitiesCode");
 
                     b.Navigation("City");
                 });
@@ -643,8 +589,7 @@ namespace Api.Migrations
                         .WithMany()
                         .HasForeignKey("Document")
                         .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("fk_professor_people_document");
+                        .IsRequired();
 
                     b.Navigation("Person");
                 });
@@ -653,13 +598,11 @@ namespace Api.Migrations
                 {
                     b.HasOne("Entities.Student", "Student")
                         .WithMany()
-                        .HasForeignKey("PersonDocument")
-                        .HasConstraintName("fk_proposals_students_person_document");
+                        .HasForeignKey("PersonDocument");
 
                     b.HasOne("Entities.ThematicArea", "ThematicArea")
                         .WithMany()
-                        .HasForeignKey("ThematicAreaCode")
-                        .HasConstraintName("fk_proposals_thematic_areas_thematic_area_code");
+                        .HasForeignKey("ThematicAreaCode");
 
                     b.Navigation("Student");
 
@@ -670,13 +613,11 @@ namespace Api.Migrations
                 {
                     b.HasOne("Entities.Student", "Student")
                         .WithMany()
-                        .HasForeignKey("PersonDocument")
-                        .HasConstraintName("fk_proyects_students_person_document");
+                        .HasForeignKey("PersonDocument");
 
                     b.HasOne("Entities.ThematicArea", "ThematicArea")
                         .WithMany()
-                        .HasForeignKey("ThematicAreaCode")
-                        .HasConstraintName("fk_proyects_thematic_areas_thematic_area_code");
+                        .HasForeignKey("ThematicAreaCode");
 
                     b.Navigation("Student");
 
@@ -687,8 +628,7 @@ namespace Api.Migrations
                 {
                     b.HasOne("Entities.ResearchLine", "ResearchLine")
                         .WithMany()
-                        .HasForeignKey("ResearchLineCode")
-                        .HasConstraintName("fk_research_sublines_research_lines_research_line_code");
+                        .HasForeignKey("ResearchLineCode");
 
                     b.Navigation("ResearchLine");
                 });
@@ -697,15 +637,13 @@ namespace Api.Migrations
                 {
                     b.HasOne("Entities.AcademicProgram", "AcademicProgram")
                         .WithMany()
-                        .HasForeignKey("AcademicProgramCode")
-                        .HasConstraintName("fk_students_academics_program_academic_program_code");
+                        .HasForeignKey("AcademicProgramCode");
 
                     b.HasOne("Entities.Person", "Person")
                         .WithMany()
                         .HasForeignKey("Document")
                         .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("fk_students_people_document");
+                        .IsRequired();
 
                     b.Navigation("AcademicProgram");
 
@@ -718,15 +656,13 @@ namespace Api.Migrations
                         .WithMany()
                         .HasForeignKey("CitiesCode")
                         .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("fk_studies_cities_cities_code");
+                        .IsRequired();
 
                     b.HasOne("Entities.Person", "Person")
                         .WithMany()
                         .HasForeignKey("PeopleCode")
                         .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("fk_studies_people_people_code");
+                        .IsRequired();
 
                     b.Navigation("City");
 
@@ -737,8 +673,7 @@ namespace Api.Migrations
                 {
                     b.HasOne("Entities.ResearchSubline", "ResearchSubline")
                         .WithMany()
-                        .HasForeignKey("ResearchSublineCode")
-                        .HasConstraintName("fk_thematic_areas_research_sublines_research_subline_code");
+                        .HasForeignKey("ResearchSublineCode");
 
                     b.Navigation("ResearchSubline");
                 });
@@ -747,8 +682,7 @@ namespace Api.Migrations
                 {
                     b.HasOne("Entities.Person", "Person")
                         .WithMany()
-                        .HasForeignKey("PersonDocument")
-                        .HasConstraintName("fk_users_people_person_document");
+                        .HasForeignKey("PersonDocument");
 
                     b.Navigation("Person");
                 });

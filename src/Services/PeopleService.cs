@@ -38,7 +38,7 @@ public class PeopleService
         try
         {
             Person? person = _peopleRepository.Find(person => person.Document  == document );
-            _peopleRepository.Delete(person);
+            _peopleRepository.Delete(person!);
             return "se borro con exito";
         }
         catch (Exception e)

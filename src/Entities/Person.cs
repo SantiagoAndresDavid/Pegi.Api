@@ -33,5 +33,6 @@ public class Person
     public string? InstitutionalMail { get; set; }
 
     public string? CitiesCode { get; set; }
-    [ForeignKey("CitiesCode")] public City? City { get; set; }
+    [ForeignKey("CitiesCode")]
+    public City? City { get; set; }
 }

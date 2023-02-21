@@ -12,11 +12,13 @@ public class AuthController : ControllerBase
 {
     private readonly UsersService _usersService;
     private readonly AuthService _authService;
+    private readonly PeopleService _peopleService;
 
-    public AuthController(UsersService usersService, AuthService authService)
+    public AuthController(UsersService usersService, AuthService authService, PeopleService peopleService)
     {
         _usersService = usersService;
         _authService = authService;
+        _peopleService = peopleService;
     }
 
     [HttpPost("login")]
@@ -27,7 +29,8 @@ public class AuthController : ControllerBase
         {
             var (message, foundUser) = _authService.LogIn(loginRequest.Name,
                 loginRequest.Password);
-            return Ok(new Response<User>(message, foundUser));
+            foundUser.Person = _peopleService.SearchPerson(foundUser.PersonDocument!);
+            return Ok(new Response<LoginResponse>(message,foundUser.Adapt<LoginResponse>()));
         }
         catch (AuthException e)
         {
@@ -45,5 +48,4 @@ public class AuthController : ControllerBase
         return BadRequest(
             new Response<Void>("Error al registrar el usuario"));
     }
-
 }

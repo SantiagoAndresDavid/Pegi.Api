@@ -3,4 +3,4 @@ using Entities;
 
 namespace Api.Controllers.Auth;
 
-public record LoginResponse(string Name, string Password,string? Role,PersonResponse Person);
+public record LoginResponse(PersonResponse Person);

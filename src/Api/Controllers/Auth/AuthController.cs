@@ -1,3 +1,4 @@
+using Api.Jwt;
 using Entities;
 using Entities.Exceptions;
 using Mapster;
@@ -30,7 +31,8 @@ public class AuthController : ControllerBase
             var (message, foundUser) = _authService.LogIn(loginRequest.Name,
                 loginRequest.Password);
             foundUser.Person = _peopleService.SearchPerson(foundUser.PersonDocument!);
-            return Ok(new Response<LoginResponse>(message,foundUser.Adapt<LoginResponse>()));
+            string token = TokenGenerator.GenerateTokenJwt(foundUser);
+            return Ok(new Response<LoginResponse>(token,foundUser.Adapt<LoginResponse>()));
         }
         catch (AuthException e)
         {

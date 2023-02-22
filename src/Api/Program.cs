@@ -6,8 +6,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 
 ConfigurationManager configuration = builder.Configuration;
-string? connectionString =
-    configuration.GetConnectionString("DefaultConnection");
+string? connectionString = configuration.GetConnectionString("DefaultConnection");
 
 builder.Services.AddDbContext<PegiDbContext>(options =>
     options.SetupDatabaseEngine(connectionString)

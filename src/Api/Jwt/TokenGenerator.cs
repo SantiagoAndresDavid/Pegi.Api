@@ -10,8 +10,6 @@ namespace Api.Jwt
 {
     internal static class TokenGenerator
     {
-
-
         public static string GenerateTokenJwt(User user)
         {
             var configuration = new ConfigurationManager();
@@ -30,9 +28,14 @@ namespace Api.Jwt
             var claims = new[]
             {
                 new Claim(ClaimTypes.NameIdentifier, user.Name!),
-                new Claim(ClaimTypes.GivenName, user.Password!),
-                new Claim(ClaimTypes.Surname, user.PersonDocument!),
                 new Claim(ClaimTypes.Role, user.Role!),
+                new Claim("Document", user.Person!.Document!),
+                new Claim("FirstName", user.Person!.FirstName!),
+                new Claim("SecondName", user.Person!.SecondName!),
+                new Claim("FirstLastName", user.Person!.FirstLastName!),
+                new Claim("SecondLastName", user.Person.SecondLastName!),
+                new Claim("Gender", user.Person!.Gender!),
+                new Claim("Phone", user.Person.Phone!)
             };
 
             var token = new JwtSecurityToken(

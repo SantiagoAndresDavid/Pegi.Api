@@ -25,14 +25,13 @@ public class AuthController : ControllerBase
     [HttpPost("login")]
     public ActionResult Login([FromBody] LoginRequest loginRequest)
     {
-        //validar usuario, retornar mensaje, rol, persona
         try
         {
             var (message, foundUser) = _authService.LogIn(loginRequest.Name,
                 loginRequest.Password);
             foundUser.Person = _peopleService.SearchPerson(foundUser.PersonDocument!);
             string token = TokenGenerator.GenerateTokenJwt(foundUser);
-            return Ok(new Response<LoginResponse>(token,foundUser.Adapt<LoginResponse>()));
+            return Ok(token);
         }
         catch (AuthException e)
         {

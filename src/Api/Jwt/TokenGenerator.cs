@@ -17,8 +17,7 @@ namespace Api.Jwt
             // appsetting for Token JWT
 
             string key = configuration["Jwt:Key"];
-            string issuer = configuration["Jwt:Issuer"];
-            string audience = configuration["Jwt:Audience"];
+
 
             var securityKey =
                 new SymmetricSecurityKey(
@@ -34,14 +33,12 @@ namespace Api.Jwt
                 new Claim("SecondName", user.Person!.SecondName!),
                 new Claim("FirstLastName", user.Person!.FirstLastName!),
                 new Claim("SecondLastName", user.Person.SecondLastName!),
-                new Claim("Gender", user.Person!.Gender!),
+                new Claim("Email", user.Person!.InstitutionalMail!),
                 new Claim("Phone", user.Person.Phone!)
             };
 
             var token = new JwtSecurityToken(
-                issuer,
-                audience,
-                claims,
+                claims:claims,
                 expires: DateTime.Now.AddMinutes(60),
                 signingCredentials: credentials);
             return new JwtSecurityTokenHandler().WriteToken(token);

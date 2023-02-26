@@ -4,6 +4,7 @@ using Mapster;
 using Microsoft.AspNetCore.Mvc;
 using Services;
 using Entities;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Api.Controllers.Proposal;
 
@@ -19,6 +20,7 @@ public class ProposalController : ControllerBase
     }
 
     [HttpPost]
+    [Authorize(Roles = ("Estudiante"))]
     public ActionResult RegisterProposal(
         [FromBody] ProposalRequest proposalRequest)
     {

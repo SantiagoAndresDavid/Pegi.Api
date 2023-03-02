@@ -14,31 +14,43 @@ namespace Api.Jwt
         {
             var configuration = new ConfigurationManager();
             configuration.AddJsonFile("appsettings.json");
+
             // appsetting for Token JWT
 
             string key = configuration["Jwt:Key"];
-
+            Claim[] claims;
 
             var securityKey =
                 new SymmetricSecurityKey(
                     Encoding.UTF8.GetBytes(key));
             var credentials = new SigningCredentials(securityKey,
                 SecurityAlgorithms.HmacSha256);
-            var claims = new[]
+
+            if (user.Person != null)
             {
-                new Claim(ClaimTypes.NameIdentifier, user.Name!),
-                new Claim(ClaimTypes.Role, user.Role!),
-                new Claim("Document", user.Person!.Document!),
-                new Claim("FirstName", user.Person!.FirstName!),
-                new Claim("SecondName", user.Person!.SecondName!),
-                new Claim("FirstLastName", user.Person!.FirstLastName!),
-                new Claim("SecondLastName", user.Person.SecondLastName!),
-                new Claim("Email", user.Person!.InstitutionalMail!),
-                new Claim("Phone", user.Person.Phone!)
-            };
+                claims = new []
+                {
+                    new Claim(ClaimTypes.NameIdentifier, user.Name!),
+                    new Claim(ClaimTypes.Role, user.Role!),
+                    new Claim("Document", user.Person!.Document),
+                    new Claim("FirstName", user.Person!.FirstName!),
+                    new Claim("FirstLastName", user.Person!.FirstLastName!),
+                    new Claim("Email", user.Person!.InstitutionalMail!)
+
+                };
+
+            }
+            else
+            {
+                claims = new[]
+                {
+                    new Claim(ClaimTypes.NameIdentifier, user.Name!),
+                    new Claim(ClaimTypes.Role, user.Role!),
+                };
+            }
 
             var token = new JwtSecurityToken(
-                claims:claims,
+                claims: claims,
                 expires: DateTime.Now.AddMinutes(60),
                 signingCredentials: credentials);
             return new JwtSecurityTokenHandler().WriteToken(token);

@@ -32,13 +32,11 @@ namespace Api.Jwt
                 {
                     new Claim(ClaimTypes.NameIdentifier, user.Name!),
                     new Claim(ClaimTypes.Role, user.Role!),
-                    new Claim("Document", user.Person!.Document),
+                    new Claim("Document", user.Person!.Document!),
                     new Claim("FirstName", user.Person!.FirstName!),
                     new Claim("FirstLastName", user.Person!.FirstLastName!),
                     new Claim("Email", user.Person!.InstitutionalMail!)
-
                 };
-
             }
             else
             {

@@ -50,13 +50,14 @@ public class ProposalController : ControllerBase
     }
 
     [HttpGet("get-proposals-document/{document}")]
+    [Authorize(Roles = ("Estudiante"))]
     public ActionResult GetProposalsDocument([FromRoute] string document)
     {
         try
         {
             List<Entities.Proposal> proposals =
                 _proposalService.GetProposalsDocument(document);
-            if (proposals.Count < 0)
+            if (proposals.Count == 0)
             {
                 return BadRequest(
                     new Response<Void>("no se encontro ninguna propuesta"));
@@ -73,6 +74,7 @@ public class ProposalController : ControllerBase
 
     //
     [HttpGet("get-proposal-code/{code}")]
+    [Authorize(Roles = ("Estudiante"))]
     public ActionResult GetProposalCode([FromRoute] string code)
     {
         try
@@ -118,6 +120,7 @@ public class ProposalController : ControllerBase
     }
 
     [HttpDelete("{code}")]
+    [Authorize(Roles = ("Estudiante"))]
     public ActionResult DeleteProposal([FromRoute] string code)
     {
         try

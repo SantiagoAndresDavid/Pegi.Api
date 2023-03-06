@@ -1,5 +1,6 @@
 using Entities.Exceptions;
 using Mapster;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Services;
 
@@ -17,6 +18,7 @@ public class ProyectController : ControllerBase
     }
 
     [HttpPost]
+    [Authorize(Roles = ("Estudiante"))]
     public ActionResult RegisterProyect(
         [FromBody] ProyectRequest proyectRequest)
     {
@@ -46,6 +48,7 @@ public class ProyectController : ControllerBase
     }
 
     [HttpGet("get-proyect-document{document}")]
+    [Authorize(Roles = ("Estudiante"))]
     public ActionResult GetProyects([FromRoute] string document)
     {
         try
@@ -68,6 +71,7 @@ public class ProyectController : ControllerBase
     }
 
     [HttpGet("get-proyect-code/{code}")]
+    [Authorize(Roles = ("Estudiante"))]
     public ActionResult GetProyectCode([FromRoute] string code)
     {
         try
@@ -114,6 +118,7 @@ public class ProyectController : ControllerBase
     }
 
     [HttpDelete("{code}")]
+    [Authorize(Roles = ("Estudiante"))]
     public ActionResult DeleteProyect([FromRoute] string code)
     {
         try

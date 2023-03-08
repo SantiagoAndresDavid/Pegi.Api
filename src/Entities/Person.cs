@@ -25,7 +25,7 @@ public class Person
 
     [Column("person_gender")] public string? Gender { get; set; }
 
-    [Column("person_birth_date")] public DateTime? BirthDate { get; set; }
+    [Column("person_birth_date")] public DateOnly? BirthDate { get; set; }
 
     [Column("person_phone")] public string? Phone { get; set; }
 

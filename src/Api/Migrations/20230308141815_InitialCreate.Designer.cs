@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Api.Migrations
 {
     [DbContext(typeof(PegiDbContext))]
-    [Migration("20230220183158_InitialCreate")]
+    [Migration("20230308141815_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -173,8 +173,8 @@ namespace Api.Migrations
                         .HasColumnType("text")
                         .HasColumnName("document");
 
-                    b.Property<DateTime?>("BirthDate")
-                        .HasColumnType("timestamp with time zone")
+                    b.Property<DateOnly?>("BirthDate")
+                        .HasColumnType("date")
                         .HasColumnName("person_birth_date");
 
                     b.Property<string>("CitiesCode")

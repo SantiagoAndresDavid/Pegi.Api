@@ -9,7 +9,7 @@ public record CreatePersonRequest(
     string SecondLastName,
     string CivilState,
     string Gender,
-    DateTime BirthDate,
+    DateOnly BirthDate,
     string Phone,
     string InstitutionalMail,
     string CitiesCode,

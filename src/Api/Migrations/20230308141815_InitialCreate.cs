@@ -127,7 +127,7 @@ namespace Api.Migrations
                     person_second_last_name = table.Column<string>(type: "text", nullable: true),
                     person_civil_state = table.Column<string>(type: "text", nullable: true),
                     person_gender = table.Column<string>(type: "text", nullable: true),
-                    person_birth_date = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    person_birth_date = table.Column<DateOnly>(type: "date", nullable: true),
                     person_phone = table.Column<string>(type: "text", nullable: true),
                     person_institutional_email = table.Column<string>(type: "text", nullable: true),
                     CitiesCode = table.Column<string>(type: "text", nullable: true)

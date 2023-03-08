@@ -2,6 +2,7 @@ using Api.Controllers.Auth;
 using Entities;
 using Entities.Exceptions;
 using Mapster;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Services;
 
@@ -38,6 +39,7 @@ public class PeopleController : ControllerBase
         }
 
     [HttpGet("{document}")]
+    [Authorize(Roles = ("Estudiante"))]
     public ActionResult GetPerson([FromRoute] string document)
     {
         try
@@ -56,6 +58,7 @@ public class PeopleController : ControllerBase
     }
 
     [HttpDelete("{document}")]
+    [Authorize(Roles = ("Estudiante"))]
     public ActionResult DeletePerson([FromRoute] string document)
     {
         try

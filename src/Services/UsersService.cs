@@ -1,7 +1,7 @@
 using Data.Repository;
 using Entities;
 using Entities.Exceptions;
-using Microsoft.EntityFrameworkCore;
+
 using Encryptor = BCrypt.Net.BCrypt;
 namespace Services;
 

@@ -1,5 +1,6 @@
 using Api.Controllers.Auth;
 using Data.Repository;
+using Data.Repository.shared;
 using Entities;
 using Services;
 
@@ -9,7 +10,7 @@ public static class DependencyInjection
 {
     public static void AddRepositories(this IServiceCollection repositories)
     {
-        repositories.AddScoped<UsersRepository>();
+        repositories.AddScoped<IRepository<User>, UsersRepository>();
         repositories.AddScoped<PeopleRepository>();
         repositories.AddScoped<CitiesRepository>();
         repositories.AddScoped<DepartmentsRepository>();

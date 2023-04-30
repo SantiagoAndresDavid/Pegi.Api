@@ -1,4 +1,5 @@
 using Data.Repository;
+using Data.Repository.shared;
 using Entities;
 using Entities.Exceptions;
 using Microsoft.EntityFrameworkCore;
@@ -7,10 +8,10 @@ namespace Services;
 
 public class UsersService
 {
-    private readonly UsersRepository _usersRepository;
+    private readonly IRepository<User> _usersRepository;
 
 
-    public UsersService(UsersRepository repository)
+    public UsersService(IRepository<User> repository)
     {
         _usersRepository = repository;
     }

@@ -1,31 +1,36 @@
-using Api;
-using Data;
-using Data.Repository;
-using Entities;
 using FluentAssertions;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
 using Services;
-using Microsoft.EntityFrameworkCore;
 
-
-namespace Pegi.Api.Test;
+namespace Pegi.Api.Test.User;
 public class UserTest
 {
     private UsersService _usersService;
+    private UsersService _evilUsersService;
 
 
     [SetUp]
     public void SetUp()
     {
         _usersService = new UsersService(UsersRepositoryMock.UsersRepository());
+        _evilUsersService = new UsersService(UsersRepositoryMock.EvilUsersRepository());
     }
 
     [Test]
     public void SaveUserTest()
     {
         bool resonse = _usersService.SaveUser(UserStub.user);
+        _usersService.Should().HaveBeenCalledMock();
         resonse.Should().BeTrue();
     }
+
+    [Test]
+    public void SaveUserBadUserTest()
+    {
+        bool resonse = _evilUsersService.SaveUser(UserStub.user);
+        _evilUsersService.Should().HaveBeenCalledEvilMock();
+        resonse.Should().BeFalse();
+    }
+
+
 
 }

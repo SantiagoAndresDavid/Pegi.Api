@@ -26,11 +26,11 @@ public class UsersService
         }
         catch
         {
-            return false ;
+            return false;
         }
     }
 
-    public (string,bool?) AddPersonDocument(string document,string username)
+    public (string,bool?) AddPersonDocument(string document, string username)
     {
         try
         {

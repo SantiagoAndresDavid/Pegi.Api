@@ -1,5 +1,6 @@
 using System.Linq.Expressions;
 using Data.Repository.shared;
+using Entities;
 using FluentAssertions.Primitives;
 using Microsoft.EntityFrameworkCore;
 using Moq;
@@ -19,19 +20,40 @@ public static class PeopleRepositoryMock
 
     public static IRepository<Entities.Person> PeopleRepository()
     {
-        Mock.Setup(repository => repository.Save(It.IsAny<Entities.Person>())).Callback(BadBehavior);
-        Mock.Setup(repository => repository.Update(It.IsAny<Entities.Person>())).Callback(BadBehavior);
-        Mock.Setup(repository => repository.Find(It.IsAny<Expression<Func<Entities.Person, bool>>>())).Returns(PersonStub.Person);
+        Mock.Setup(repository => repository.Save(It.IsAny<Entities.Person>()))
+            .Callback(BadBehavior);
+        Mock.Setup(repository => repository.Update(It.IsAny<Entities.Person>()))
+            .Callback(BadBehavior);
+        Mock.Setup(repository =>
+                repository.Find(
+                    It.IsAny<Expression<Func<Entities.Person, bool>>>()))
+            .Returns(PersonStub.Person);
+        Mock.Setup(repository => repository.Delete(It.IsAny<Entities.Person>()))
+            .Callback(BadBehavior);
         return Mock.Object;
     }
 
-    public static void HaveBeenCalledSave(this ObjectAssertions objectAssertions, Times times)
+    public static void HaveBeenCalledSave(
+        this ObjectAssertions objectAssertions, Times times)
     {
-        Mock.Verify(repository => repository.Save(It.IsAny<Entities.Person>()), times);
+        Mock.Verify(repository => repository.Save(It.IsAny<Entities.Person>()),
+            times);
     }
 
-    public static void HaveBeenCalledUpdate(this ObjectAssertions objectAssertions, Times times)
+    public static void HaveBeenCalledUpdate(
+        this ObjectAssertions objectAssertions, Times times)
     {
-        Mock.Verify(repository => repository.Update(It.IsAny<Entities.Person>()), times);
+        Mock.Verify(
+            repository => repository.Update(It.IsAny<Entities.Person>()),
+            times);
+    }
+
+    public static void HaveBeenCalledFind(
+        this ObjectAssertions objectAssertions, Times times)
+    {
+        Mock.Setup(repository =>
+                repository.Find(
+                    It.IsAny<Expression<Func<Entities.Person, bool>>>()))
+            .Returns(PersonStub.Person);
     }
 }

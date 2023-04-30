@@ -1,13 +1,14 @@
 using Data.Repository;
+using Data.Repository.shared;
 using Entities;
 
 namespace Services;
 
 public class ThematicAreaService
 {
-    private readonly ThematicAreasRepository _thematicAreasRepository;
+    private readonly IRepository<ThematicArea> _thematicAreasRepository;
 
-    public ThematicAreaService(ThematicAreasRepository thematicAreasRepository)
+    public ThematicAreaService(IRepository<ThematicArea> thematicAreasRepository)
     {
         _thematicAreasRepository = thematicAreasRepository;
     }

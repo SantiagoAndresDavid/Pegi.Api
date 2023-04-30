@@ -1,4 +1,5 @@
 using Data.Repository;
+using Data.Repository.shared;
 using Entities;
 using Entities.Exceptions;
 
@@ -6,9 +7,9 @@ namespace Services;
 
 public class StudentsService
 {
-    private readonly StudentsRepository _studentsRepository;
+    private readonly IRepository<Student> _studentsRepository;
 
-    public StudentsService(StudentsRepository studentsRepository)
+    public StudentsService(IRepository<Student> studentsRepository)
     {
         _studentsRepository = studentsRepository;
     }

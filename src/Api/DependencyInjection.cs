@@ -11,23 +11,23 @@ public static class DependencyInjection
     public static void AddRepositories(this IServiceCollection repositories)
     {
         repositories.AddScoped<IRepository<User>, UsersRepository>();
-        repositories.AddScoped<PeopleRepository>();
-        repositories.AddScoped<CitiesRepository>();
-        repositories.AddScoped<DepartmentsRepository>();
-        repositories.AddScoped<StudiesRespository>();
-        repositories.AddScoped<ExperiencesRepository>();
-        repositories.AddScoped<ProfessorRepository>();
-        repositories.AddScoped<AcademicProgramsRepository>();
-        repositories.AddScoped<StudentsRepository>();
-        repositories.AddScoped<ThematicAreasRepository>();
-        repositories.AddScoped<ResearchSubLinesRepository>();
-        repositories.AddScoped<ResearchLinesRepository>();
-        repositories.AddScoped<ProposalRepository>();
-        repositories.AddScoped<ProposalFeedBackRepository>();
-        repositories.AddScoped<HistoryProposalsRepository>();
-        repositories.AddScoped<ProyectRepository>();
-        repositories.AddScoped<HistoryProyectRepository>();
-        repositories.AddScoped<ProyectFeedBackRepository>();
+        repositories.AddScoped<IRepository<Person>,PeopleRepository>();
+        repositories.AddScoped<IRepository<City>,CitiesRepository>();
+        repositories.AddScoped<IRepository<Department>,DepartmentsRepository>();
+        repositories.AddScoped<IRepository<Study>,StudiesRespository>();
+        repositories.AddScoped<IRepository<Experience>,ExperiencesRepository>();
+        repositories.AddScoped<IRepository<Professor>,ProfessorRepository>();
+        repositories.AddScoped<IRepository<AcademicProgram>,AcademicProgramsRepository>();
+        repositories.AddScoped<IRepository<Student>,StudentsRepository>();
+        repositories.AddScoped<IRepository<ThematicArea>,ThematicAreasRepository>();
+        repositories.AddScoped<IRepository<ResearchSubline>,ResearchSubLinesRepository>();
+        repositories.AddScoped<IRepository<ResearchLine>,ResearchLinesRepository>();
+        repositories.AddScoped<IRepository<Proposal>,ProposalRepository>();
+        repositories.AddScoped<IRepository<ProposalFeedBack>,ProposalFeedBackRepository>();
+        repositories.AddScoped<IRepository<HistoryProposals>,HistoryProposalsRepository>();
+        repositories.AddScoped<IRepository<Proyect>,ProyectRepository>();
+        repositories.AddScoped<IRepository<HistoryProyect>,HistoryProyectRepository>();
+        repositories.AddScoped<IRepository<ProyectFeedBack>,ProyectFeedBackRepository>();
     }
 
     public static void AddServices(this IServiceCollection services)

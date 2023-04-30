@@ -1,4 +1,5 @@
 using Data.Repository;
+using Data.Repository.shared;
 using Entities;
 using Entities.Exceptions;
 
@@ -6,12 +7,13 @@ namespace Services;
 
 public class ProyectFeedBackService
 {
-    private readonly ProyectFeedBackRepository _proyectFeedBackRepository;
+    private readonly IRepository<ProyectFeedBack> _proyectFeedBackRepository;
 
-    public ProyectFeedBackService(ProyectFeedBackRepository proyectFeedBackRepository)
+    public ProyectFeedBackService(IRepository<ProyectFeedBack> proyectFeedBackRepository)
     {
         _proyectFeedBackRepository = proyectFeedBackRepository;
     }
+
 
     public (string, bool) SaveProyectFeedBack(ProyectFeedBack proyectFeedBack)
     {

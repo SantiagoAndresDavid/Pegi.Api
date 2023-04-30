@@ -1,3 +1,4 @@
+using Data.Repository.shared;
 using Entities;
 using Entities.Exceptions;
 
@@ -5,11 +6,9 @@ namespace Services;
 
 public class HistoryProposalService
 {
-    private readonly HistoryProposalsRepository _historyProposalsRepository;
+    private readonly IRepository<HistoryProposals> _historyProposalsRepository;
 
-
-    public HistoryProposalService(
-        HistoryProposalsRepository historyProposalsRepository)
+    public HistoryProposalService(IRepository<HistoryProposals> historyProposalsRepository)
     {
         _historyProposalsRepository = historyProposalsRepository;
     }

@@ -1,14 +1,14 @@
 using Data.Repository;
+using Data.Repository.shared;
 using Entities;
 
 namespace Services;
 
 public class ResearchSubLineService
 {
-    private readonly ResearchSubLinesRepository _researchSubLinesRepository;
+    private readonly IRepository<ResearchSubline> _researchSubLinesRepository;
 
-
-    public ResearchSubLineService(ResearchSubLinesRepository researchSubLinesRepository)
+    public ResearchSubLineService(IRepository<ResearchSubline> researchSubLinesRepository)
     {
         _researchSubLinesRepository = researchSubLinesRepository;
     }

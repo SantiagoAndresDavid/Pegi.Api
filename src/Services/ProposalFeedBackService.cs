@@ -1,4 +1,5 @@
 using Data.Repository;
+using Data.Repository.shared;
 using Entities;
 using Entities.Exceptions;
 
@@ -6,9 +7,9 @@ namespace Services;
 
 public class ProposalFeedBackService
 {
-    private readonly ProposalFeedBackRepository _proposalFeedBackRepository;
+    private readonly IRepository<ProposalFeedBack> _proposalFeedBackRepository;
 
-    public ProposalFeedBackService(ProposalFeedBackRepository proposalFeedBackRepository)
+    public ProposalFeedBackService(IRepository<ProposalFeedBack> proposalFeedBackRepository)
     {
         _proposalFeedBackRepository = proposalFeedBackRepository;
     }

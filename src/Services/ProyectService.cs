@@ -1,4 +1,5 @@
 using Data.Repository;
+using Data.Repository.shared;
 using Entities;
 using Entities.Exceptions;
 
@@ -6,7 +7,12 @@ namespace Services;
 
 public class ProyectService
 {
-    private readonly ProyectRepository _proyectRepository;
+    private readonly IRepository<Proyect> _proyectRepository;
+
+    public ProyectService(IRepository<Proyect> proyectRepository)
+    {
+        _proyectRepository = proyectRepository;
+    }
 
     public ProyectService(ProyectRepository proyectRepository)
     {

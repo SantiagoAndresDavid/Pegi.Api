@@ -1,18 +1,20 @@
 using Data.Repository;
+using Data.Repository.shared;
 using Entities;
 
 namespace Services;
 
 public class LocationsService
 {
-    private readonly CitiesRepository _citiesRepository;
-    private readonly DepartmentsRepository _departmentsRepository;
+    private readonly IRepository<City> _citiesRepository;
+    private readonly IRepository<Department> _departmentsRepository;
 
-    public LocationsService(CitiesRepository citiesRepository, DepartmentsRepository departmentsRepository)
+    public LocationsService(IRepository<City> citiesRepository, IRepository<Department> departmentsRepository)
     {
         _citiesRepository = citiesRepository;
         _departmentsRepository = departmentsRepository;
     }
+
 
     public List<Department> GetDepartments()
     {

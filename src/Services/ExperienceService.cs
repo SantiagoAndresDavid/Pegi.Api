@@ -1,4 +1,5 @@
 using Data.Repository;
+using Data.Repository.shared;
 using Entities;
 using Entities.Exceptions;
 
@@ -6,9 +7,9 @@ namespace Services;
 
 public class ExperienceService
 {
-    private readonly ExperiencesRepository _experiencesRepository;
+    private readonly IRepository<Experience> _experiencesRepository;
 
-    public ExperienceService(ExperiencesRepository experiencesRepository)
+    public ExperienceService(IRepository<Experience> experiencesRepository)
     {
         _experiencesRepository = experiencesRepository;
     }

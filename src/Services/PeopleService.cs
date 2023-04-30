@@ -1,5 +1,6 @@
 using System.Diagnostics;
 using Data.Repository;
+using Data.Repository.shared;
 using Entities;
 using Entities.Exceptions;
 
@@ -7,10 +8,9 @@ namespace Services;
 
 public class PeopleService
 {
-    private readonly PeopleRepository _peopleRepository;
+    private readonly IRepository<Person> _peopleRepository;
 
-
-    public PeopleService(PeopleRepository peopleRepository)
+    public PeopleService(IRepository<Person> peopleRepository)
     {
         _peopleRepository = peopleRepository;
     }
@@ -37,7 +37,8 @@ public class PeopleService
     {
         try
         {
-            Person? person = _peopleRepository.Find(person => person.Document  == document );
+            Person? person =
+                _peopleRepository.Find(person => person.Document == document);
             _peopleRepository.Delete(person!);
             return "se borro con exito";
         }

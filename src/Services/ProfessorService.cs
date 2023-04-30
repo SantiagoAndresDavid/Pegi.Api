@@ -1,3 +1,4 @@
+using Data.Repository.shared;
 using Entities;
 using Entities.Exceptions;
 
@@ -5,13 +6,12 @@ namespace Services;
 
 public class ProfessorService
 {
-    private readonly ProfessorRepository _professorRepository;
+    private readonly IRepository<Professor> _professorRepository;
 
-    public ProfessorService(ProfessorRepository professorRepository)
+    public ProfessorService(IRepository<Professor> professorRepository)
     {
         _professorRepository = professorRepository;
     }
-
 
     public (string, bool) SaveProfessor(Professor professor)
     {

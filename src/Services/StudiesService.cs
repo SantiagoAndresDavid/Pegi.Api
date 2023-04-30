@@ -1,4 +1,5 @@
 using Data.Repository;
+using Data.Repository.shared;
 using Entities;
 using Entities.Exceptions;
 
@@ -6,18 +7,18 @@ namespace Services;
 
 public class StudiesService
 {
-    private readonly StudiesRespository _studiesrespository;
+    private readonly IRepository<Study> _studiesRespository;
 
-    public StudiesService(StudiesRespository studiesrespository)
+    public StudiesService(IRepository<Study> studiesrespository)
     {
-        _studiesrespository = studiesrespository;
+        _studiesRespository = studiesrespository;
     }
 
     public (string, bool)  SaveStudy(Study study)
     {
         try
         {
-            _studiesrespository.Save(study);
+            _studiesRespository.Save(study);
             return ("se ha guardado con exito", true);
         }
         catch (StudyExeption e)
@@ -28,7 +29,7 @@ public class StudiesService
 
     public List<Study> SearchStudies(string documentPerson)
     {
-        return _studiesrespository.Filter(study => study.PeopleCode == documentPerson);
+        return _studiesRespository.Filter(study => study.PeopleCode == documentPerson);
     }
 
 }

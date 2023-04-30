@@ -1,4 +1,5 @@
 using Data.Repository;
+using Data.Repository.shared;
 using Entities;
 using Entities.Exceptions;
 
@@ -6,13 +7,12 @@ namespace Services;
 
 public class AcademicProgramService
 {
-    private readonly AcademicProgramsRepository _academicProgramsRepository;
+    private readonly IRepository<AcademicProgram> _academicProgramsRepository;
 
-    public AcademicProgramService(AcademicProgramsRepository academicProgramsRepository)
+    public AcademicProgramService(IRepository<AcademicProgram> academicProgramsRepository)
     {
         _academicProgramsRepository = academicProgramsRepository;
     }
-
 
     public AcademicProgram? SearchProfessorAcademicProgram(string code)
     {

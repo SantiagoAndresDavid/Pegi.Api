@@ -1,4 +1,5 @@
 using Data.Repository;
+using Data.Repository.shared;
 using Entities;
 using Entities.Exceptions;
 using Encryptor = BCrypt.Net.BCrypt;
@@ -6,9 +7,9 @@ namespace Services;
 
 public class AuthService
 {
-    private readonly UsersRepository _repository;
+    private readonly IRepository<User> _repository;
 
-    public AuthService(UsersRepository repository)
+    public AuthService(IRepository<User> repository)
     {
         _repository = repository;
     }

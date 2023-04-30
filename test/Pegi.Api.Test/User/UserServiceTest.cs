@@ -28,19 +28,21 @@ public class UserServiceTest
     [Test]
     public void AddPersonDocumentTest()
     {
-        var (message, status) = _usersService.DeletePersonDocument(PersonStub.Person.Document!);
-       _usersService.Should().HaveBeenCalledUpdate(Times.AtLeastOnce());
-       status.Should().BeTrue();
+        var (message, status) =
+            _usersService.DeletePersonDocument(PersonStub.Person.Document!);
+        _usersService.Should().HaveBeenCalledUpdate(Times.AtLeastOnce());
+        status.Should().BeTrue();
     }
 
     [Test]
     public void DeletePersonDocumentTest()
     {
-        var (message, status) = _usersService.AddPersonDocument(PersonStub.Person.Document!,UserStub.User.Name!);
+        var (message, status) =
+            _usersService.AddPersonDocument(PersonStub.Person.Document!,
+                UserStub.User.Name!);
         _usersService.Should().HaveBeenCalledUpdate(Times.AtLeastOnce());
         status.Should().BeTrue();
     }
-
 
 
     [Test]

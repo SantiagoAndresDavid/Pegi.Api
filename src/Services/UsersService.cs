@@ -9,6 +9,7 @@ public class UsersService
 {
     private readonly UsersRepository _usersRepository;
 
+
     public UsersService(UsersRepository repository)
     {
         _usersRepository = repository;
@@ -32,7 +33,7 @@ public class UsersService
     {
         try
         {
-                User? user = _usersRepository.Find(user => user.Name == username );
+            User? user = _usersRepository.Find(user => user.Name == username );
             user!.PersonDocument = document;
             _usersRepository.Update(user);
             return ("se agrego con exito",true);

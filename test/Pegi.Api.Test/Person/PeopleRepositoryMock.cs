@@ -56,4 +56,11 @@ public static class PeopleRepositoryMock
                     It.IsAny<Expression<Func<Entities.Person, bool>>>()))
             .Returns(PersonStub.Person);
     }
+
+    public static void HaveBeenCalledDelete(
+        this ObjectAssertions objectAssertions, Times times)
+    {
+        Mock.Setup(repository => repository.Delete(It.IsAny<Entities.Person>()))
+            .Callback(BadBehavior);
+    }
 }

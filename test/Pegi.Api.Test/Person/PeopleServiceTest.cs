@@ -30,4 +30,15 @@ public class PeopleTest
         _peopleService.Should().HaveBeenCalledFind(Times.AtLeastOnce());
         person.Should().NotBeNull();
     }
+
+    [Test]
+    public void DeletePersonTest()
+    {
+        String response = _peopleService.DeletePerson(PersonStub.Person.Document!);
+        _peopleService.Should().HaveBeenCalledDelete(Times.AtLeastOnce());
+        response.Should().Be("se borro con exito");
+    }
+
+
+
 }

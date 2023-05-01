@@ -7,7 +7,7 @@ namespace Services;
 
 public class ProposalService
 {
-    private readonly IRepository<Proposal> _proposalRepository;
+        private readonly IRepository<Proposal> _proposalRepository;
 
     public ProposalService(IRepository<Proposal> proposalRepository)
     {

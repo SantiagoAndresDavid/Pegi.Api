@@ -51,16 +51,17 @@ public static class PeopleRepositoryMock
     public static void HaveBeenCalledFind(
         this ObjectAssertions objectAssertions, Times times)
     {
-        Mock.Setup(repository =>
-                repository.Find(
-                    It.IsAny<Expression<Func<Entities.Person, bool>>>()))
-            .Returns(PersonStub.Person);
+        Mock.Verify(repository =>
+            repository.Find(
+                It.IsAny<Expression<Func<Entities.Person, bool>>>()), times);
+
     }
 
     public static void HaveBeenCalledDelete(
         this ObjectAssertions objectAssertions, Times times)
     {
-        Mock.Setup(repository => repository.Delete(It.IsAny<Entities.Person>()))
-            .Callback(BadBehavior);
+        Mock.Verify(
+            repository => repository.Delete(It.IsAny<Entities.Person>()),times);
+
     }
 }

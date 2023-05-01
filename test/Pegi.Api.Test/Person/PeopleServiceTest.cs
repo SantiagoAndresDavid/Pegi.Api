@@ -1,9 +1,8 @@
-using Entities;
 using FluentAssertions;
 using Moq;
 using Services;
 
-namespace Pegi.Api.Test;
+namespace Pegi.Api.Test.Person;
 
 public class PeopleTest
 {
@@ -26,7 +25,7 @@ public class PeopleTest
     [Test]
     public void SearchPersonTest()
     {
-        Person? person = _peopleService.SearchPerson(PersonStub.Person.Document!);
+        Entities.Person? person = _peopleService.SearchPerson(PersonStub.Person.Document!);
         _peopleService.Should().HaveBeenCalledFind(Times.AtLeastOnce());
         person.Should().NotBeNull();
     }
@@ -38,7 +37,4 @@ public class PeopleTest
         _peopleService.Should().HaveBeenCalledDelete(Times.AtLeastOnce());
         response.Should().Be("se borro con exito");
     }
-
-
-
 }

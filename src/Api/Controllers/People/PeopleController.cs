@@ -22,6 +22,7 @@ public class PeopleController : ControllerBase
     }
 
         [HttpPost]
+        [Authorize(Roles = "Estudiante,Docente")]
         public ActionResult RegisterPeople(
             [FromBody] CreatePersonRequest createPersonRequest)
         {
@@ -39,7 +40,7 @@ public class PeopleController : ControllerBase
         }
 
     [HttpGet("{document}")]
-    [Authorize(Roles = ("Estudiante"))]
+    [Authorize(Roles = "Estudiante,Docente")]
     public ActionResult GetPerson([FromRoute] string document)
     {
         try
@@ -58,7 +59,7 @@ public class PeopleController : ControllerBase
     }
 
     [HttpDelete("{document}")]
-    [Authorize(Roles = ("Estudiante"))]
+    [Authorize(Roles = "Estudiante,Docente")]
     public ActionResult DeletePerson([FromRoute] string document)
     {
         try

@@ -2,6 +2,7 @@ using Api.Controllers.HistorialProposal;
 using Entities;
 using Entities.Exceptions;
 using Mapster;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Services;
 
@@ -20,6 +21,7 @@ public class HistorialProyectController : ControllerBase
     }
 
     [HttpPost("register-feedback")]
+    [Authorize(Roles = "Docente")]
     public ActionResult RegisterFeedback(
         [FromBody] ProyectFeedbackRequest proyectFeedbackRequest)
     {

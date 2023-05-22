@@ -39,6 +39,21 @@ public class ProposalService
         }
     }
 
+    public (string,bool?) UpdateStatusProposal(string code,string status)
+    {
+        try
+        {
+            Proposal? proposal = _proposalRepository.Find(proposal => proposal.Code == code);
+            proposal!.Status = status;
+            _proposalRepository.Update(proposal);
+            return ("se modifico con exito",true);
+        }
+        catch(AuthException e)
+        {
+            return ("error",false);
+        }
+    }
+
     public List<Proposal> GetProposalsDocument(string personDocument)
     {
         return _proposalRepository.Filter(proposal =>

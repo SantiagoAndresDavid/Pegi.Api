@@ -12,5 +12,5 @@ public class ProyectFeedBack
 
     [Column("status")] public string? Status { get; set; }
 
-    [Column("Score")] public string? Score { get; set; }
+    [Column("Score")] public int? Score { get; set; }
 }

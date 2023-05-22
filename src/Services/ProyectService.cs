@@ -26,11 +26,11 @@ public class ProyectService
         }
     }
 
-    public (string, bool?) UpdateProyect(Proyect proposal)
+    public (string, bool?) UpdateProyect(Proyect proyect)
     {
         try
         {
-            _proyectRepository.Update(proposal);
+            _proyectRepository.Update(proyect);
             return ("se actualizo con exito", true);
         }
         catch (AuthException e)
@@ -38,6 +38,23 @@ public class ProyectService
             return ("error", false);
         }
     }
+
+    public (string,bool?) UpdateStatusProyect(string code,string status,int? score)
+    {
+        try
+        {
+            Proyect? proyect = _proyectRepository.Find(proyect => proyect.Code == code);
+            proyect!.Status = status;
+            proyect!.Score = score;
+            _proyectRepository.Update(proyect);
+            return ("se modifico con exito",true);
+        }
+        catch(AuthException e)
+        {
+            return ("error",false);
+        }
+    }
+
 
     public List<Proyect> GetProyects(string personDocument)
     {

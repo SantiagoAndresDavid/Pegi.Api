@@ -12,13 +12,13 @@ public class HistorialProposalController : ControllerBase
 {
     private readonly HistoryProposalService _historyProposalService;
     private readonly ProposalFeedBackService _proposalFeedBackService;
+    private readonly ProposalService _proposalService;
 
-    public HistorialProposalController(
-        HistoryProposalService historyProposalService,
-        ProposalFeedBackService proposalFeedBackService)
+    public HistorialProposalController(HistoryProposalService historyProposalService, ProposalFeedBackService proposalFeedBackService, ProposalService proposalService)
     {
         _historyProposalService = historyProposalService;
         _proposalFeedBackService = proposalFeedBackService;
+        _proposalService = proposalService;
     }
 
     [HttpPost("register-feedback")]
@@ -35,6 +35,7 @@ public class HistorialProposalController : ControllerBase
                     proposalFeedBackRequest.ProposalCode);
             historialProposal.Code = Random.Shared.Next();
             _historyProposalService.SaveProposalHistory(historialProposal);
+            _proposalService.UpdateStatusProposal(historialProposal.ProposalCode,historialProposal.ProposalFeedBack.Status);
             return Ok(
                 new Response<HisotrialProposalResponse>(
                     historialProposal.Adapt<HisotrialProposalResponse>()));

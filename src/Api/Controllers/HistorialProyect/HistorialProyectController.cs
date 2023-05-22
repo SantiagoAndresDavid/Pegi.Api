@@ -12,11 +12,13 @@ public class HistorialProyectController : ControllerBase
 {
     private readonly ProyectFeedBackService _proyectFeedBackService;
     private readonly HistoryProyectService _historyProyectService;
+    private readonly ProyectService _proyectService;
 
-    public HistorialProyectController(ProyectFeedBackService proyectFeedBackService, HistoryProyectService historyProyectService)
+    public HistorialProyectController(ProyectFeedBackService proyectFeedBackService, HistoryProyectService historyProyectService, ProyectService proyectService)
     {
         _proyectFeedBackService = proyectFeedBackService;
         _historyProyectService = historyProyectService;
+        _proyectService = proyectService;
     }
 
     [HttpPost("register-feedback")]
@@ -33,6 +35,7 @@ public class HistorialProyectController : ControllerBase
                     proyectFeedbackRequest.ProyectCode);
             historialProyect.Code = Random.Shared.Next();
             _historyProyectService.SaveProyectlHistory(historialProyect);
+            _proyectService.UpdateStatusProyect(historialProyect.ProyectCode,proyectFeedbackRequest.Status,proyectFeedbackRequest.Score);
             return Ok(
                 new Response<HistorialProyectResponse>(
                     historialProyect.Adapt<HistorialProyectResponse>()));

@@ -8,7 +8,7 @@ public record PersonResponse(string Document,
     string SecondLastName,
     string CivilState,
     string Gender,
-    DateOnly BirthDate,
+    DateTime BirthDate,
     string Phone,
     string InstitutionalMail,
     string CitiesCode);

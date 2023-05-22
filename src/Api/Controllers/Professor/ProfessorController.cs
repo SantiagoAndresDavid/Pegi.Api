@@ -1,3 +1,4 @@
+using Api.Controllers.People;
 using Entities;
 using Entities.Exceptions;
 using Mapster;
@@ -47,7 +48,7 @@ public class ProfessorController : ControllerBase
             Entities.Professor? professor = _professorService.SearchProfessor(document);
             if(professor?.Document == null)
             {
-                return BadRequest(new Response<Void>("no se encontro a la persona"));
+                return BadRequest(new Response<Void>("No hay docente registrado con ese documento"));
             }
             return Ok(new Response<ProfessorResponse>(professor.Adapt<ProfessorResponse>()));
         }
@@ -56,6 +57,57 @@ public class ProfessorController : ControllerBase
             return BadRequest(new Response<Void>(e.Message));
         }
     }
+
+     [HttpGet("get-professor-position/{position}")]
+        public ActionResult GetProfessorByPosition([FromRoute] string position)
+        {
+            try
+            {
+                List<Entities.Professor> professors = _professorService.SearchProfessorByPosition(position);
+                if(professors.Count < 0)
+                {
+                    return BadRequest(new Response<Void>("No se pudo retornar una lista de docentes con esa posicion"));
+                }
+                List<Entities.Person> professorsResponses =
+                    new List<Entities.Person>();
+                foreach (Entities.Professor professor in professors)
+                {
+
+                    Person relatedPerson = _peopleService.SearchPerson(professor.Document);
+
+                    professorsResponses.Add(relatedPerson);
+                }
+
+                return Ok(new Response<List<PersonResponse>>(
+                    professorsResponses?.Adapt<List<PersonResponse>>()));
+            }
+            catch (PersonExeption e)
+            {
+                return BadRequest(new Response<Void>(e.Message));
+            }
+        }
+
+        [HttpGet]
+        public ActionResult GetAllProfessors()
+        {
+            try
+            {
+                List<Entities.Professor> professors =
+                    _professorService.GetAllProfessors();
+                if (professors.Count < 0)
+                {
+                    return BadRequest(
+                        new Response<Void>("No se pudo retornar una lista de docentes"));
+                }
+
+                return Ok(new Response<List<ProfessorResponse>>(
+                    professors?.Adapt<List<ProfessorResponse>>()));
+            }
+            catch (PersonExeption e)
+            {
+                return BadRequest(new Response<Void>(e.Message));
+            }
+        }
 
 
 }

@@ -32,5 +32,17 @@ public class ProfessorService
             professor.Document == document);
     }
 
+    public List<Professor> SearchProfessorByPosition(string position)
+    {
+        return _professorRepository.Filter(professor =>
+            professor.Position != null &&
+            professor.Position == position);
+    }
+
+    public List<Professor> GetAllProfessors()
+    {
+        return _professorRepository.GetAll();
+    }
+
 
 }

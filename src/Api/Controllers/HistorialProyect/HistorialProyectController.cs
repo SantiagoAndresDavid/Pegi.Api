@@ -47,4 +47,25 @@ public class HistorialProyectController : ControllerBase
             return BadRequest(new Response<Void>(exeption.Message));
         }
     }
+
+    [HttpGet("{proyectCode}")]
+    public ActionResult GetHistoryProyect([FromRoute] string proyectCode)
+    {
+        try
+        {
+            List<HistoryProyect> historyProyects = _historyProyectService.SearchProyectHistory(proyectCode);
+            if (historyProyects.Count <= 0)
+            {
+                return BadRequest(
+                    new Response<Void>("no tiene experiencias registradas en proyecto"));
+            }
+            return Ok(
+                new Response<List<HistorialProyectResponse>>(
+                    historyProyects.Adapt<List<HistorialProyectResponse>>()));
+        }
+        catch (ExperienceExeption e)
+        {
+            return BadRequest(new Response<Void>(e.Message));
+        }
+    }
 }

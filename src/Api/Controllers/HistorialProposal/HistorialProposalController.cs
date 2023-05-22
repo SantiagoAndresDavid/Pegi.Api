@@ -57,7 +57,7 @@ public class HistorialProposalController : ControllerBase
             if (historyProposals.Count <= 0)
             {
                 return BadRequest(
-                    new Response<Void>("no tiene experiencias registradas"));
+                    new Response<Void>("no tiene experiencias registradas en propuesta"));
             }
             return Ok(
                 new Response<List<HisotrialProposalResponse>>(

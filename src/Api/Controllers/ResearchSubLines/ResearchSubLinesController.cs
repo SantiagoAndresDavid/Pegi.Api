@@ -1,3 +1,4 @@
+using Api.Controllers.ResearchLines;
 using Api.Controllers.ThematicAreas;
 using Entities;
 using Entities.Exceptions;
@@ -19,6 +20,22 @@ public class ResearchSubLinesController : ControllerBase
         _researchSubLineService = researchSubLineService;
     }
 
+    [HttpPost]
+    public ActionResult RegisterSublinesInvestigation(
+        [FromBody] CreateSubLineRequest createSublineRequest)
+    {
+        try
+        {
+            var    subline = createSublineRequest.Adapt<ResearchSubline>();
+            string message = _researchSubLineService.SaveSubline(subline);
+            return Ok(new Response<Void>(message, false));
+        }
+        catch (Exception e)
+        {
+            return BadRequest(new Response<Void>(e.Message));
+        }
+    }
+
     [HttpGet("{code}")]
     public ActionResult GetResearchSubLine([FromRoute] string code)
     {
@@ -33,7 +50,7 @@ public class ResearchSubLinesController : ControllerBase
         catch (Exception e)
         {
             return BadRequest(
-                new Response<Void>("no se encontraron sublineas asociadas a esta linea"));
+                new Response<Void>("No se encontraron sublineas asociadas a esa linea"));
         }
 
     }
@@ -51,7 +68,7 @@ public class ResearchSubLinesController : ControllerBase
         catch (Exception e)
         {
              return BadRequest(
-                            new Response<Void>("no se encontraron sublineas"));
+                            new Response<Void>("No se encontraron sublineas de investigacion"));
         }
 
     }

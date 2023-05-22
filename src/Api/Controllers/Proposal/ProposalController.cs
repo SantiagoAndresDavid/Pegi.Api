@@ -40,7 +40,7 @@ public class ProposalController : ControllerBase
                 _proposalService.SaveProposal(newProposal);
             }
 
-            return Ok(new Response<Void>("se ha guardado con exito",
+            return Ok(new Response<Void>("Propuesta registrada con exito",
                 false));
         }
         catch (PersonExeption exeption)
@@ -60,7 +60,7 @@ public class ProposalController : ControllerBase
             if (proposals.Count == 0)
             {
                 return BadRequest(
-                    new Response<Void>("no se encontro ninguna propuesta"));
+                    new Response<Void>("No existen propuestas registradas con ese documento"));
             }
 
             return Ok(new Response<List<ProposalResponse>>(
@@ -84,7 +84,7 @@ public class ProposalController : ControllerBase
             if (proposal == null)
             {
                 return BadRequest(
-                    new Response<Void>("no se encontro a la propuesta"));
+                    new Response<Void>("No existe propuesta registrada con ese codigo"));
             }
 
             return Ok(
@@ -107,7 +107,7 @@ public class ProposalController : ControllerBase
             if (proposals.Count < 0)
             {
                 return BadRequest(
-                    new Response<Void>("no se encontro ninguna propuesta"));
+                    new Response<Void>("No se pudo retornar una lista de propuesta"));
             }
 
             return Ok(new Response<List<ProposalResponse>>(

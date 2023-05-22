@@ -16,6 +16,22 @@ public class ResearchLinesController : ControllerBase
         _researchLineService = researchLineService;
     }
 
+    [HttpPost]
+    public ActionResult RegisterResearchLine(
+        [FromBody] CreateLineRequest createLineRequest)
+    {
+        try
+        {
+            var    line    = createLineRequest.Adapt<ResearchLine>();
+            string message = _researchLineService.SaveLine(line);
+            return Ok(new Response<Void>(message, false));
+        }
+        catch (Exception e)
+        {
+            return BadRequest(new Response<Void>(e.Message));
+        }
+    }
+
     [HttpGet("{code}")]
     public ActionResult GetResearchLine([FromRoute] string code)
     {
@@ -24,7 +40,7 @@ public class ResearchLinesController : ControllerBase
         if (researchLine!.Code == null)
         {
             return BadRequest(
-                new Response<Void>("no se encontraron areas tematicas"));
+                new Response<Void>("No se encontro linea de investigacion con ese codigo "));
         }else
         {
             return Ok(
@@ -41,7 +57,7 @@ public class ResearchLinesController : ControllerBase
         if (researchLines.Count < 0)
         {
             return BadRequest(
-                new Response<Void>("no se encontraron areas tematicas"));
+                new Response<Void>("No se encontraron lineas de investigacion"));
         }
 
         return Ok(new Response<List<ResearchLinesResponse>>(

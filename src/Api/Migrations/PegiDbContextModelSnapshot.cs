@@ -170,8 +170,8 @@ namespace Api.Migrations
                         .HasColumnType("text")
                         .HasColumnName("document");
 
-                    b.Property<DateOnly?>("BirthDate")
-                        .HasColumnType("date")
+                    b.Property<DateTime?>("BirthDate")
+                        .HasColumnType("timestamp with time zone")
                         .HasColumnName("person_birth_date");
 
                     b.Property<string>("CitiesCode")

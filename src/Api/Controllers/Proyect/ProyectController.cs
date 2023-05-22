@@ -48,7 +48,7 @@ public class ProyectController : ControllerBase
     }
 
     [HttpGet("get-proyect-document{document}")]
-    [Authorize(Roles = ("Estudiante"))]
+    [Authorize(Roles = "Estudiante,Docente")]
     public ActionResult GetProyects([FromRoute] string document)
     {
         try
@@ -71,7 +71,7 @@ public class ProyectController : ControllerBase
     }
 
     [HttpGet("get-proyect-code/{code}")]
-    [Authorize(Roles = ("Estudiante"))]
+    [Authorize(Roles = "Estudiante,Docente")]
     public ActionResult GetProyectCode([FromRoute] string code)
     {
         try

@@ -50,7 +50,7 @@ public class ProposalController : ControllerBase
     }
 
     [HttpGet("get-proposals-document/{document}")]
-    [Authorize(Roles = ("Estudiante"))]
+    [Authorize(Roles = "Estudiante,Docente")]
     public ActionResult GetProposalsDocument([FromRoute] string document)
     {
         try
@@ -74,7 +74,7 @@ public class ProposalController : ControllerBase
 
     //
     [HttpGet("get-proposal-code/{code}")]
-    [Authorize(Roles = ("Estudiante"))]
+    [Authorize(Roles = "Estudiante,Docente")]
     public ActionResult GetProposalCode([FromRoute] string code)
     {
         try

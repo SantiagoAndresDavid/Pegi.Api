@@ -1,4 +1,6 @@
 ﻿namespace Api.Controllers.ResearchLines;
 
-public record CreateSubLineRequest(string Name,
+public record CreateSubLineRequest(
+    string Code,
+    string Name,
     int LineCode);

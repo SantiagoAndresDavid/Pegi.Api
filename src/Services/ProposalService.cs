@@ -116,12 +116,19 @@ public class ProposalService
         return filterListProposal(proposals);;
     }
 
+   public object GeneralStatisticsProposalStudent(string personDocument)
+   {
+       List<Proposal> proposals = _proposalRepository.Filter(proposal =>
+           proposal.PersonDocument != null &&
+           proposal.PersonDocument == personDocument);
+       return filterListProposal(proposals);;
+   }
+
     public object GeneralStatisticsProposals()
     {
         List<Proposal> proposals = _proposalRepository.GetAll();
         return  filterListProposal(proposals);
     }
-
 
     public List<Proposal> GetProposalsProfessorDocument(string personDocument)
     {

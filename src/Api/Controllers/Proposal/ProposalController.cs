@@ -117,6 +117,28 @@ public class ProposalController : ControllerBase
         }
     }
 
+    [HttpGet("general-statistics-proposal-student/{document}")]
+    [Authorize(Roles = "Docente")]
+    public ActionResult GetGeneralStatisticsProposalStudent([FromRoute] string document)
+    {
+        try
+        {
+            object statistics =
+                _proposalService.GeneralStatisticsProposalStudent(document);
+            if (statistics == null)
+            {
+                return BadRequest(
+                    new Response<Void>("No hay estadisticas para este docente"));
+            }
+
+            return Ok(new Response<object>(statistics));
+        }
+        catch (PersonExeption e)
+        {
+            return BadRequest(new Response<Void>(e.Message));
+        }
+    }
+
     [HttpGet("general-statistics-proposal")]
     [Authorize(Roles = "Docente")]
     public ActionResult GetGeneralStatisticsProposals()

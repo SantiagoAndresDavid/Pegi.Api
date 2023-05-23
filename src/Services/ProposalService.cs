@@ -76,14 +76,10 @@ public class ProposalService
             proposal.PersonDocument == personDocument);
     }
 
-    public object GeneralStatisticsProposalProfessor(string personDocument)
+
+    public object filterListProposal(List<Proposal> proposals)
     {
-        List<Proposal> proposals = _proposalRepository.Filter(proposal =>
-            proposal.ProfessorDocument != null &&
-            proposal.ProfessorDocument == personDocument);
-
         int pendiente = 0, aprobada = 0, corregir = 0, rechazada = 0;
-
         foreach (Proposal p in proposals)
         {
             if (p.Status == "aprobada")
@@ -102,7 +98,6 @@ public class ProposalService
             {
                 rechazada++;
             }
-
         }
         var statistics = new
         {
@@ -113,41 +108,18 @@ public class ProposalService
         };
         return statistics;
     }
+   public object GeneralStatisticsProposalProfessor(string personDocument)
+    {
+        List<Proposal> proposals = _proposalRepository.Filter(proposal =>
+            proposal.ProfessorDocument != null &&
+            proposal.ProfessorDocument == personDocument);
+        return filterListProposal(proposals);;
+    }
 
     public object GeneralStatisticsProposals()
     {
         List<Proposal> proposals = _proposalRepository.GetAll();
-
-        int pendiente = 0, aprobada = 0, corregir = 0, rechazada = 0;
-
-        foreach (Proposal p in proposals)
-        {
-            if (p.Status == "aprobada")
-            {
-                aprobada++;
-            }
-            if (p.Status == "pendiente")
-            {
-                pendiente++;
-            }
-            if (p.Status == "corregir")
-            {
-                corregir++;
-            }
-            if (p.Status == "rechazada")
-            {
-                rechazada++;
-            }
-
-        }
-        var statistics = new
-        {
-            Pendiente = pendiente,
-            Rechazada = rechazada,
-            Aprobada = aprobada,
-            Corregir = corregir
-        };
-        return statistics;
+        return  filterListProposal(proposals);
     }
 
 

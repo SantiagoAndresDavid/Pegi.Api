@@ -11,6 +11,10 @@ public class Proposal
     [ForeignKey("PersonDocument")]
     public Student? Student { get; set; }
 
+    public string? ProfessorDocument { get; set; }
+    [ForeignKey("ProfessorDocument")]
+    public Professor? Professor { get; set; }
+
 
     [Column("title")] public string? Title { get; set; }
     [Column("date")] public DateTime? Date { get; set; }

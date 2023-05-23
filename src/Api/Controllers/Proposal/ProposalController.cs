@@ -72,6 +72,73 @@ public class ProposalController : ControllerBase
         }
     }
 
+    [HttpGet("get-proposals-professor/{document}")]
+    [Authorize(Roles = "Docente")]
+    public ActionResult GetProposalsProfessorDocument([FromRoute] string document)
+    {
+        try
+        {
+            List<Entities.Proposal> proposals =
+                _proposalService.GetProposalsProfessorDocument(document);
+            if (proposals.Count < 0)
+            {
+                return BadRequest(
+                    new Response<Void>("No existen propuestas registradas con ese documento"));
+            }
+
+            return Ok(new Response<List<ProposalResponse>>(
+                proposals?.Adapt<List<ProposalResponse>>()));
+        }
+        catch (PersonExeption e)
+        {
+            return BadRequest(new Response<Void>(e.Message));
+        }
+    }
+
+    [HttpGet("general-statistics-proposal-professor/{document}")]
+    [Authorize(Roles = "Docente")]
+    public ActionResult GetGeneralStatisticsProposalProfessor([FromRoute] string document)
+    {
+        try
+        {
+           object statistics =
+                _proposalService.GeneralStatisticsProposalProfessor(document);
+            if (statistics == null)
+            {
+                return BadRequest(
+                    new Response<Void>("No hay estadisticas para este docente"));
+            }
+
+            return Ok(new Response<object>(statistics));
+        }
+        catch (PersonExeption e)
+        {
+            return BadRequest(new Response<Void>(e.Message));
+        }
+    }
+
+    [HttpGet("general-statistics-proposal")]
+    [Authorize(Roles = "Docente")]
+    public ActionResult GetGeneralStatisticsProposals()
+    {
+        try
+        {
+            object statistics =
+                _proposalService.GeneralStatisticsProposals();
+            if (statistics == null)
+            {
+                return BadRequest(
+                    new Response<Void>("No hay estadisticas"));
+            }
+
+            return Ok(new Response<object>(statistics));
+        }
+        catch (PersonExeption e)
+        {
+            return BadRequest(new Response<Void>(e.Message));
+        }
+    }
+
     //
     [HttpGet("get-proposal-code/{code}")]
     [Authorize(Roles = "Estudiante,Docente")]
@@ -90,6 +157,29 @@ public class ProposalController : ControllerBase
             return Ok(
                 new Response<ProposalResponse>(
                     proposal.Adapt<ProposalResponse>()));
+        }
+        catch (PersonExeption e)
+        {
+            return BadRequest(new Response<Void>(e.Message));
+        }
+    }
+
+    [HttpGet("update-professor-proposal/{code}")]
+    [Authorize(Roles = "Docente")]
+    public ActionResult UpdateProfessorProposal([FromRoute] string code,string document)
+    {
+        try
+        {
+            var (message,response)= _proposalService.UpdateProfessorDocumentProposal(code,document);
+            if (response == false )
+            {
+                return BadRequest(
+                    new Response<Void>(message));
+
+            }
+
+             return Ok(new Response<Void>(message));
+
         }
         catch (PersonExeption e)
         {

@@ -54,11 +54,108 @@ public class ProposalService
         }
     }
 
+    public (string,bool?) UpdateProfessorDocumentProposal(string code,string document)
+    {
+        try
+        {
+            Proposal? proposal = _proposalRepository.Find(proposal => proposal.Code == code);
+            proposal!.ProfessorDocument = document;
+            _proposalRepository.Update(proposal);
+            return ("se asigno con exito al docente en la propuesta",true);
+        }
+        catch(AuthException e)
+        {
+            return ("error al asignar docente en la propuesta",false);
+        }
+    }
+
     public List<Proposal> GetProposalsDocument(string personDocument)
     {
         return _proposalRepository.Filter(proposal =>
             proposal.PersonDocument != null &&
             proposal.PersonDocument == personDocument);
+    }
+
+    public object GeneralStatisticsProposalProfessor(string personDocument)
+    {
+        List<Proposal> proposals = _proposalRepository.Filter(proposal =>
+            proposal.ProfessorDocument != null &&
+            proposal.ProfessorDocument == personDocument);
+
+        int pendiente = 0, aprobada = 0, corregir = 0, rechazada = 0;
+
+        foreach (Proposal p in proposals)
+        {
+            if (p.Status == "aprobada")
+            {
+                aprobada++;
+            }
+            if (p.Status == "pendiente")
+            {
+                pendiente++;
+            }
+            if (p.Status == "corregir")
+            {
+                corregir++;
+            }
+            if (p.Status == "rechazada")
+            {
+                rechazada++;
+            }
+
+        }
+        var statistics = new
+        {
+            Pendiente = pendiente,
+            Rechazada = rechazada,
+            Aprobada = aprobada,
+            Corregir = corregir
+        };
+        return statistics;
+    }
+
+    public object GeneralStatisticsProposals()
+    {
+        List<Proposal> proposals = _proposalRepository.GetAll();
+
+        int pendiente = 0, aprobada = 0, corregir = 0, rechazada = 0;
+
+        foreach (Proposal p in proposals)
+        {
+            if (p.Status == "aprobada")
+            {
+                aprobada++;
+            }
+            if (p.Status == "pendiente")
+            {
+                pendiente++;
+            }
+            if (p.Status == "corregir")
+            {
+                corregir++;
+            }
+            if (p.Status == "rechazada")
+            {
+                rechazada++;
+            }
+
+        }
+        var statistics = new
+        {
+            Pendiente = pendiente,
+            Rechazada = rechazada,
+            Aprobada = aprobada,
+            Corregir = corregir
+        };
+        return statistics;
+    }
+
+
+    public List<Proposal> GetProposalsProfessorDocument(string personDocument)
+    {
+        return _proposalRepository.Filter(proposal =>
+            proposal.ProfessorDocument != null &&
+            proposal.ProfessorDocument == personDocument);
     }
 
 

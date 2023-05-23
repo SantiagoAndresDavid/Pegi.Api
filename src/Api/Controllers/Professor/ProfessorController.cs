@@ -59,33 +59,34 @@ public class ProfessorController : ControllerBase
     }
 
      [HttpGet("get-professor-position/{position}")]
-        public ActionResult GetProfessorByPosition([FromRoute] string position)
-        {
-            try
-            {
-                List<Entities.Professor> professors = _professorService.SearchProfessorByPosition(position);
-                if(professors.Count < 0)
-                {
-                    return BadRequest(new Response<Void>("No se pudo retornar una lista de docentes con esa posicion"));
-                }
-                List<Entities.Person> professorsResponses =
-                    new List<Entities.Person>();
-                foreach (Entities.Professor professor in professors)
-                {
+     public ActionResult GetProfessorByPosition([FromRoute] string position)
+     {
+         try
+         {
+             List<Entities.Professor> professors = _professorService.SearchProfessorByPosition(position);
+             if (professors.Count == 0)
+             {
+                 return BadRequest(new Response<Void>("No se encontraron profesores con esa posición"));
+             }
 
-                    Person relatedPerson = _peopleService.SearchPerson(professor.Document);
+             List<PersonResponse> professorResponses = new List<PersonResponse>();
 
-                    professorsResponses.Add(relatedPerson);
-                }
+             foreach (Entities.Professor professor in professors)
+             {
+                 Person relatedPerson = _peopleService.SearchPerson(professor.Document);
+                 if (relatedPerson != null)
+                 {
+                     professorResponses.Add(relatedPerson.Adapt<PersonResponse>());
+                 }
+             }
 
-                return Ok(new Response<List<PersonResponse>>(
-                    professorsResponses?.Adapt<List<PersonResponse>>()));
-            }
-            catch (PersonExeption e)
-            {
-                return BadRequest(new Response<Void>(e.Message));
-            }
-        }
+             return Ok(new Response<List<PersonResponse>>(professorResponses));
+         }
+         catch (PersonExeption e)
+         {
+             return BadRequest(new Response<Void>(e.Message));
+         }
+     }
 
         [HttpGet]
         public ActionResult GetAllProfessors()

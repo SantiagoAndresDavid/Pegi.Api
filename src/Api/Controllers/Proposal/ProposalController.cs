@@ -57,7 +57,7 @@ public class ProposalController : ControllerBase
         {
             List<Entities.Proposal> proposals =
                 _proposalService.GetProposalsDocument(document);
-            if (proposals.Count == 0)
+            if (proposals.Count < 0)
             {
                 return BadRequest(
                     new Response<Void>("No existen propuestas registradas con ese documento"));

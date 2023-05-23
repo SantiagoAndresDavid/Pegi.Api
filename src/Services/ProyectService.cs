@@ -55,12 +55,34 @@ public class ProyectService
         }
     }
 
+    public (string,bool?) UpdateProfessorDocumentProyect(string code,string document)
+    {
+        try
+        {
+            Proyect? proyect = _proyectRepository.Find(proyect => proyect.Code == code);
+            proyect!.ProfessorDocument = document;
+            _proyectRepository.Update(proyect);
+            return ("se asigno con exito al docente en el proyecto",true);
+        }
+        catch(AuthException e)
+        {
+            return ("error al asignar docente al proyecto",false);
+        }
+    }
+
 
     public List<Proyect> GetProyects(string personDocument)
     {
         return _proyectRepository.Filter(proyect =>
             proyect.PersonDocument != null &&
             proyect.PersonDocument == personDocument);
+    }
+
+    public List<Proyect> GetProyectsProfessorDocument(string personDocument)
+    {
+        return _proyectRepository.Filter(proyect =>
+            proyect.ProfessorDocument != null &&
+            proyect.ProfessorDocument == personDocument);
     }
 
     public Proyect? SearchProyect(string personDocument)
@@ -95,5 +117,80 @@ public class ProyectService
     {
         return _proyectRepository.Find(proyect => proyect.Code == code);
     }
+
+    public object GeneralStatisticsProyectProfessor(string personDocument)
+    {
+        List<Proyect> proyects = _proyectRepository.Filter(proyect =>
+            proyect.ProfessorDocument != null &&
+            proyect.ProfessorDocument == personDocument);
+
+        int pendiente = 0, aprobada = 0, corregir = 0, rechazada = 0;
+
+        foreach (Proyect p in proyects)
+        {
+            if (p.Status == "aprobada")
+            {
+                aprobada++;
+            }
+            if (p.Status == "pendiente")
+            {
+                pendiente++;
+            }
+            if (p.Status == "corregir")
+            {
+                corregir++;
+            }
+            if (p.Status == "rechazada")
+            {
+                rechazada++;
+            }
+
+        }
+        var statistics = new
+        {
+            Pendiente = pendiente,
+            Rechazada = rechazada,
+            Aprobada = aprobada,
+            Corregir = corregir
+        };
+        return statistics;
+    }
+
+    public object GeneralStatisticsProyects()
+    {
+        List<Proyect> proyects = _proyectRepository.GetAll();
+
+        int pendiente = 0, aprobada = 0, corregir = 0, rechazada = 0;
+
+        foreach (Proyect p in proyects)
+        {
+            if (p.Status == "aprobada")
+            {
+                aprobada++;
+            }
+            if (p.Status == "pendiente")
+            {
+                pendiente++;
+            }
+            if (p.Status == "corregir")
+            {
+                corregir++;
+            }
+            if (p.Status == "rechazada")
+            {
+                rechazada++;
+            }
+
+        }
+        var statistics = new
+        {
+            Pendiente = pendiente,
+            Rechazada = rechazada,
+            Aprobada = aprobada,
+            Corregir = corregir
+        };
+        return statistics;
+    }
+
 
 }

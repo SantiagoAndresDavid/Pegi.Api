@@ -10,6 +10,10 @@ public class Proyect
     public string? PersonDocument { get; set; }
     [ForeignKey("PersonDocument")] public Student? Student { get; set; }
 
+    public string? ProfessorDocument { get; set; }
+    [ForeignKey("ProfessorDocument")]
+    public Professor? Professor { get; set; }
+
     [Column("Content")] public string? Content { get; set; }
     [Column("Status")] public string? Status { get; set; }
     [Column("Score")] public int? Score { get; set; }

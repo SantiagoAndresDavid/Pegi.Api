@@ -70,6 +70,29 @@ public class ProyectController : ControllerBase
         }
     }
 
+    [HttpGet("get-proyect-professor/{document}")]
+    [Authorize(Roles = "Docente")]
+    public ActionResult GetProyectsProfessorDocument([FromRoute] string document)
+    {
+        try
+        {
+            List<Entities.Proyect> proyects =
+                _proyectService.GetProyectsProfessorDocument(document);
+            if (proyects.Count < 0)
+            {
+                return BadRequest(
+                    new Response<Void>("No existen propuestas registradas con ese documento"));
+            }
+
+            return Ok(new Response<List<ProyectResponse>>(
+                proyects?.Adapt<List<ProyectResponse>>()));
+        }
+        catch (PersonExeption e)
+        {
+            return BadRequest(new Response<Void>(e.Message));
+        }
+    }
+
     [HttpGet("get-proyect-code/{code}")]
     [Authorize(Roles = "Estudiante,Docente")]
     public ActionResult GetProyectCode([FromRoute] string code)
@@ -87,6 +110,29 @@ public class ProyectController : ControllerBase
             return Ok(
                 new Response<ProyectResponse>(
                     proyect.Adapt<ProyectResponse>()));
+        }
+        catch (PersonExeption e)
+        {
+            return BadRequest(new Response<Void>(e.Message));
+        }
+    }
+
+    [HttpGet("update-professor-proyect/{code}")]
+    [Authorize(Roles = "Docente")]
+    public ActionResult UpdateProfessorProyect([FromRoute] string code,string document)
+    {
+        try
+        {
+            var (message,response)= _proyectService.UpdateProfessorDocumentProyect(code,document);
+            if (response == false )
+            {
+                return BadRequest(
+                    new Response<Void>(message));
+
+            }
+
+            return Ok(new Response<Void>(message));
+
         }
         catch (PersonExeption e)
         {
@@ -127,6 +173,50 @@ public class ProyectController : ControllerBase
             return Ok(new Response<Void>(message, false));
         }
         catch (Exception e)
+        {
+            return BadRequest(new Response<Void>(e.Message));
+        }
+    }
+
+    [HttpGet("general-statistics-proposal-proyect/{document}")]
+    [Authorize(Roles = "Docente")]
+    public ActionResult GetGeneralStatisticsProposalProfessor([FromRoute] string document)
+    {
+        try
+        {
+            object statistics =
+                _proyectService.GeneralStatisticsProyectProfessor(document);
+            if (statistics == null)
+            {
+                return BadRequest(
+                    new Response<Void>("No hay estadisticas para este docente"));
+            }
+
+            return Ok(new Response<object>(statistics));
+        }
+        catch (PersonExeption e)
+        {
+            return BadRequest(new Response<Void>(e.Message));
+        }
+    }
+
+    [HttpGet("general-statistics-proyect")]
+    [Authorize(Roles = "Docente")]
+    public ActionResult GetGeneralStatisticsProposals()
+    {
+        try
+        {
+            object statistics =
+                _proyectService.GeneralStatisticsProyects();
+            if (statistics == null)
+            {
+                return BadRequest(
+                    new Response<Void>("No hay estadisticas"));
+            }
+
+            return Ok(new Response<object>(statistics));
+        }
+        catch (PersonExeption e)
         {
             return BadRequest(new Response<Void>(e.Message));
         }

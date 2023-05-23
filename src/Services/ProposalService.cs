@@ -113,7 +113,7 @@ public class ProposalService
         List<Proposal> proposals = _proposalRepository.Filter(proposal =>
             proposal.ProfessorDocument != null &&
             proposal.ProfessorDocument == personDocument);
-        return filterListProposal(proposals);;
+        return filterListProposal(proposals);
     }
 
    public object GeneralStatisticsProposalStudent(string personDocument)
@@ -121,7 +121,7 @@ public class ProposalService
        List<Proposal> proposals = _proposalRepository.Filter(proposal =>
            proposal.PersonDocument != null &&
            proposal.PersonDocument == personDocument);
-       return filterListProposal(proposals);;
+       return filterListProposal(proposals);
    }
 
     public object GeneralStatisticsProposals()

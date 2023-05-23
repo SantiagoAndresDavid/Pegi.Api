@@ -179,7 +179,7 @@ public class ProyectController : ControllerBase
     }
 
     [HttpGet("general-statistics-proposal-proyect/{document}")]
-    [Authorize(Roles = "Docente")]
+    //[Authorize(Roles = "Docente")]
     public ActionResult GetGeneralStatisticsProposalProfessor([FromRoute] string document)
     {
         try
@@ -200,8 +200,30 @@ public class ProyectController : ControllerBase
         }
     }
 
+    [HttpGet("general-statistics-proposal-student/{document}")]
+    //[Authorize(Roles = "Docente")]
+    public ActionResult GetGeneralStatisticsProposalStudent([FromRoute] string document)
+    {
+        try
+        {
+            object statistics =
+                _proyectService.GeneralStatisticsProyectStudent(document);
+            if (statistics == null)
+            {
+                return BadRequest(
+                    new Response<Void>("No hay estadisticas para este docente"));
+            }
+
+            return Ok(new Response<object>(statistics));
+        }
+        catch (PersonExeption e)
+        {
+            return BadRequest(new Response<Void>(e.Message));
+        }
+    }
+
     [HttpGet("general-statistics-proyect")]
-    [Authorize(Roles = "Docente")]
+    //[Authorize(Roles = "Docente")]
     public ActionResult GetGeneralStatisticsProposals()
     {
         try

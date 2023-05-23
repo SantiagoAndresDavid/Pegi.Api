@@ -118,15 +118,10 @@ public class ProyectService
         return _proyectRepository.Find(proyect => proyect.Code == code);
     }
 
-    public object GeneralStatisticsProyectProfessor(string personDocument)
+    public object filterListProposal(List<Proyect> proyect)
     {
-        List<Proyect> proyects = _proyectRepository.Filter(proyect =>
-            proyect.ProfessorDocument != null &&
-            proyect.ProfessorDocument == personDocument);
-
         int pendiente = 0, aprobada = 0, corregir = 0, rechazada = 0;
-
-        foreach (Proyect p in proyects)
+        foreach (Proyect p in proyect)
         {
             if (p.Status == "aprobada")
             {
@@ -144,7 +139,6 @@ public class ProyectService
             {
                 rechazada++;
             }
-
         }
         var statistics = new
         {
@@ -155,41 +149,26 @@ public class ProyectService
         };
         return statistics;
     }
+    public object GeneralStatisticsProyectProfessor(string personDocument)
+    {
+        List<Proyect> proyects = _proyectRepository.Filter(proyect =>
+            proyect.ProfessorDocument != null &&
+            proyect.ProfessorDocument == personDocument);
+        return filterListProposal(proyects);
+    }
+
+    public object GeneralStatisticsProyectStudent(string personDocument)
+    {
+        List<Proyect> proyects = _proyectRepository.Filter(proyect =>
+            proyect.PersonDocument != null &&
+            proyect.PersonDocument == personDocument);
+        return filterListProposal(proyects);
+    }
 
     public object GeneralStatisticsProyects()
     {
         List<Proyect> proyects = _proyectRepository.GetAll();
-
-        int pendiente = 0, aprobada = 0, corregir = 0, rechazada = 0;
-
-        foreach (Proyect p in proyects)
-        {
-            if (p.Status == "aprobada")
-            {
-                aprobada++;
-            }
-            if (p.Status == "pendiente")
-            {
-                pendiente++;
-            }
-            if (p.Status == "corregir")
-            {
-                corregir++;
-            }
-            if (p.Status == "rechazada")
-            {
-                rechazada++;
-            }
-
-        }
-        var statistics = new
-        {
-            Pendiente = pendiente,
-            Rechazada = rechazada,
-            Aprobada = aprobada,
-            Corregir = corregir
-        };
-        return statistics;
+        return filterListProposal(proyects);
     }
 
 

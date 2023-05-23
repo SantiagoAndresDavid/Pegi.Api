@@ -3,4 +3,4 @@
 public record CreateSubLineRequest(
     string Code,
     string Name,
-    int LineCode);
+    string LineCode);

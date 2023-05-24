@@ -20,7 +20,7 @@ public class ProposalController : ControllerBase
     }
 
     [HttpPost]
-    //[Authorize(Roles = ("Estudiante"))]
+    [Authorize(Roles = ("Estudiante"))]
     public ActionResult RegisterProposal(
         [FromBody] ProposalRequest proposalRequest)
     {
@@ -161,7 +161,7 @@ public class ProposalController : ControllerBase
         }
     }
 
-    //
+
     [HttpGet("get-proposal-code/{code}")]
     [Authorize(Roles = "Estudiante,Docente")]
     public ActionResult GetProposalCode([FromRoute] string code)

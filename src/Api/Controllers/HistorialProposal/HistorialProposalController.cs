@@ -15,7 +15,10 @@ public class HistorialProposalController : ControllerBase
     private readonly ProposalFeedBackService _proposalFeedBackService;
     private readonly ProposalService _proposalService;
 
-    public HistorialProposalController(HistoryProposalService historyProposalService, ProposalFeedBackService proposalFeedBackService, ProposalService proposalService)
+    public HistorialProposalController(
+        HistoryProposalService historyProposalService,
+        ProposalFeedBackService proposalFeedBackService,
+        ProposalService proposalService)
     {
         _historyProposalService = historyProposalService;
         _proposalFeedBackService = proposalFeedBackService;
@@ -37,7 +40,9 @@ public class HistorialProposalController : ControllerBase
                     proposalFeedBackRequest.ProposalCode);
             historialProposal.Code = Random.Shared.Next();
             _historyProposalService.SaveProposalHistory(historialProposal);
-            _proposalService.UpdateStatusProposal(historialProposal.ProposalCode,historialProposal.ProposalFeedBack.Status);
+            _proposalService.UpdateStatusProposal(
+                historialProposal.ProposalCode,
+                historialProposal.ProposalFeedBack.Status);
             return Ok(
                 new Response<HisotrialProposalResponse>(
                     historialProposal.Adapt<HisotrialProposalResponse>()));
@@ -53,12 +58,21 @@ public class HistorialProposalController : ControllerBase
     {
         try
         {
-            List<HistoryProposals> historyProposals = _historyProposalService.SearchHistoryProposal(proposalCode);
+            List<HistoryProposals> historyProposals =
+                _historyProposalService.SearchHistoryProposal(proposalCode);
+            foreach (var historyProposal in historyProposals)
+            {
+                historyProposal.ProposalFeedBack =
+                    _proposalFeedBackService.GetProposalFeedBackCode(
+                        historyProposal.PorposalFeedBackCode);
+            }
             if (historyProposals.Count <= 0)
             {
                 return BadRequest(
-                    new Response<Void>("no tiene experiencias registradas en propuesta"));
+                    new Response<Void>(
+                        "no tiene experiencias registradas en propuesta"));
             }
+
             return Ok(
                 new Response<List<HisotrialProposalResponse>>(
                     historyProposals.Adapt<List<HisotrialProposalResponse>>()));

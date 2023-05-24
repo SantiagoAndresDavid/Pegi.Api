@@ -20,7 +20,7 @@ public class ProposalController : ControllerBase
     }
 
     [HttpPost]
-    [Authorize(Roles = ("Estudiante"))]
+    //[Authorize(Roles = ("Estudiante"))]
     public ActionResult RegisterProposal(
         [FromBody] ProposalRequest proposalRequest)
     {

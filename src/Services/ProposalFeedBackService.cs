@@ -26,5 +26,9 @@ public class ProposalFeedBackService
         }
     }
 
+    public ProposalFeedBack? GetProposalFeedBackCode(int? code)
+    {
+        return _proposalFeedBackRepository.Find(ProposalFeedBack => ProposalFeedBack.Code == code);
+    }
 
 }

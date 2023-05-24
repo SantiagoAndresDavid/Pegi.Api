@@ -25,4 +25,11 @@ public class ProyectFeedBackService
             return (e.Message, false);
         }
     }
+
+    public ProyectFeedBack? GetProyectFeedBackCode(int? code)
+    {
+        return _proyectFeedBackRepository.Find(Proyectfeedback => Proyectfeedback.Code == code);
+    }
+
+
 }

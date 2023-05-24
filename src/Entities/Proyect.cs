@@ -18,7 +18,7 @@ public class Proyect
     [Column("Status")] public string? Status { get; set; }
     [Column("Score")] public int? Score { get; set; }
 
-    public string? ThematicAreaCode { get; set; }
-    [ForeignKey("ThematicAreaCode")]
-    public ThematicArea? ThematicArea { get; set; }
+    public string? ProposalCode { get; set; }
+    [ForeignKey("ProposalCode")]
+    public Proposal? Proposal { get; set; }
 }

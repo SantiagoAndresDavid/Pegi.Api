@@ -73,7 +73,7 @@ public class ProposalController : ControllerBase
     }
 
     [HttpGet("get-proposals-professor/{document}")]
-    [Authorize(Roles = "Docente")]
+    [Authorize(Roles = "Docente,Administrador")]
     public ActionResult GetProposalsProfessorDocument([FromRoute] string document)
     {
         try
@@ -96,7 +96,7 @@ public class ProposalController : ControllerBase
     }
 
     [HttpGet("general-statistics-proposal-professor/{document}")]
-    [Authorize(Roles = "Docente")]
+    [Authorize(Roles = "Docente,Administrador")]
     public ActionResult GetGeneralStatisticsProposalProfessor([FromRoute] string document)
     {
         try
@@ -118,7 +118,7 @@ public class ProposalController : ControllerBase
     }
 
     [HttpGet("general-statistics-proposal-student/{document}")]
-    [Authorize(Roles = "Docente")]
+    [Authorize(Roles = "Estudiante,Administrador")]
     public ActionResult GetGeneralStatisticsProposalStudent([FromRoute] string document)
     {
         try
@@ -140,7 +140,7 @@ public class ProposalController : ControllerBase
     }
 
     [HttpGet("general-statistics-proposal")]
-    [Authorize(Roles = "Docente")]
+    [Authorize(Roles = "Administrador")]
     public ActionResult GetGeneralStatisticsProposals()
     {
         try
@@ -163,7 +163,7 @@ public class ProposalController : ControllerBase
 
     //
     [HttpGet("get-proposal-code/{code}")]
-    [Authorize(Roles = "Estudiante,Docente")]
+    [Authorize(Roles = "Estudiante,Docente,Administrador")]
     public ActionResult GetProposalCode([FromRoute] string code)
     {
         try
@@ -186,13 +186,13 @@ public class ProposalController : ControllerBase
         }
     }
 
-    [HttpGet("update-professor-proposal/{code}")]
-    [Authorize(Roles = "Docente")]
-    public ActionResult UpdateProfessorProposal([FromRoute] string code,string document)
+    [HttpPut("update-professor-proposal/")]
+    [Authorize(Roles = "Administrador")]
+    public ActionResult UpdateProfessorProposal([FromBody] ProposalUpdateRequest proposalUpdateRequest)
     {
         try
         {
-            var (message,response)= _proposalService.UpdateProfessorDocumentProposal(code,document);
+            var (message,response)= _proposalService.UpdateProfessorDocumentProposal(proposalUpdateRequest.code,proposalUpdateRequest.ProfessorDocument);
             if (response == false )
             {
                 return BadRequest(

@@ -48,7 +48,7 @@ public class ProyectController : ControllerBase
     }
 
     [HttpGet("get-proyect-document{document}")]
-    [Authorize(Roles = "Estudiante,Docente")]
+    [Authorize(Roles = "Estudiante,Docente,Administrador")]
     public ActionResult GetProyects([FromRoute] string document)
     {
         try
@@ -71,7 +71,7 @@ public class ProyectController : ControllerBase
     }
 
     [HttpGet("get-proyect-professor/{document}")]
-    [Authorize(Roles = "Docente")]
+    [Authorize(Roles = "Docente,Administrador")]
     public ActionResult GetProyectsProfessorDocument([FromRoute] string document)
     {
         try
@@ -94,7 +94,7 @@ public class ProyectController : ControllerBase
     }
 
     [HttpGet("get-proyect-code/{code}")]
-    [Authorize(Roles = "Estudiante,Docente")]
+    [Authorize(Roles = "Estudiante,Docente,Administrador")]
     public ActionResult GetProyectCode([FromRoute] string code)
     {
         try
@@ -117,13 +117,13 @@ public class ProyectController : ControllerBase
         }
     }
 
-    [HttpGet("update-professor-proyect/{code}")]
-    [Authorize(Roles = "Docente")]
-    public ActionResult UpdateProfessorProyect([FromRoute] string code,string document)
+    [HttpPut("update-professor-proyect/")]
+    [Authorize(Roles = "Administrador")]
+    public ActionResult UpdateProfessorProyect([FromBody] ProyectUpdateRequest proyectUpdateRequest)
     {
         try
         {
-            var (message,response)= _proyectService.UpdateProfessorDocumentProyect(code,document);
+            var (message,response)= _proyectService.UpdateProfessorDocumentProyect(proyectUpdateRequest.code,proyectUpdateRequest.ProfessorDocument);
             if (response == false )
             {
                 return BadRequest(
@@ -179,7 +179,7 @@ public class ProyectController : ControllerBase
     }
 
     [HttpGet("general-statistics-proposal-proyect/{document}")]
-    //[Authorize(Roles = "Docente")]
+    [Authorize(Roles = "Docente,Administrador")]
     public ActionResult GetGeneralStatisticsProposalProfessor([FromRoute] string document)
     {
         try
@@ -201,7 +201,7 @@ public class ProyectController : ControllerBase
     }
 
     [HttpGet("general-statistics-proposal-student/{document}")]
-    //[Authorize(Roles = "Docente")]
+    [Authorize(Roles = "Estudiante,Administrador")]
     public ActionResult GetGeneralStatisticsProposalStudent([FromRoute] string document)
     {
         try
@@ -223,7 +223,7 @@ public class ProyectController : ControllerBase
     }
 
     [HttpGet("general-statistics-proyect")]
-    //[Authorize(Roles = "Docente")]
+    [Authorize(Roles = "Administrador")]
     public ActionResult GetGeneralStatisticsProposals()
     {
         try

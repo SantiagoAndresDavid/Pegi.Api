@@ -82,19 +82,19 @@ public class ProposalService
         int pendiente = 0, aprobada = 0, corregir = 0, rechazada = 0;
         foreach (Proposal p in proposals)
         {
-            if (p.Status == "aprobada")
+            if (p.Status == "Aprobada")
             {
                 aprobada++;
             }
-            if (p.Status == "pendiente")
+            if (p.Status == "Pendiente")
             {
                 pendiente++;
             }
-            if (p.Status == "corregir")
+            if (p.Status == "Corregir")
             {
                 corregir++;
             }
-            if (p.Status == "rechazada")
+            if (p.Status == "Rechazada")
             {
                 rechazada++;
             }

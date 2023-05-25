@@ -178,9 +178,9 @@ public class ProyectController : ControllerBase
         }
     }
 
-    [HttpGet("general-statistics-proposal-proyect/{document}")]
+    [HttpGet("general-statistics-proyect-professor/{document}")]
     [Authorize(Roles = "Docente,Administrador")]
-    public ActionResult GetGeneralStatisticsProposalProfessor([FromRoute] string document)
+    public ActionResult GetGeneralStatisticsProyectProfessor([FromRoute] string document)
     {
         try
         {
@@ -200,9 +200,9 @@ public class ProyectController : ControllerBase
         }
     }
 
-    [HttpGet("general-statistics-proposal-student/{document}")]
+    [HttpGet("general-statistics-proyect-student/{document}")]
     [Authorize(Roles = "Estudiante,Administrador")]
-    public ActionResult GetGeneralStatisticsProposalStudent([FromRoute] string document)
+    public ActionResult GetGeneralStatisticsProyectStudent([FromRoute] string document)
     {
         try
         {

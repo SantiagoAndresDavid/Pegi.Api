@@ -34,4 +34,8 @@
       <Folder Include="Migrations" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Compile Remove="Migrations\PegiDbContextModelSnapshot.cs" />
+    </ItemGroup>
+
 </Project>

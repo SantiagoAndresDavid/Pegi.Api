@@ -3,6 +3,7 @@ using System;
 using Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Api.Migrations
 {
     [DbContext(typeof(PegiDbContext))]
-    partial class PegiDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230523173154_InitialCreate")]
+    partial class InitialCreate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -170,8 +173,8 @@ namespace Api.Migrations
                         .HasColumnType("text")
                         .HasColumnName("document");
 
-                    b.Property<DateOnly?>("BirthDate")
-                        .HasColumnType("date")
+                    b.Property<DateTime?>("BirthDate")
+                        .HasColumnType("timestamp with time zone")
                         .HasColumnName("person_birth_date");
 
                     b.Property<string>("CitiesCode")
@@ -268,6 +271,9 @@ namespace Api.Migrations
                     b.Property<string>("PersonDocument")
                         .HasColumnType("text");
 
+                    b.Property<string>("ProfessorDocument")
+                        .HasColumnType("text");
+
                     b.Property<string>("SpecificObjective")
                         .HasColumnType("text")
                         .HasColumnName("specificObjective");
@@ -286,6 +292,8 @@ namespace Api.Migrations
                     b.HasKey("Code");
 
                     b.HasIndex("PersonDocument");
+
+                    b.HasIndex("ProfessorDocument");
 
                     b.HasIndex("ThematicAreaCode");
 
@@ -331,6 +339,9 @@ namespace Api.Migrations
                     b.Property<string>("PersonDocument")
                         .HasColumnType("text");
 
+                    b.Property<string>("ProfessorDocument")
+                        .HasColumnType("text");
+
                     b.Property<int?>("Score")
                         .HasColumnType("integer")
                         .HasColumnName("Score");
@@ -345,6 +356,8 @@ namespace Api.Migrations
                     b.HasKey("Code");
 
                     b.HasIndex("PersonDocument");
+
+                    b.HasIndex("ProfessorDocument");
 
                     b.HasIndex("ThematicAreaCode");
 
@@ -364,8 +377,8 @@ namespace Api.Migrations
                         .HasColumnType("text")
                         .HasColumnName("comment");
 
-                    b.Property<string>("Score")
-                        .HasColumnType("text")
+                    b.Property<int?>("Score")
+                        .HasColumnType("integer")
                         .HasColumnName("Score");
 
                     b.Property<string>("Status")
@@ -600,9 +613,15 @@ namespace Api.Migrations
                         .WithMany()
                         .HasForeignKey("PersonDocument");
 
+                    b.HasOne("Entities.Professor", "Professor")
+                        .WithMany()
+                        .HasForeignKey("ProfessorDocument");
+
                     b.HasOne("Entities.ThematicArea", "ThematicArea")
                         .WithMany()
                         .HasForeignKey("ThematicAreaCode");
+
+                    b.Navigation("Professor");
 
                     b.Navigation("Student");
 
@@ -615,9 +634,15 @@ namespace Api.Migrations
                         .WithMany()
                         .HasForeignKey("PersonDocument");
 
+                    b.HasOne("Entities.Professor", "Professor")
+                        .WithMany()
+                        .HasForeignKey("ProfessorDocument");
+
                     b.HasOne("Entities.ThematicArea", "ThematicArea")
                         .WithMany()
                         .HasForeignKey("ThematicAreaCode");
+
+                    b.Navigation("Professor");
 
                     b.Navigation("Student");
 

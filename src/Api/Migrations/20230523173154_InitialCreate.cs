@@ -59,7 +59,7 @@ namespace Api.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     comment = table.Column<string>(type: "text", nullable: true),
                     status = table.Column<string>(type: "text", nullable: true),
-                    Score = table.Column<string>(type: "text", nullable: true)
+                    Score = table.Column<int>(type: "integer", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -127,7 +127,7 @@ namespace Api.Migrations
                     person_second_last_name = table.Column<string>(type: "text", nullable: true),
                     person_civil_state = table.Column<string>(type: "text", nullable: true),
                     person_gender = table.Column<string>(type: "text", nullable: true),
-                    person_birth_date = table.Column<DateOnly>(type: "date", nullable: true),
+                    person_birth_date = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
                     person_phone = table.Column<string>(type: "text", nullable: true),
                     person_institutional_email = table.Column<string>(type: "text", nullable: true),
                     CitiesCode = table.Column<string>(type: "text", nullable: true)
@@ -284,6 +284,7 @@ namespace Api.Migrations
                 {
                     code = table.Column<string>(type: "text", nullable: false),
                     PersonDocument = table.Column<string>(type: "text", nullable: true),
+                    ProfessorDocument = table.Column<string>(type: "text", nullable: true),
                     title = table.Column<string>(type: "text", nullable: true),
                     date = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
                     investigationGroup = table.Column<string>(type: "text", nullable: true),
@@ -304,6 +305,11 @@ namespace Api.Migrations
                         principalTable: "Thematic_areas",
                         principalColumn: "code");
                     table.ForeignKey(
+                        name: "FK_proposals_professor_ProfessorDocument",
+                        column: x => x.ProfessorDocument,
+                        principalTable: "professor",
+                        principalColumn: "Document");
+                    table.ForeignKey(
                         name: "FK_proposals_students_PersonDocument",
                         column: x => x.PersonDocument,
                         principalTable: "students",
@@ -316,6 +322,7 @@ namespace Api.Migrations
                 {
                     code = table.Column<string>(type: "text", nullable: false),
                     PersonDocument = table.Column<string>(type: "text", nullable: true),
+                    ProfessorDocument = table.Column<string>(type: "text", nullable: true),
                     Content = table.Column<string>(type: "text", nullable: true),
                     Status = table.Column<string>(type: "text", nullable: true),
                     Score = table.Column<int>(type: "integer", nullable: true),
@@ -329,6 +336,11 @@ namespace Api.Migrations
                         column: x => x.ThematicAreaCode,
                         principalTable: "Thematic_areas",
                         principalColumn: "code");
+                    table.ForeignKey(
+                        name: "FK_proyects_professor_ProfessorDocument",
+                        column: x => x.ProfessorDocument,
+                        principalTable: "professor",
+                        principalColumn: "Document");
                     table.ForeignKey(
                         name: "FK_proyects_students_PersonDocument",
                         column: x => x.PersonDocument,
@@ -430,6 +442,11 @@ namespace Api.Migrations
                 column: "PersonDocument");
 
             migrationBuilder.CreateIndex(
+                name: "IX_proposals_ProfessorDocument",
+                table: "proposals",
+                column: "ProfessorDocument");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_proposals_ThematicAreaCode",
                 table: "proposals",
                 column: "ThematicAreaCode");
@@ -438,6 +455,11 @@ namespace Api.Migrations
                 name: "IX_proyects_PersonDocument",
                 table: "proyects",
                 column: "PersonDocument");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_proyects_ProfessorDocument",
+                table: "proyects",
+                column: "ProfessorDocument");
 
             migrationBuilder.CreateIndex(
                 name: "IX_proyects_ThematicAreaCode",
@@ -494,9 +516,6 @@ namespace Api.Migrations
                 name: "HistoryProyects");
 
             migrationBuilder.DropTable(
-                name: "professor");
-
-            migrationBuilder.DropTable(
                 name: "studies");
 
             migrationBuilder.DropTable(
@@ -516,6 +535,9 @@ namespace Api.Migrations
 
             migrationBuilder.DropTable(
                 name: "Thematic_areas");
+
+            migrationBuilder.DropTable(
+                name: "professor");
 
             migrationBuilder.DropTable(
                 name: "students");

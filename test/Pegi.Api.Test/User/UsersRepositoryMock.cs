@@ -20,7 +20,7 @@ public static class UsersRepositoryMock
     {
         Mock.Setup(repository => repository.Save(It.IsAny<Entities.User>())).Callback(BadBehavior);
         Mock.Setup(repository => repository.Update(It.IsAny<Entities.User>())).Callback(BadBehavior);
-        Mock.Setup(repository => repository.Find(It.IsAny<Expression<Func<Entities.User, bool>>>())).Returns(UserStub.User);
+        Mock.Setup(repository => repository.Find(It.IsAny<Expression<Func<Entities.User, bool>>>())).Returns(UserStub.EncrypeUser);
         return Mock.Object;
     }
 
@@ -32,5 +32,13 @@ public static class UsersRepositoryMock
     public static void HaveBeenCalledUpdate(this ObjectAssertions objectAssertions, Times times)
     {
         Mock.Verify(repository => repository.Update(It.IsAny<Entities.User>()), times);
+    }
+
+    public static void HaveBeenCalledFind(this
+        ObjectAssertions objectAssertions, Times times)
+    {
+        Mock.Verify(repository =>
+            repository.Find(
+                It.IsAny<Expression<Func<Entities.User, bool>>>()),times);
     }
 }

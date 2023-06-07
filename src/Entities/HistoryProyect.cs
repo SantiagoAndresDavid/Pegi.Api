@@ -11,6 +11,7 @@ public class HistoryProyect
         ProyectCode = proyectCode;
     }
 
+
     [Key]
     [Column("code")]
     public int? Code { get; set; }

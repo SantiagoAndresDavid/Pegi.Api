@@ -18,11 +18,20 @@ public class UserServiceTest
     }
 
     [Test]
+    public void LoginUserTest()
+    {
+        var(mensaje,user) = _authService.LogIn(UserStub.User.Name!,UserStub.User.Password!);
+        _authService.Should().HaveBeenCalledFind(Times.AtLeastOnce());
+        user.Should().BeEquivalentTo(UserStub.EncrypeUser);
+    }
+
+
+    [Test]
     public void SaveUserTest()
     {
-        bool resonse = _usersService.SaveUser(UserStub.User);
+        bool response = _usersService.SaveUser(UserStub.User);
         _usersService.Should().HaveBeenCalledSave(Times.AtLeastOnce());
-        resonse.Should().BeTrue();
+        response.Should().BeTrue();
     }
 
     [Test]

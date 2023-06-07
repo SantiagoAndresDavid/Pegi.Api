@@ -38,4 +38,13 @@ public class ProposalServiceTest
         _proposalService.Should().HaveBeenCalledDelete(Times.AtLeastOnce());
         response.Should().Be("se borro con exito");
     }
+
+    [Test]
+    public void SearchProposalTest()
+    {
+        Entities.Proposal? proposal = _proposalService.GetProposalCode(ProposalStub.Proposal.Code!);
+        _proposalService.Should().HaveBeenCalledFind(Times.AtLeastOnce());
+        proposal.Should().Be(ProposalStub.Proposal);
+    }
+
 }

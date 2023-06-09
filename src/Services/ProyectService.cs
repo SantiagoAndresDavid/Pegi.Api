@@ -120,12 +120,12 @@ public class ProyectService
 
     public object filterListProposal(List<Proyect> proyect)
     {
-        int pendiente = 0, aprobada = 0, corregir = 0, rechazada = 0;
+        int pendiente = 0, aprobado = 0, corregir = 0, rechazado = 0,total = 0;
         foreach (Proyect p in proyect)
         {
-            if (p.Status == "Aprobada")
+            if (p.Status == "Aprobado")
             {
-                aprobada++;
+                aprobado++;
             }
             if (p.Status == "Pendiente")
             {
@@ -135,17 +135,20 @@ public class ProyectService
             {
                 corregir++;
             }
-            if (p.Status == "Rechazada")
+            if (p.Status == "Rechazado")
             {
-                rechazada++;
+                rechazado++;
             }
+
+            total++;
         }
         var statistics = new
         {
             Pendiente = pendiente,
-            Rechazada = rechazada,
-            Aprobada = aprobada,
-            Corregir = corregir
+            Rechazado = rechazado,
+            Aprobado = aprobado,
+            Corregir = corregir,
+            Total = total
         };
         return statistics;
     }

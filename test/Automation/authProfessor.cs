@@ -1,5 +1,6 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Interactions;
 
 namespace Automation;
 
@@ -18,9 +19,9 @@ public class authProfessor
     {
         ChromeOptions options = new ChromeOptions();
         options.AddArgument("--allow-insecure-localhost");
-        driver.Navigate().GoToUrl("https://pegi.vercel.app/");
+        driver.Navigate().GoToUrl("https://pegi-web.vercel.app/");
         driver.Manage().Window.Maximize();
-        Thread.Sleep(9000);
+        Thread.Sleep(18000);
         var loginButton = driver.FindElement(By.Id("login"));
         loginButton.Click();
         Thread.Sleep(2000);
@@ -33,18 +34,18 @@ public class authProfessor
         var sendButton = driver.FindElement(By.Id("send"));
         sendButton.Click();
         Thread.Sleep(4000);
-
-        //enter data to a cv
+        //enter to a dashboard
         var dashButton = driver.FindElement((By.Id("dashboard")));
         dashButton.Click();
-        Thread.Sleep(2500);
-        //enter data to a cv
+        Thread.Sleep(8000);
+        //enter  to a cv
         var cvButton = driver.FindElement((By.Id("cv")));
         cvButton.Click();
-        Thread.Sleep(2500);
+        Thread.Sleep(5000);
+        //enter  to a dashboard
         var consultProposalButton = driver.FindElement((By.Id("proposal-repository")));
         consultProposalButton.Click();
-        Thread.Sleep(2500);
+        Thread.Sleep(5000);
         var viewProposalButton = driver.FindElement((By.Id("details")));
         viewProposalButton.Click();
         Thread.Sleep(5500);
@@ -59,12 +60,18 @@ public class authProfessor
         Thread.Sleep(2500);
         var qualifyButton = driver.FindElement((By.Id("qualify")));
         qualifyButton.Click();
+        Thread.Sleep(3000);
+        var selectElement = driver.FindElement(By.Name("status"));
+        var option = selectElement.FindElement(By.CssSelector("option[value='Aprobado']"));
+        option.Click();
         Thread.Sleep(2500);
-        var closeQualifyButton = driver.FindElement((By.Id("closeQualify")));
-        closeQualifyButton.Click();
-        Thread.Sleep(5500);
+        var comment = driver.FindElement(By.Name("comment"));
+        comment.SendKeys("su propuesta ha sido aprobada, felicitaciones.");
+        Thread.Sleep(2500);
+        var submit = driver.FindElement((By.Id("submit")));
+        submit.Click();
+        Thread.Sleep(5000);
         driver.Close();
-
         Assert.Pass();
     }
 

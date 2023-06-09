@@ -1,0 +1,846 @@
+{
+  "$schema": "http://json.schemastore.org/sarif-1.0.0",
+  "version": "1.0.0",
+  "runs": [
+    {
+      "tool": {
+        "name": "Compilador de Microsoft (R) Visual C#",
+        "version": "4.3.0.0",
+        "fileVersion": "4.3.1-3.22526.13 (41a5af9d)",
+        "semanticVersion": "4.3.0",
+        "language": "es-MX"
+      },
+      "results": [
+        {
+          "ruleId": "CS0168",
+          "level": "warning",
+          "message": "La variable 'e' se ha declarado pero nunca se usa",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/sofia/Documents/project/Pegi.Api/src/Api/Controllers/ThematicAreas/ThematicAreasController.cs",
+                "region": {
+                  "startLine": 49,
+                  "startColumn": 37,
+                  "endLine": 49,
+                  "endColumn": 38
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 3
+          }
+        },
+        {
+          "ruleId": "CS0168",
+          "level": "warning",
+          "message": "La variable 'e' se ha declarado pero nunca se usa",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/sofia/Documents/project/Pegi.Api/src/Api/Controllers/ThematicAreas/ThematicAreasController.cs",
+                "region": {
+                  "startLine": 63,
+                  "startColumn": 26,
+                  "endLine": 63,
+                  "endColumn": 27
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 3
+          }
+        },
+        {
+          "ruleId": "CS8604",
+          "level": "warning",
+          "message": "Posible argumento de referencia nulo para el parámetro \"connectionString\" en \"DbContextOptionsBuilder DataBaseProvider.SetupDatabaseEngine(DbContextOptionsBuilder options, string connectionString)\".",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/sofia/Documents/project/Pegi.Api/src/Api/Program.cs",
+                "region": {
+                  "startLine": 16,
+                  "startColumn": 33,
+                  "endLine": 16,
+                  "endColumn": 49
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CS0168",
+          "level": "warning",
+          "message": "La variable 'e' se ha declarado pero nunca se usa",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/sofia/Documents/project/Pegi.Api/src/Api/Controllers/ResearchSubLines/ResearchSubLinesController.cs",
+                "region": {
+                  "startLine": 50,
+                  "startColumn": 26,
+                  "endLine": 50,
+                  "endColumn": 27
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 3
+          }
+        },
+        {
+          "ruleId": "CS0168",
+          "level": "warning",
+          "message": "La variable 'e' se ha declarado pero nunca se usa",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/sofia/Documents/project/Pegi.Api/src/Api/Controllers/ResearchSubLines/ResearchSubLinesController.cs",
+                "region": {
+                  "startLine": 68,
+                  "startColumn": 26,
+                  "endLine": 68,
+                  "endColumn": 27
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 3
+          }
+        },
+        {
+          "ruleId": "CS8604",
+          "level": "warning",
+          "message": "Posible argumento de referencia nulo para el parámetro \"code\" en \"(string, bool?) ProyectService.UpdateProfessorDocumentProyect(string code, string document)\".",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/sofia/Documents/project/Pegi.Api/src/Api/Controllers/Proyect/ProyectController.cs",
+                "region": {
+                  "startLine": 126,
+                  "startColumn": 84,
+                  "endLine": 126,
+                  "endColumn": 109
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CS8604",
+          "level": "warning",
+          "message": "Posible argumento de referencia nulo para el parámetro \"document\" en \"(string, bool?) ProyectService.UpdateProfessorDocumentProyect(string code, string document)\".",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/sofia/Documents/project/Pegi.Api/src/Api/Controllers/Proyect/ProyectController.cs",
+                "region": {
+                  "startLine": 126,
+                  "startColumn": 110,
+                  "endLine": 126,
+                  "endColumn": 148
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CS8604",
+          "level": "warning",
+          "message": "Posible argumento de referencia nulo para el parámetro \"code\" en \"(string, bool?) ProyectService.UpdateStatusProyect(string code, string status, int? score)\".",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/sofia/Documents/project/Pegi.Api/src/Api/Controllers/HistorialProyect/HistorialProyectController.cs",
+                "region": {
+                  "startLine": 44,
+                  "startColumn": 49,
+                  "endLine": 44,
+                  "endColumn": 77
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CS8604",
+          "level": "warning",
+          "message": "Posible argumento de referencia nulo para el parámetro \"status\" en \"(string, bool?) ProyectService.UpdateStatusProyect(string code, string status, int? score)\".",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/sofia/Documents/project/Pegi.Api/src/Api/Controllers/HistorialProyect/HistorialProyectController.cs",
+                "region": {
+                  "startLine": 45,
+                  "startColumn": 17,
+                  "endLine": 45,
+                  "endColumn": 46
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CS8602",
+          "level": "warning",
+          "message": "Desreferencia de una referencia posiblemente NULL.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/sofia/Documents/project/Pegi.Api/src/Api/Controllers/HistorialProposal/HistorialProposalController.cs",
+                "region": {
+                  "startLine": 45,
+                  "startColumn": 17,
+                  "endLine": 45,
+                  "endColumn": 51
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CS8604",
+          "level": "warning",
+          "message": "Posible argumento de referencia nulo para el parámetro \"code\" en \"(string, bool?) ProposalService.UpdateStatusProposal(string code, string status)\".",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/sofia/Documents/project/Pegi.Api/src/Api/Controllers/HistorialProposal/HistorialProposalController.cs",
+                "region": {
+                  "startLine": 44,
+                  "startColumn": 17,
+                  "endLine": 44,
+                  "endColumn": 47
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CS8604",
+          "level": "warning",
+          "message": "Posible argumento de referencia nulo para el parámetro \"status\" en \"(string, bool?) ProposalService.UpdateStatusProposal(string code, string status)\".",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/sofia/Documents/project/Pegi.Api/src/Api/Controllers/HistorialProposal/HistorialProposalController.cs",
+                "region": {
+                  "startLine": 45,
+                  "startColumn": 17,
+                  "endLine": 45,
+                  "endColumn": 58
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CS8604",
+          "level": "warning",
+          "message": "Posible argumento de referencia nulo para el parámetro \"document\" en \"Person? PeopleService.SearchPerson(string document)\".",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/sofia/Documents/project/Pegi.Api/src/Api/Controllers/Professor/ProfessorController.cs",
+                "region": {
+                  "startLine": 76,
+                  "startColumn": 69,
+                  "endLine": 76,
+                  "endColumn": 87
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CS8600",
+          "level": "warning",
+          "message": "Se va a convertir un literal nulo o un posible valor nulo en un tipo que no acepta valores NULL",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/sofia/Documents/project/Pegi.Api/src/Api/Controllers/Professor/ProfessorController.cs",
+                "region": {
+                  "startLine": 76,
+                  "startColumn": 41,
+                  "endLine": 76,
+                  "endColumn": 88
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CS8604",
+          "level": "warning",
+          "message": "Posible argumento de referencia nulo para el parámetro \"code\" en \"(string, bool?) ProposalService.UpdateProfessorDocumentProposal(string code, string document)\".",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/sofia/Documents/project/Pegi.Api/src/Api/Controllers/Proposal/ProposalController.cs",
+                "region": {
+                  "startLine": 195,
+                  "startColumn": 86,
+                  "endLine": 195,
+                  "endColumn": 112
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CS8604",
+          "level": "warning",
+          "message": "Posible argumento de referencia nulo para el parámetro \"document\" en \"(string, bool?) ProposalService.UpdateProfessorDocumentProposal(string code, string document)\".",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/sofia/Documents/project/Pegi.Api/src/Api/Controllers/Proposal/ProposalController.cs",
+                "region": {
+                  "startLine": 195,
+                  "startColumn": 113,
+                  "endLine": 195,
+                  "endColumn": 152
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "S2068",
+          "level": "warning",
+          "message": "\"pwd\" detected here, make sure this is not a hard-coded credential.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/sofia/Documents/project/Pegi.Api/src/Api/appsettings.json",
+                "region": {
+                  "startLine": 3,
+                  "startColumn": 27,
+                  "endLine": 3,
+                  "endColumn": 86
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "S2094",
+          "level": "warning",
+          "message": "Remove this empty record, write its code or make it an \"interface\".",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/sofia/Documents/project/Pegi.Api/src/Api/Controllers/AcademicPrograms/AcademicProgrmasRequest.cs",
+                "region": {
+                  "startLine": 3,
+                  "startColumn": 15,
+                  "endLine": 3,
+                  "endColumn": 38
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "S5122",
+          "level": "warning",
+          "message": "Make sure this permissive CORS policy is safe here.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/sofia/Documents/project/Pegi.Api/src/Api/Program.cs",
+                "region": {
+                  "startLine": 41,
+                  "startColumn": 19,
+                  "endLine": 41,
+                  "endColumn": 42
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "S3981",
+          "level": "warning",
+          "message": "The 'Count' of 'ICollection' always evaluates as 'False' regardless the size.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/sofia/Documents/project/Pegi.Api/src/Api/Controllers/ResearchLines/ResearchLinesController.cs",
+                "region": {
+                  "startLine": 57,
+                  "startColumn": 13,
+                  "endLine": 57,
+                  "endColumn": 36
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "S3981",
+          "level": "warning",
+          "message": "The 'Count' of 'ICollection' always evaluates as 'False' regardless the size.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/sofia/Documents/project/Pegi.Api/src/Api/Controllers/Proyect/ProyectController.cs",
+                "region": {
+                  "startLine": 58,
+                  "startColumn": 17,
+                  "endLine": 58,
+                  "endColumn": 35
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA1305",
+          "level": "warning",
+          "message": "The behavior of 'int.ToString()' could vary based on the current user's locale settings. Replace this call in 'ProyectController.RegisterProyect(ProyectRequest)' with a call to 'int.ToString(IFormatProvider)'.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/sofia/Documents/project/Pegi.Api/src/Api/Controllers/Proyect/ProyectController.cs",
+                "region": {
+                  "startLine": 29,
+                  "startColumn": 31,
+                  "endLine": 29,
+                  "endColumn": 62
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "S1481",
+          "level": "warning",
+          "message": "Remove the unused local variable 'message'.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/sofia/Documents/project/Pegi.Api/src/Api/Controllers/Auth/AuthController.cs",
+                "region": {
+                  "startLine": 30,
+                  "startColumn": 18,
+                  "endLine": 30,
+                  "endColumn": 25
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "S3981",
+          "level": "warning",
+          "message": "The 'Count' of 'ICollection' always evaluates as 'False' regardless the size.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/sofia/Documents/project/Pegi.Api/src/Api/Controllers/Proyect/ProyectController.cs",
+                "region": {
+                  "startLine": 81,
+                  "startColumn": 17,
+                  "endLine": 81,
+                  "endColumn": 35
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "S1481",
+          "level": "warning",
+          "message": "Remove the unused local variable 'response'.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/sofia/Documents/project/Pegi.Api/src/Api/Controllers/People/PeopleController.cs",
+                "region": {
+                  "startLine": 33,
+                  "startColumn": 22,
+                  "endLine": 33,
+                  "endColumn": 30
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "S1481",
+          "level": "warning",
+          "message": "Remove the unused local variable 'hasErrors'.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/sofia/Documents/project/Pegi.Api/src/Api/Controllers/People/PeopleController.cs",
+                "region": {
+                  "startLine": 33,
+                  "startColumn": 31,
+                  "endLine": 33,
+                  "endColumn": 40
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "S3981",
+          "level": "warning",
+          "message": "The 'Count' of 'ICollection' always evaluates as 'False' regardless the size.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/sofia/Documents/project/Pegi.Api/src/Api/Controllers/Proyect/ProyectController.cs",
+                "region": {
+                  "startLine": 151,
+                  "startColumn": 17,
+                  "endLine": 151,
+                  "endColumn": 35
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA1305",
+          "level": "warning",
+          "message": "The behavior of 'int.ToString()' could vary based on the current user's locale settings. Replace this call in 'ProposalController.RegisterProposal(ProposalRequest)' with a call to 'int.ToString(IFormatProvider)'.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/sofia/Documents/project/Pegi.Api/src/Api/Controllers/Proposal/ProposalController.cs",
+                "region": {
+                  "startLine": 31,
+                  "startColumn": 32,
+                  "endLine": 31,
+                  "endColumn": 63
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "S3981",
+          "level": "warning",
+          "message": "The 'Count' of 'ICollection' always evaluates as 'False' regardless the size.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/sofia/Documents/project/Pegi.Api/src/Api/Controllers/Proposal/ProposalController.cs",
+                "region": {
+                  "startLine": 60,
+                  "startColumn": 17,
+                  "endLine": 60,
+                  "endColumn": 36
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "S3981",
+          "level": "warning",
+          "message": "The 'Count' of 'ICollection' always evaluates as 'False' regardless the size.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/sofia/Documents/project/Pegi.Api/src/Api/Controllers/Proposal/ProposalController.cs",
+                "region": {
+                  "startLine": 83,
+                  "startColumn": 17,
+                  "endLine": 83,
+                  "endColumn": 36
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "S3981",
+          "level": "warning",
+          "message": "The 'Count' of 'ICollection' always evaluates as 'False' regardless the size.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/sofia/Documents/project/Pegi.Api/src/Api/Controllers/Professor/ProfessorController.cs",
+                "region": {
+                  "startLine": 98,
+                  "startColumn": 21,
+                  "endLine": 98,
+                  "endColumn": 41
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "S3981",
+          "level": "warning",
+          "message": "The 'Count' of 'ICollection' always evaluates as 'False' regardless the size.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/sofia/Documents/project/Pegi.Api/src/Api/Controllers/Proposal/ProposalController.cs",
+                "region": {
+                  "startLine": 219,
+                  "startColumn": 17,
+                  "endLine": 219,
+                  "endColumn": 36
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        }
+      ],
+      "rules": {
+        "CA1305": {
+          "id": "CA1305",
+          "shortDescription": "Specify IFormatProvider",
+          "fullDescription": "A method or constructor calls one or more members that have overloads that accept a System.IFormatProvider parameter, and the method or constructor does not call the overload that takes the IFormatProvider parameter. When a System.Globalization.CultureInfo or IFormatProvider object is not supplied, the default value that is supplied by the overloaded member might not have the effect that you want in all locales. If the result will be based on the input from/output displayed to the user, specify 'CultureInfo.CurrentCulture' as the 'IFormatProvider'. Otherwise, if the result will be stored and accessed by software, such as when it is loaded from disk/database and when it is persisted to disk/database, specify 'CultureInfo.InvariantCulture'.",
+          "defaultLevel": "warning",
+          "helpUri": "https://docs.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1305",
+          "properties": {
+            "category": "Globalization",
+            "isEnabledByDefault": true,
+            "tags": [
+              "PortedFromFxCop",
+              "Telemetry",
+              "EnabledRuleInAggressiveMode"
+            ]
+          }
+        },
+        "CS0168": {
+          "id": "CS0168",
+          "shortDescription": "La variable está declarada pero nunca se usa",
+          "defaultLevel": "warning",
+          "helpUri": "https://msdn.microsoft.com/query/roslyn.query?appId=roslyn&k=k(CS0168)",
+          "properties": {
+            "category": "Compiler",
+            "isEnabledByDefault": true,
+            "tags": [
+              "Compiler",
+              "Telemetry"
+            ]
+          }
+        },
+        "CS8600": {
+          "id": "CS8600",
+          "shortDescription": "Se va a convertir un literal nulo o un posible valor nulo en un tipo que no acepta valores NULL",
+          "defaultLevel": "warning",
+          "helpUri": "https://msdn.microsoft.com/query/roslyn.query?appId=roslyn&k=k(CS8600)",
+          "properties": {
+            "category": "Compiler",
+            "isEnabledByDefault": true,
+            "tags": [
+              "Compiler",
+              "Telemetry"
+            ]
+          }
+        },
+        "CS8602": {
+          "id": "CS8602",
+          "shortDescription": "Desreferencia de una referencia posiblemente NULL.",
+          "defaultLevel": "warning",
+          "helpUri": "https://msdn.microsoft.com/query/roslyn.query?appId=roslyn&k=k(CS8602)",
+          "properties": {
+            "category": "Compiler",
+            "isEnabledByDefault": true,
+            "tags": [
+              "Compiler",
+              "Telemetry"
+            ]
+          }
+        },
+        "CS8604": {
+          "id": "CS8604",
+          "shortDescription": "Posible argumento de referencia nulo",
+          "defaultLevel": "warning",
+          "helpUri": "https://msdn.microsoft.com/query/roslyn.query?appId=roslyn&k=k(CS8604)",
+          "properties": {
+            "category": "Compiler",
+            "isEnabledByDefault": true,
+            "tags": [
+              "Compiler",
+              "Telemetry"
+            ]
+          }
+        },
+        "S1481": {
+          "id": "S1481",
+          "shortDescription": "Unused local variables should be removed",
+          "fullDescription": "If a local variable is declared but not used, it is dead code and should be removed. Doing so will improve maintainability because developers will not wonder what the variable is used for.",
+          "defaultLevel": "warning",
+          "helpUri": "https://rules.sonarsource.com/csharp/RSPEC-1481",
+          "properties": {
+            "category": "Minor Code Smell",
+            "isEnabledByDefault": true,
+            "tags": [
+              "C#",
+              "MainSourceScope",
+              "TestSourceScope",
+              "SonarWay"
+            ]
+          }
+        },
+        "S2068": {
+          "id": "S2068",
+          "shortDescription": "Hard-coded credentials are security-sensitive",
+          "fullDescription": "Because it is easy to extract strings from an application source code or binary, credentials should not be hard-coded. This is particularly true for applications that are distributed or that are open-source.",
+          "defaultLevel": "warning",
+          "helpUri": "https://rules.sonarsource.com/csharp/RSPEC-2068",
+          "properties": {
+            "category": "Blocker Security Hotspot",
+            "isEnabledByDefault": true,
+            "tags": [
+              "C#",
+              "MainSourceScope",
+              "SonarWay"
+            ]
+          }
+        },
+        "S2094": {
+          "id": "S2094",
+          "shortDescription": "Classes should not be empty",
+          "fullDescription": "There is no good excuse for an empty class. If it’s being used simply as a common extension point, it should be replaced with an interface. If it was stubbed in as a placeholder for future development it should be fleshed-out. In any other case, it should be eliminated.",
+          "defaultLevel": "warning",
+          "helpUri": "https://rules.sonarsource.com/csharp/RSPEC-2094",
+          "properties": {
+            "category": "Minor Code Smell",
+            "isEnabledByDefault": true,
+            "tags": [
+              "C#",
+              "MainSourceScope",
+              "TestSourceScope",
+              "SonarWay"
+            ]
+          }
+        },
+        "S3981": {
+          "id": "S3981",
+          "shortDescription": "Collection sizes and array length comparisons should make sense",
+          "fullDescription": "The size of a collection and the length of an array are always greater than or equal to zero. So testing that a size or length is greater than or equal to zero doesn’t make sense, since the result is always true. Similarly testing that it is less than zero will always return false. Perhaps the intent was to check the non-emptiness of the collection or array instead.",
+          "defaultLevel": "warning",
+          "helpUri": "https://rules.sonarsource.com/csharp/RSPEC-3981",
+          "properties": {
+            "category": "Major Bug",
+            "isEnabledByDefault": true,
+            "tags": [
+              "C#",
+              "MainSourceScope",
+              "TestSourceScope",
+              "SonarWay"
+            ]
+          }
+        },
+        "S5122": {
+          "id": "S5122",
+          "shortDescription": "Having a permissive Cross-Origin Resource Sharing policy is security-sensitive",
+          "fullDescription": "Having a permissive Cross-Origin Resource Sharing policy is security-sensitive. It has led in the past to the following vulnerabilities:",
+          "defaultLevel": "warning",
+          "helpUri": "https://rules.sonarsource.com/csharp/RSPEC-5122",
+          "properties": {
+            "category": "Minor Security Hotspot",
+            "isEnabledByDefault": true,
+            "tags": [
+              "C#",
+              "MainSourceScope",
+              "SonarWay"
+            ]
+          }
+        }
+      }
+    }
+  ]
+}

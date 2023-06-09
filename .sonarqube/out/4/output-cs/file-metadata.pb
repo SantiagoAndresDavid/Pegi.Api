@@ -1,0 +1,9 @@
+J
+AC:\Users\sofia\Documents\project\Pegi.Api\test\Automation\auth.csutf-8S
+JC:\Users\sofia\Documents\project\Pegi.Api\test\Automation\authProfessor.csutf-8Q
+HC:\Users\sofia\Documents\project\Pegi.Api\test\Automation\authStudent.csutf-8L
+CC:\Users\sofia\Documents\project\Pegi.Api\test\Automation\Usings.csutf-8}
+rC:\Users\sofia\.nuget\packages\microsoft.net.test.sdk\17.1.0\build\netcoreapp2.1\Microsoft.NET.Test.Sdk.Program.csutf-8r
+gC:\Users\sofia\Documents\project\Pegi.Api\test\Automation\obj\Debug\net6.0\Automation.GlobalUsings.g.csutf-8„
+yC:\Users\sofia\Documents\project\Pegi.Api\test\Automation\obj\Debug\net6.0\.NETCoreApp,Version=v6.0.AssemblyAttributes.csutf-8p
+eC:\Users\sofia\Documents\project\Pegi.Api\test\Automation\obj\Debug\net6.0\Automation.AssemblyInfo.csutf-8

@@ -1,0 +1,342 @@
+{
+  "$schema": "http://json.schemastore.org/sarif-1.0.0",
+  "version": "1.0.0",
+  "runs": [
+    {
+      "tool": {
+        "name": "Compilador de Microsoft (R) Visual C#",
+        "version": "4.3.0.0",
+        "fileVersion": "4.3.1-3.22526.13 (41a5af9d)",
+        "semanticVersion": "4.3.0",
+        "language": "es-MX"
+      },
+      "results": [
+        {
+          "ruleId": "CS8618",
+          "level": "warning",
+          "message": "El elemento campo \"driver\" que no acepta valores NULL debe contener un valor distinto de NULL al salir del constructor. Considere la posibilidad de declarar el elemento campo como que admite un valor NULL.",
+          "suppressionStates": [
+            "suppressedInSource"
+          ],
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/sofia/Documents/project/Pegi.Api/test/Automation/authStudent.cs",
+                "region": {
+                  "startLine": 9,
+                  "startColumn": 25,
+                  "endLine": 9,
+                  "endColumn": 31
+                }
+              }
+            }
+          ],
+          "relatedLocations": [
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/sofia/Documents/project/Pegi.Api/test/Automation/authStudent.cs",
+                "region": {
+                  "startLine": 9,
+                  "startColumn": 25,
+                  "endLine": 9,
+                  "endColumn": 31
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CS8618",
+          "level": "warning",
+          "message": "El elemento campo \"driver\" que no acepta valores NULL debe contener un valor distinto de NULL al salir del constructor. Considere la posibilidad de declarar el elemento campo como que admite un valor NULL.",
+          "suppressionStates": [
+            "suppressedInSource"
+          ],
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/sofia/Documents/project/Pegi.Api/test/Automation/authProfessor.cs",
+                "region": {
+                  "startLine": 9,
+                  "startColumn": 24,
+                  "endLine": 9,
+                  "endColumn": 30
+                }
+              }
+            }
+          ],
+          "relatedLocations": [
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/sofia/Documents/project/Pegi.Api/test/Automation/authProfessor.cs",
+                "region": {
+                  "startLine": 9,
+                  "startColumn": 24,
+                  "endLine": 9,
+                  "endColumn": 30
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CS8618",
+          "level": "warning",
+          "message": "El elemento campo \"driver\" que no acepta valores NULL debe contener un valor distinto de NULL al salir del constructor. Considere la posibilidad de declarar el elemento campo como que admite un valor NULL.",
+          "suppressionStates": [
+            "suppressedInSource"
+          ],
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/sofia/Documents/project/Pegi.Api/test/Automation/auth.cs",
+                "region": {
+                  "startLine": 8,
+                  "startColumn": 24,
+                  "endLine": 8,
+                  "endColumn": 30
+                }
+              }
+            }
+          ],
+          "relatedLocations": [
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/sofia/Documents/project/Pegi.Api/test/Automation/auth.cs",
+                "region": {
+                  "startLine": 8,
+                  "startColumn": 24,
+                  "endLine": 8,
+                  "endColumn": 30
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA1001",
+          "level": "warning",
+          "message": "Type 'authProfessor' owns disposable field(s) 'driver' but is not disposable",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/sofia/Documents/project/Pegi.Api/test/Automation/authProfessor.cs",
+                "region": {
+                  "startLine": 7,
+                  "startColumn": 14,
+                  "endLine": 7,
+                  "endColumn": 27
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA1001",
+          "level": "warning",
+          "message": "Type 'auth' owns disposable field(s) 'driver' but is not disposable",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/sofia/Documents/project/Pegi.Api/test/Automation/auth.cs",
+                "region": {
+                  "startLine": 6,
+                  "startColumn": 14,
+                  "endLine": 6,
+                  "endColumn": 18
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA1001",
+          "level": "warning",
+          "message": "Type 'authStudent' owns disposable field(s) 'driver' but is not disposable",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/sofia/Documents/project/Pegi.Api/test/Automation/authStudent.cs",
+                "region": {
+                  "startLine": 6,
+                  "startColumn": 14,
+                  "endLine": 6,
+                  "endColumn": 25
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "NUnit1028",
+          "level": "warning",
+          "message": "Only test methods should be public",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/sofia/Documents/project/Pegi.Api/test/Automation/auth.cs",
+                "region": {
+                  "startLine": 74,
+                  "startColumn": 18,
+                  "endLine": 74,
+                  "endColumn": 34
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "AD0001",
+          "level": "warning",
+          "message": "El analizador \"NUnit.Analyzers.UseAssertMultiple.UseAssertMultipleAnalyzer\" produjo una excepción de tipo \"System.IndexOutOfRangeException\" con el mensaje \"Index was outside the bounds of the array.\".\u000d\u000aSe produjo una excepción con el contexto siguiente:\u000d\u000aCompilation: Automation\u000d\u000aIOperation: Invocation\u000d\u000aSyntaxTree: C:\\Users\\sofia\\Documents\\project\\Pegi.Api\\test\\Automation\\authStudent.cs\u000d\u000aSyntaxNode: Assert.Pass() [InvocationExpressionSyntax]@[1523..1536) (50,8)-(50,21)\u000d\u000a\u000d\u000aSystem.IndexOutOfRangeException: Index was outside the bounds of the array.\u000d\u000a   at NUnit.Analyzers.UseAssertMultiple.UseAssertMultipleAnalyzer.AnalyzeAssertInvocation(OperationAnalysisContext context, IInvocationOperation assertOperation)\u000d\u000a   at NUnit.Analyzers.BaseAssertionAnalyzer.AnalyzeInvocation(OperationAnalysisContext context)\u000d\u000a   at Microsoft.CodeAnalysis.Diagnostics.AnalyzerExecutor.<>c.<ExecuteOperationAction>b__63_0(ValueTuple`2 data)\u000d\u000a   at Microsoft.CodeAnalysis.Diagnostics.AnalyzerExecutor.ExecuteAndCatchIfThrows_NoLock[TArg](DiagnosticAnalyzer analyzer, Action`1 analyze, TArg argument, Nullable`1 info)\u000d\u000a-----\u000d\u000a\u000d\u000aSuprima el diagnóstico siguiente para deshabilitar este analizador: NUnit2045",
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "AD0001",
+          "ruleKey": "AD0001-001",
+          "level": "warning",
+          "message": "El analizador \"NUnit.Analyzers.UseAssertMultiple.UseAssertMultipleAnalyzer\" produjo una excepción de tipo \"System.IndexOutOfRangeException\" con el mensaje \"Index was outside the bounds of the array.\".\u000d\u000aSe produjo una excepción con el contexto siguiente:\u000d\u000aCompilation: Automation\u000d\u000aIOperation: Invocation\u000d\u000aSyntaxTree: C:\\Users\\sofia\\Documents\\project\\Pegi.Api\\test\\Automation\\auth.cs\u000d\u000aSyntaxNode: Assert.Pass() [InvocationExpressionSyntax]@[5153..5166) (132,8)-(132,21)\u000d\u000a\u000d\u000aSystem.IndexOutOfRangeException: Index was outside the bounds of the array.\u000d\u000a   at NUnit.Analyzers.UseAssertMultiple.UseAssertMultipleAnalyzer.AnalyzeAssertInvocation(OperationAnalysisContext context, IInvocationOperation assertOperation)\u000d\u000a   at NUnit.Analyzers.BaseAssertionAnalyzer.AnalyzeInvocation(OperationAnalysisContext context)\u000d\u000a   at Microsoft.CodeAnalysis.Diagnostics.AnalyzerExecutor.<>c.<ExecuteOperationAction>b__63_0(ValueTuple`2 data)\u000d\u000a   at Microsoft.CodeAnalysis.Diagnostics.AnalyzerExecutor.ExecuteAndCatchIfThrows_NoLock[TArg](DiagnosticAnalyzer analyzer, Action`1 analyze, TArg argument, Nullable`1 info)\u000d\u000a-----\u000d\u000a\u000d\u000aSuprima el diagnóstico siguiente para deshabilitar este analizador: NUnit2045",
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "AD0001",
+          "ruleKey": "AD0001-002",
+          "level": "warning",
+          "message": "El analizador \"NUnit.Analyzers.UseAssertMultiple.UseAssertMultipleAnalyzer\" produjo una excepción de tipo \"System.IndexOutOfRangeException\" con el mensaje \"Index was outside the bounds of the array.\".\u000d\u000aSe produjo una excepción con el contexto siguiente:\u000d\u000aCompilation: Automation\u000d\u000aIOperation: Invocation\u000d\u000aSyntaxTree: C:\\Users\\sofia\\Documents\\project\\Pegi.Api\\test\\Automation\\authProfessor.cs\u000d\u000aSyntaxNode: Assert.Pass() [InvocationExpressionSyntax]@[2811..2824) (74,8)-(74,21)\u000d\u000a\u000d\u000aSystem.IndexOutOfRangeException: Index was outside the bounds of the array.\u000d\u000a   at NUnit.Analyzers.UseAssertMultiple.UseAssertMultipleAnalyzer.AnalyzeAssertInvocation(OperationAnalysisContext context, IInvocationOperation assertOperation)\u000d\u000a   at NUnit.Analyzers.BaseAssertionAnalyzer.AnalyzeInvocation(OperationAnalysisContext context)\u000d\u000a   at Microsoft.CodeAnalysis.Diagnostics.AnalyzerExecutor.<>c.<ExecuteOperationAction>b__63_0(ValueTuple`2 data)\u000d\u000a   at Microsoft.CodeAnalysis.Diagnostics.AnalyzerExecutor.ExecuteAndCatchIfThrows_NoLock[TArg](DiagnosticAnalyzer analyzer, Action`1 analyze, TArg argument, Nullable`1 info)\u000d\u000a-----\u000d\u000a\u000d\u000aSuprima el diagnóstico siguiente para deshabilitar este analizador: NUnit2045",
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "AD0001",
+          "ruleKey": "AD0001-003",
+          "level": "warning",
+          "message": "El analizador \"NUnit.Analyzers.UseAssertMultiple.UseAssertMultipleAnalyzer\" produjo una excepción de tipo \"System.IndexOutOfRangeException\" con el mensaje \"Index was outside the bounds of the array.\".\u000d\u000aSe produjo una excepción con el contexto siguiente:\u000d\u000aCompilation: Automation\u000d\u000aIOperation: Invocation\u000d\u000aSyntaxTree: C:\\Users\\sofia\\Documents\\project\\Pegi.Api\\test\\Automation\\auth.cs\u000d\u000aSyntaxNode: Assert.Pass() [InvocationExpressionSyntax]@[2446..2459) (70,8)-(70,21)\u000d\u000a\u000d\u000aSystem.IndexOutOfRangeException: Index was outside the bounds of the array.\u000d\u000a   at NUnit.Analyzers.UseAssertMultiple.UseAssertMultipleAnalyzer.AnalyzeAssertInvocation(OperationAnalysisContext context, IInvocationOperation assertOperation)\u000d\u000a   at NUnit.Analyzers.BaseAssertionAnalyzer.AnalyzeInvocation(OperationAnalysisContext context)\u000d\u000a   at Microsoft.CodeAnalysis.Diagnostics.AnalyzerExecutor.<>c.<ExecuteOperationAction>b__63_0(ValueTuple`2 data)\u000d\u000a   at Microsoft.CodeAnalysis.Diagnostics.AnalyzerExecutor.ExecuteAndCatchIfThrows_NoLock[TArg](DiagnosticAnalyzer analyzer, Action`1 analyze, TArg argument, Nullable`1 info)\u000d\u000a-----\u000d\u000a\u000d\u000aSuprima el diagnóstico siguiente para deshabilitar este analizador: NUnit2045",
+          "properties": {
+            "warningLevel": 1
+          }
+        }
+      ],
+      "rules": {
+        "AD0001": {
+          "id": "AD0001",
+          "shortDescription": "Error del analizador",
+          "fullDescription": "El analizador 'NUnit.Analyzers.UseAssertMultiple.UseAssertMultipleAnalyzer' inició la siguiente excepción:\u000d\u000a'Se produjo una excepción con el contexto siguiente:\u000d\u000aCompilation: Automation\u000d\u000aIOperation: Invocation\u000d\u000aSyntaxTree: C:\\Users\\sofia\\Documents\\project\\Pegi.Api\\test\\Automation\\authStudent.cs\u000d\u000aSyntaxNode: Assert.Pass() [InvocationExpressionSyntax]@[1523..1536) (50,8)-(50,21)\u000d\u000a\u000d\u000aSystem.IndexOutOfRangeException: Index was outside the bounds of the array.\u000d\u000a   at NUnit.Analyzers.UseAssertMultiple.UseAssertMultipleAnalyzer.AnalyzeAssertInvocation(OperationAnalysisContext context, IInvocationOperation assertOperation)\u000d\u000a   at NUnit.Analyzers.BaseAssertionAnalyzer.AnalyzeInvocation(OperationAnalysisContext context)\u000d\u000a   at Microsoft.CodeAnalysis.Diagnostics.AnalyzerExecutor.<>c.<ExecuteOperationAction>b__63_0(ValueTuple`2 data)\u000d\u000a   at Microsoft.CodeAnalysis.Diagnostics.AnalyzerExecutor.ExecuteAndCatchIfThrows_NoLock[TArg](DiagnosticAnalyzer analyzer, Action`1 analyze, TArg argument, Nullable`1 info)\u000d\u000a-----\u000d\u000a'.",
+          "defaultLevel": "warning",
+          "properties": {
+            "category": "Compiler",
+            "isEnabledByDefault": true,
+            "tags": [
+              "AnalyzerException"
+            ]
+          }
+        },
+        "AD0001-001": {
+          "id": "AD0001",
+          "shortDescription": "Error del analizador",
+          "fullDescription": "El analizador 'NUnit.Analyzers.UseAssertMultiple.UseAssertMultipleAnalyzer' inició la siguiente excepción:\u000d\u000a'Se produjo una excepción con el contexto siguiente:\u000d\u000aCompilation: Automation\u000d\u000aIOperation: Invocation\u000d\u000aSyntaxTree: C:\\Users\\sofia\\Documents\\project\\Pegi.Api\\test\\Automation\\auth.cs\u000d\u000aSyntaxNode: Assert.Pass() [InvocationExpressionSyntax]@[5153..5166) (132,8)-(132,21)\u000d\u000a\u000d\u000aSystem.IndexOutOfRangeException: Index was outside the bounds of the array.\u000d\u000a   at NUnit.Analyzers.UseAssertMultiple.UseAssertMultipleAnalyzer.AnalyzeAssertInvocation(OperationAnalysisContext context, IInvocationOperation assertOperation)\u000d\u000a   at NUnit.Analyzers.BaseAssertionAnalyzer.AnalyzeInvocation(OperationAnalysisContext context)\u000d\u000a   at Microsoft.CodeAnalysis.Diagnostics.AnalyzerExecutor.<>c.<ExecuteOperationAction>b__63_0(ValueTuple`2 data)\u000d\u000a   at Microsoft.CodeAnalysis.Diagnostics.AnalyzerExecutor.ExecuteAndCatchIfThrows_NoLock[TArg](DiagnosticAnalyzer analyzer, Action`1 analyze, TArg argument, Nullable`1 info)\u000d\u000a-----\u000d\u000a'.",
+          "defaultLevel": "warning",
+          "properties": {
+            "category": "Compiler",
+            "isEnabledByDefault": true,
+            "tags": [
+              "AnalyzerException"
+            ]
+          }
+        },
+        "AD0001-002": {
+          "id": "AD0001",
+          "shortDescription": "Error del analizador",
+          "fullDescription": "El analizador 'NUnit.Analyzers.UseAssertMultiple.UseAssertMultipleAnalyzer' inició la siguiente excepción:\u000d\u000a'Se produjo una excepción con el contexto siguiente:\u000d\u000aCompilation: Automation\u000d\u000aIOperation: Invocation\u000d\u000aSyntaxTree: C:\\Users\\sofia\\Documents\\project\\Pegi.Api\\test\\Automation\\authProfessor.cs\u000d\u000aSyntaxNode: Assert.Pass() [InvocationExpressionSyntax]@[2811..2824) (74,8)-(74,21)\u000d\u000a\u000d\u000aSystem.IndexOutOfRangeException: Index was outside the bounds of the array.\u000d\u000a   at NUnit.Analyzers.UseAssertMultiple.UseAssertMultipleAnalyzer.AnalyzeAssertInvocation(OperationAnalysisContext context, IInvocationOperation assertOperation)\u000d\u000a   at NUnit.Analyzers.BaseAssertionAnalyzer.AnalyzeInvocation(OperationAnalysisContext context)\u000d\u000a   at Microsoft.CodeAnalysis.Diagnostics.AnalyzerExecutor.<>c.<ExecuteOperationAction>b__63_0(ValueTuple`2 data)\u000d\u000a   at Microsoft.CodeAnalysis.Diagnostics.AnalyzerExecutor.ExecuteAndCatchIfThrows_NoLock[TArg](DiagnosticAnalyzer analyzer, Action`1 analyze, TArg argument, Nullable`1 info)\u000d\u000a-----\u000d\u000a'.",
+          "defaultLevel": "warning",
+          "properties": {
+            "category": "Compiler",
+            "isEnabledByDefault": true,
+            "tags": [
+              "AnalyzerException"
+            ]
+          }
+        },
+        "AD0001-003": {
+          "id": "AD0001",
+          "shortDescription": "Error del analizador",
+          "fullDescription": "El analizador 'NUnit.Analyzers.UseAssertMultiple.UseAssertMultipleAnalyzer' inició la siguiente excepción:\u000d\u000a'Se produjo una excepción con el contexto siguiente:\u000d\u000aCompilation: Automation\u000d\u000aIOperation: Invocation\u000d\u000aSyntaxTree: C:\\Users\\sofia\\Documents\\project\\Pegi.Api\\test\\Automation\\auth.cs\u000d\u000aSyntaxNode: Assert.Pass() [InvocationExpressionSyntax]@[2446..2459) (70,8)-(70,21)\u000d\u000a\u000d\u000aSystem.IndexOutOfRangeException: Index was outside the bounds of the array.\u000d\u000a   at NUnit.Analyzers.UseAssertMultiple.UseAssertMultipleAnalyzer.AnalyzeAssertInvocation(OperationAnalysisContext context, IInvocationOperation assertOperation)\u000d\u000a   at NUnit.Analyzers.BaseAssertionAnalyzer.AnalyzeInvocation(OperationAnalysisContext context)\u000d\u000a   at Microsoft.CodeAnalysis.Diagnostics.AnalyzerExecutor.<>c.<ExecuteOperationAction>b__63_0(ValueTuple`2 data)\u000d\u000a   at Microsoft.CodeAnalysis.Diagnostics.AnalyzerExecutor.ExecuteAndCatchIfThrows_NoLock[TArg](DiagnosticAnalyzer analyzer, Action`1 analyze, TArg argument, Nullable`1 info)\u000d\u000a-----\u000d\u000a'.",
+          "defaultLevel": "warning",
+          "properties": {
+            "category": "Compiler",
+            "isEnabledByDefault": true,
+            "tags": [
+              "AnalyzerException"
+            ]
+          }
+        },
+        "CA1001": {
+          "id": "CA1001",
+          "shortDescription": "Types that own disposable fields should be disposable",
+          "fullDescription": "A class declares and implements an instance field that is a System.IDisposable type, and the class does not implement IDisposable. A class that declares an IDisposable field indirectly owns an unmanaged resource and should implement the IDisposable interface.",
+          "defaultLevel": "warning",
+          "helpUri": "https://docs.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1001",
+          "properties": {
+            "category": "Design",
+            "isEnabledByDefault": true,
+            "tags": [
+              "PortedFromFxCop",
+              "Telemetry",
+              "EnabledRuleInAggressiveMode"
+            ]
+          }
+        },
+        "CS8618": {
+          "id": "CS8618",
+          "shortDescription": "Un campo que no acepta valores NULL debe contener un valor distinto de NULL al salir del constructor. Considere la posibilidad de declararlo como que admite un valor NULL.",
+          "defaultLevel": "warning",
+          "helpUri": "https://msdn.microsoft.com/query/roslyn.query?appId=roslyn&k=k(CS8618)",
+          "properties": {
+            "category": "Compiler",
+            "isEnabledByDefault": true,
+            "tags": [
+              "Compiler",
+              "Telemetry"
+            ]
+          }
+        },
+        "NUnit1028": {
+          "id": "NUnit1028",
+          "shortDescription": "The non-test method is public",
+          "fullDescription": "A fixture should not contain any public non-test methods.",
+          "defaultLevel": "note",
+          "helpUri": "https://github.com/nunit/nunit.analyzers/tree/master/documentation/NUnit1028.md",
+          "properties": {
+            "category": "Structure",
+            "isEnabledByDefault": true
+          }
+        }
+      }
+    }
+  ]
+}
